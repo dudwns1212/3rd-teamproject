@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+<link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" href="/css/footer.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title></title>
+</head>
+<body>
+<div th:insert="~{header :: header}" class="gympage"></div>
+
+<div class="main">
+    <div class="container">
+        
+        <div class="section1">
+            <div class="context">
+                <h1>건강한 삶의 시작</h1>
+                <p>당신의 피트니스 목표를 달성하세요</p>
+            </div>
+        </div>
+
+        <div class="section2">
+            <h2>운동 프로그램</h2>
+            <div class="card-grid">
+			    <div class="card">
+			        <h3>웨이트 트레이닝</h3>
+			        <p>전문 트레이너와 함께하는 체계적인 근력 운동</p>
+			    </div>
+			    <div class="card">
+			        <h3>유산소 운동</h3>
+			        <p>다양한 유산소 기구로 건강한 심폐 기능 향상</p>
+			    </div>
+			    <div class="card">
+			        <h3>개인 PT</h3>
+			        <p>1:1 맞춤형 운동 프로그램</p>
+			    </div>
+			</div>
+        </div>
+
+        <!-- 시설 안내 섹션 -->
+        <div class="section3">
+            <h2>시설 안내</h2>
+            <div class="mershin">
+            	<h1>이 기구는 어쩌구</h1>
+            	<h1>저 기구는 저쩌구</h1>
+                <!-- 시설 내용 -->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div th:insert="~{footer :: footer}"></div>
+</body>
+<style>
+/* 메인 래퍼 - 전체 화면의 80% */
+.main {
+    width: 100%;
+    background-color: #f5f5f5;
+    padding-bottom: 40px;
+    padding-top: 120px;
+}
+
+.container {
+    max-width: 90%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* 히어로 섹션 */
+.section1 {
+    text-align: center;
+    padding: 60px 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.context h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.context p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+/* 서비스 섹션 */
+.section2 {
+    margin-bottom: 40px;
+}
+
+.section2 h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #333;
+}
+
+.card-grid {
+    display: flex;
+    gap: 30px;
+}
+
+.card {
+    flex: 1;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 5px 5px 10px;
+}
+
+.card:hover {
+    background-color: #e9ecef;
+}
+
+.card h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: #666;
+}
+
+/* 시설 안내 섹션 */
+.section3 h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #333;
+}
+
+.mershin {
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    min-height: 200px;
+    text-align: center;
+}
+</style>
+</html>
