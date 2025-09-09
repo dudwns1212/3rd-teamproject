@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+
+.footer-container {
+    background-color: #000; 
+    color: #999; 
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 40px 0; 
+    font-size: 0.8rem; 
+    border-top: 1px solid #333; 
+    position: relative; /* sns-icons 위치 조정을 위해 */
+}
+
+/* 헤더와 마찬가지로 실제 내용이 들어가는 1200px 영역 */
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center; 
+    line-height: 1.8; 
+    position: relative; /* sns-icons 위치 조정을 위해 */
+}
+
+/* 회사 정보 (주소, 대표, 사업자번호 등) */
+.footer-info p {
+    margin: 0;
+}
+
+/* 정보들 사이의 구분선 */
+.footer-info .separator {
+    margin: 0 10px;
+    color: #555;
+}
+
+/* 저작권 정보 */
+.footer-copyright {
+    margin-top: 20px;
+    font-size: 0.75rem; 
+    color: #777;
+}
+
+/* 푸터의 링크 */
+.footer-links a {
+    color: #999;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #eee; 
+}

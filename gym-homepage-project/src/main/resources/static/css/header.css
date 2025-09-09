@@ -1,0 +1,90 @@
+@CHARSET "UTF-8";
+
+.header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 실제 검은색 배경 영역 */
+.header-inner {
+    height: 100px;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #000;
+    color: #eee;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.en {
+    color: white;
+    font-size: 2.3rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    margin: 0;
+}
+
+.brand {
+    margin-left: 130px;
+    position: absolute;
+	
+
+}
+
+/* 로그인/회원정보 영역 */
+.user-section {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.user-section button {
+    background: transparent;
+    border: 1px solid #666;
+    color: #eee;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 15px;
+}
+
+.user-section button:hover {
+    background-color: #333;
+}
+
+/* 사용자 이름 */
+.user-name {
+    color: orange;
+    font-weight: bold;
+    margin-right: 10px;
+    margin-top: 14px;
+}
+
+/* 로고 */
+.logo button {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: black;
+    border: none;
+}
+
+.logo img {
+    width: 70px;
+    height: 70px;
+    border: none;
+}
