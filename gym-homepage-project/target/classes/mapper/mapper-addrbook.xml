@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
 <mapper namespace="mapper-addrbook">
 	<select id="getDBList" resultType="lx.edu.springboot.vo.AddrBookVO">
 		select AB_ID abId
@@ -46,4 +47,8 @@
 							, ab_memo = #{abMemo}, ab_comdept = #{abComdept}, ab_birth = #{abBirth}
 						where ab_id = #{abId}
 	</update>
+=======
+<mapper namespace="mapper-gym">
+	
+>>>>>>> byungwook
 </mapper>
