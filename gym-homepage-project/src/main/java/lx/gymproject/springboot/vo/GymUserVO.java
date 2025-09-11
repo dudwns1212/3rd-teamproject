@@ -36,6 +36,4 @@ public class GymUserVO {
 		return "GymUserVO [userId=" + userId + ", gymPeriod=" + gymPeriod + ", useLocker=" + useLocker
 				+ ", useTranning=" + useTranning + "]";
 	}
-	
-	
 }
