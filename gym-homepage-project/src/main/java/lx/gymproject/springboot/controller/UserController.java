@@ -3,6 +3,7 @@ package lx.gymproject.springboot.controller;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lx.gymproject.springboot.dao.GymUserDAO;
 import lx.gymproject.springboot.vo.GymUserVO;
+
 
 @Controller
 public class UserController {
@@ -31,7 +33,7 @@ public class UserController {
 		return "registerPage";
 	}
 	
-	@PostMapping("login.do")
+  @PostMapping("login.do")
 	public String login(Model model, HttpSession session,
 			@RequestParam(value="userEmail") String userEmail,
 			@RequestParam(value="userPassword") String userPassword) {
@@ -98,5 +100,5 @@ public class UserController {
 	public String appointmentHome() {
 		return "appointmentHome";
 	}
-	
+
 }
