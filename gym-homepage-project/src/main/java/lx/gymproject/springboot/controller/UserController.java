@@ -43,6 +43,11 @@ public class UserController {
 		return "registerPage";
 		
 	}
+
+	@RequestMapping("reservation.do")
+	public String reservation() {
+		return "reservation";
+	}
 	
 	
 }
