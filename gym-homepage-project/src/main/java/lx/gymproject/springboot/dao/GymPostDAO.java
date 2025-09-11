@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lx.gymproject.springboot.vo.GymPostVO;
-import lx.gymproject.springboot.vo.UserVO;
 
 @Component
 public class GymPostDAO {

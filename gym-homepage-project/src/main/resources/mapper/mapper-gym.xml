@@ -10,4 +10,54 @@
 		insert into users (user_email, user_password, user_name, user_tel, user_birth, user_gender)
 			values(#{userEmail},#{userPassword},#{userName},#{userTel},#{userBirth},#{userGender})
 	</insert>
+	
+	<select id="getDB" parameterType="int" resultType="lx.gymproject.springboot.vo.GymPostVO">
+        select post_id poId
+            ,post_name poName
+            ,post_content poContent       
+            ,post_user_id poUserId
+            ,post_tag poTag
+            ,post_img poImg
+            ,post_like poLike
+            ,post_view poView
+            ,post_dislike poDislike
+            ,post_board_code poBoardCode from post
+        where post_id = #{poId}
+    </select>
+
+    <select id="getDBList" resultType="lx.gymproject.springboot.vo.GymPostVO">
+        select post_id poId
+            ,post_name poName
+            ,post_content poContent       
+            ,post_user_id poUserId
+            ,post_tag poTag
+            ,post_img poImg
+            ,post_like poLike
+            ,post_view poView
+            ,post_dislike poDislike
+            ,post_board_code poBoardCode from post
+    </select>
+
+    <insert id="insertDB" parameterType="lx.gymproject.springboot.vo.GymPostVO">
+        insert into post(post_name, post_content, post_user_id, post_tag, post_img, post_like,
+                        post_view, post_dislike, post_board_code) values(#{poName}, #{poContent}, #{poUserId}, #{poTag}, #{poImg}, #{poLike}, #{poView}, #{poDislike}, #{poBoardCode}) </insert>
+
+    <update id="updateDB" parameterType="lx.gymproject.springboot.vo.GymPostVO">
+        UPDATE post
+        SET post_name = #{poName},
+            post_content = #{poContent},      
+            post_user_id = #{poUserId},
+            post_tag = #{poTag},
+            post_img = #{poImg},
+            post_like = #{poLike},
+            post_view = #{poView},
+            post_dislike = #{poDislike},
+            post_board_code = #{poBoardCode} WHERE post_id = #{poId}
+    </update>
+
+    <delete id="deleteDB" parameterType="int">
+        delete from post where post_id = #{poId}
+    </delete>
+	
+	
 </mapper>
