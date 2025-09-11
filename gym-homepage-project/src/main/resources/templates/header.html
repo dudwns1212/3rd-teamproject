@@ -21,8 +21,8 @@
                 <div class="en">짐 케어 헬스&PT</div>
             </a>
         </h1>
-        
-        <div class="user-section" th:if="true">
+
+        <div class="user-section" th:unless="${session.loginUser}">
 	        <form action="loginPage.do" method="post">
 	            <button type="submit">로그인</button>
 	        </form>
@@ -30,13 +30,13 @@
 	            <button type="submit">회원가입</button>
 	        </form>
         </div>
-        <div class="user-section" th:unless="true">
-	        <form action="login.do" method="post">
-	            <button type="submit">마이페이지</button>
+
+        <div class="user-section" th:if="${session.loginUser}">
+	        <form action="mypage.do">
+	            <button id="mypagebtn" type="submit">마이페이지</button>
 	        </form>
-	        <form action="register.do" method="post">
-	            <button type="submit">로그아웃</button>
-	        </form>
+            <a href="/logout.do" id="logoutlink">로그아웃</a>
+
         </div>
     </div>
 </div>

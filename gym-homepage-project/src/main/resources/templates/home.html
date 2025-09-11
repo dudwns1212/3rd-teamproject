@@ -8,7 +8,7 @@
 <title></title>
 </head>
 <body>
-<div th:insert="~{header :: header}" class="gympage"></div>
+<div th:replace="~{header :: header}" class="gympage"></div>
 
 <div class="main">
     <div class="container">
@@ -23,18 +23,21 @@
         <div class="section2">
             <h2>운동 프로그램</h2>
             <div class="card-grid">
-			    <div class="card">
-			        <h3>웨이트 트레이닝</h3>
-			        <p>전문 트레이너와 함께하는 체계적인 근력 운동</p>
-			    </div>
-			    <div class="card">
-			        <h3>유산소 운동</h3>
-			        <p>다양한 유산소 기구로 건강한 심폐 기능 향상</p>
-			    </div>
-			    <div class="card">
-			        <h3>개인 PT</h3>
-			        <p>1:1 맞춤형 운동 프로그램</p>
-			    </div>
+			    <form action="appointmentHome.do">
+				    <button class="card">
+				        <h3>웨이트 트레이닝</h3>
+				        <p>전문 트레이너와 함께하는 체계적인 근력 운동</p>
+				    </button>
+				    <button class="card">
+				        <h3>유산소 운동</h3>
+				        <p>다양한 유산소 기구로 건강한 심폐 기능 향상</p>
+				    </button>
+				    
+				    <button class="card">
+				        <h3>개인 PT</h3>
+				        <p>1:1 맞춤형 운동 프로그램</p>
+				    </button>
+			    </form>
 			</div>
         </div>
 
@@ -52,6 +55,7 @@
 </div>
 
 <div th:insert="~{footer :: footer}"></div>
+
 </body>
 <style>
 /* 메인 래퍼 - 전체 화면의 80% */
