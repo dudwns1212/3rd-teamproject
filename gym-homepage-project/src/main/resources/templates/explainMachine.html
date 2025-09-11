@@ -9,73 +9,7 @@
 <body>
 <div th:insert="~{header :: header}" class="gympage"></div>
 
-<<<<<<< HEAD
-	<div class="group-container">
-		<div class="img-container">
-			<img src="https://cafe24.poxo.com/ec01/healthoutlet01/OP8d67okSDvg5Rv3kFOkD54dKlNMMVqDe6I0qEZk4Gf6b1lxVoG+GMGRd5NwHObmR8xVbIz6ST0CZZAlIPImHw==/_/web/product/big/201901/3652a72b3254c33c85ca7e2e5f150e94.jpg"; class="healthimg">
-				<span class="explain-container">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</span>
-		</div>
-		
-			<div class="img-container">
-			<img src="https://cafe24.poxo.com/ec01/healthoutlet01/OP8d67okSDvg5Rv3kFOkD54dKlNMMVqDe6I0qEZk4Gf6b1lxVoG+GMGRd5NwHObmR8xVbIz6ST0CZZAlIPImHw==/_/web/product/big/201805/1564_shop1_244824.jpg"; class="healthimg">
-				<span class="explain-container">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</span>
-		</div>
-		
-	</div>
 	
-	<div class="group-container">
-		<div class="img-container">
-			<img src="https://cafe24.poxo.com/ec01/healthoutlet01/OP8d67okSDvg5Rv3kFOkD54dKlNMMVqDe6I0qEZk4Gf6b1lxVoG+GMGRd5NwHObmR8xVbIz6ST0CZZAlIPImHw==/_/web/product/big/201902/fdbf38a78a5ba1687369a67aaf18cef2.jpg"; class="healthimg">
-				<span class="explain-container">ㅇㅇㅇㅇㅇㅇㅇㅇ</span>
-		</div>
-		
-			<div class="img-container">
-			<img src="https://cafe24.poxo.com/ec01/healthoutlet01/OP8d67okSDvg5Rv3kFOkD54dKlNMMVqDe6I0qEZk4Gf6b1lxVoG+GMGRd5NwHObmR8xVbIz6ST0CZZAlIPImHw==/_/web/product/big/201908/5314cb86a4caeec4b3d88abe9c83fc53.jpg"; class="healthimg">
-				<span class="explain-container">ㅇㅇㅇㅇㅇㅇㅇㅇ</span>
-		</div>
-		
-	</div>
-	
-	
-	<div class="group-container">
-		<div class="img-container">
-			<img src="https://cafe24.poxo.com/ec01/healthoutlet01/OP8d67okSDvg5Rv3kFOkD54dKlNMMVqDe6I0qEZk4Gf6b1lxVoG+GMGRd5NwHObmR8xVbIz6ST0CZZAlIPImHw==/_/web/product/big/201805/591_shop1_393161.jpg"; class="healthimg">
-				<span class="explain-container">OOOOOOOOOO</span>
-		</div>
-		
-			<div class="img-container">
-			<img src="https://godomall.speedycdn.net/f05d3ff72ba05664ff6dfca2edf54462/goods/3949/image/detail/3949_detail_093.jpg"; class="healthimg">
-				<span class="explain-container">OOOOOOOOOOOO</span>
-		</div>
-		
-	</div>
-	
-	
-<div th:insert="~{footer :: footer}"></div>
-</body>
-<style>
-
-.group-container{
-	
-	display:flex;
-	flex-direction: row;
-	justify-content: space-between; 
-	align-items: space-between; 
-	margin-bottom: 2px;
-
-}
-
-.explain-container{
-	
-	width:300px; 
-	height:300px;
-	font-size: 30px;
-	font-weight: 100; 
-	border: solid red; 
-	position: absorgb(0, 0, 255)e;
-	bottom: 50px; 
-
-=======
 	
 	<div class="group-container" >
 		<div class="img-container" th:each="vo : ${vo}">			
@@ -103,15 +37,14 @@
   padding: 12px;         /* 바깥 여백(선택) */
   box-sizing: border-box;
   padding-bottom:120px;  /*바텀부분에 가려지는거 방지*/
-
+}
 .explain-container{
 	
-
-	 display: block;
+	display: block;
   font-size: 14px;
   line-height: 1.4;
   color: #374151;
->>>>>>> 09e68a5290acc1465846501d1cd53fe34cfd8eef
+
 }
 
 .img-container{

@@ -62,13 +62,13 @@
 	
 	
 
-  <!-- 기구 리스트 --!>
+  <!-- 기구 리스트 -->
   <select id="getMachineList" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
     select machine_id , machine_name , machine_purchase_date , machine_price, machine_service_contact , machine_img , machine_video from gym_machine; 
   </select>
-  <!--
-  <select id="getMachine" parameterType="int" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
+  
+  <!-- <select id="getMachine" parameterType="int" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
     select machine_id , machine_name , machine_purchase_date , machine_price, machine_service_contact , machine_img , machine_video from gym_machine where machine_id = 1; 
-  </select> --!>
+  </select> --> 
 
 </mapper>
