@@ -88,4 +88,15 @@ public class UserController {
 	public String reservation() {
 		return "reservation";
 	}
+
+	@RequestMapping("reservationDashboard.do")
+	public String reservationDashboard() {
+		return "dashboard";
+	}
+	
+	@RequestMapping("appointmentHome.do")
+	public String appointmentHome() {
+		return "appointmentHome";
+	}
+	
 }
