@@ -8,7 +8,7 @@ import lx.gymproject.springboot.vo.GymUserVO;
 
 @Component
 public class GymUserDAO {
-
+	
 	@Autowired
 	SqlSession session;
 	

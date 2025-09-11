@@ -3,7 +3,7 @@
 <mapper namespace="mapper-gymuser">
 	<!-- 로그인 -->
 	<select id="doLoginById" parameterType="String" resultType="lx.gymproject.springboot.vo.GymUserVO">
-		select user_id from users where user_email = #{userEmail}	
+		select * from users where user_email = #{userEmail}	
 	</select>
 	<!-- 회원가입 -->
 	<insert id="doRegisterByUserVO" parameterType="lx.gymproject.springboot.vo.GymUserVO">
