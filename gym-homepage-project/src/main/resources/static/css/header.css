@@ -88,3 +88,12 @@
     height: 70px;
     border: none;
 }
+#mypagebtn{
+	margin-bottom:10px;
+}
+#logoutlink{
+	color: white;
+}
+#logoutlink:hover{
+	color: pink;
+}
