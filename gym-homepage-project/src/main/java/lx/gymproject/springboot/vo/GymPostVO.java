@@ -4,7 +4,7 @@ public class GymPostVO {
 	
 	public int poId;
 	public String poName;
-	public String psContent;
+	public String poContent;
 	public int poUserId;
 	public String poTag;
 	public String poImg;
@@ -27,10 +27,10 @@ public class GymPostVO {
 		this.poName = poName;
 	}
 	public String getPsContent() {
-		return psContent;
+		return poContent;
 	}
-	public void setPsContent(String psContent) {
-		this.psContent = psContent;
+	public void setPsContent(String poContent) {
+		this.poContent = poContent;
 	}
 	public int getPoUserId() {
 		return poUserId;
@@ -78,7 +78,7 @@ public class GymPostVO {
 	
 	@Override
 	public String toString() {
-		return "GymPostVO [poId=" + poId + ", poName=" + poName + ", psContent=" + psContent + ", poUserId=" + poUserId
+		return "GymPostVO [poId=" + poId + ", poName=" + poName + ", psContent=" + poContent + ", poUserId=" + poUserId
 				+ ", poTag=" + poTag + ", poImg=" + poImg + ", poLike=" + poLike + ", poview=" + poView + ", poDislike="
 				+ poDislike + ", poBoardCode=" + poBoardCode + "]";
 	}

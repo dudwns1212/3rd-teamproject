@@ -22,14 +22,18 @@ public class PostController {
 	@Autowired
 	GymPostDAO dao;
 	
-		@RequestMapping("postBoardPage.do")
-		public String postBoard() {
-			return "postBoardPage";
+		@RequestMapping("postBoard.do")
+		public String postBoard(HttpSession session, HttpServletRequest req) throws Exception {
+			List<GymPostVO> list = dao.getDBList();
+			req.setAttribute("data", list);
+			return "postBoard";
 		}
 		
-		@RequestMapping("postPage.do")
-		public String loginPage() {
-			return "postPage";
+		@RequestMapping("post.do")
+		public String post(HttpSession session, HttpServletRequest req) throws Exception {
+			List<GymPostVO> list = dao.getDBList();
+			req.setAttribute("data", list);
+			return "post";
 		}		
 		
 		@RequestMapping("/insert.do")
