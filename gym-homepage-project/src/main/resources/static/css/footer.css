@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 
 .footer-container {
+	width: 100%;
     background-color: #000; 
     color: #999; 
     font-family: 'Noto Sans KR', sans-serif;
@@ -10,9 +11,9 @@
     position: relative; /* sns-icons 위치 조정을 위해 */
 }
 
-/* 헤더와 마찬가지로 실제 내용이 들어가는 1200px 영역 */
 .footer-inner {
-    max-width: 1200px;
+	height: 100px;
+    max-width: 100%;
     margin: 0 auto;
     text-align: center; 
     line-height: 1.8; 
