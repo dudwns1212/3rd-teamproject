@@ -33,8 +33,6 @@ public class UserController {
 		return "registerPage";
 	}
 	
-<<<<<<< HEAD
-=======
   @PostMapping("login.do")
 	public String login(Model model, HttpSession session,
 			@RequestParam(value="userEmail") String userEmail,
@@ -88,15 +86,10 @@ public class UserController {
 	}
 	
 	
->>>>>>> 09e68a5290acc1465846501d1cd53fe34cfd8eef
 	@RequestMapping("reservation.do")
 	public String reservation() {
 		return "reservation";
 	}
-<<<<<<< HEAD
-	
-	
-=======
 
 	@RequestMapping("reservationDashboard.do")
 	public String reservationDashboard() {
@@ -107,6 +100,4 @@ public class UserController {
 	public String appointmentHome() {
 		return "appointmentHome";
 	}
-
->>>>>>> 09e68a5290acc1465846501d1cd53fe34cfd8eef
 }
