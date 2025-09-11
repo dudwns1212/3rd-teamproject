@@ -50,4 +50,15 @@ public class UserController {
 	}
 	
 	
+	@RequestMapping("reservationDashboard.do")
+	public String reservationDashboard() {
+		return "dashboard";
+	}
+	
+	@RequestMapping("appointmentHome.do")
+	public String appointmentHome() {
+		return "appointmentHome";
+	}
+	
+	
 }
