@@ -8,7 +8,7 @@
 <title></title>
 </head>
 <body>
-<div th:insert="~{header :: header}" class="gympage"></div>
+<div th:replace="~{header :: header}" class="gympage"></div>
 
 <div class="main">
     <div class="container">
@@ -51,7 +51,11 @@
     </div>
 </div>
 
+<<<<<<< HEAD
+<div th:replace="~{footer :: footer}"></div>
+=======
 <div th:insert="~{footer :: footer}"></div>
+>>>>>>> origin/sungjun
 </body>
 <style>
 /* 메인 래퍼 - 전체 화면의 80% */
