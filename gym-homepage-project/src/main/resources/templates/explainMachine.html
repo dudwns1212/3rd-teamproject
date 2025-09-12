@@ -3,29 +3,9 @@
 <head>
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/footer.css">
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title></title>
-</head>
-<body>
-<div th:insert="~{header :: header}" class="gympage"></div>
-
-	
-	<div class="group-container" >
-		<div class="img-container" th:each="vo : ${vo}">			
-			<img th:src="${vo.machineImg}" class="healthimg">				
-			<span class="explain-container" th:text="'기구이름 : ' + ${vo.machineName}"></span>
-			<span class="explain-container" th:text="'입고날짜 : '+${#temporals.format(vo.machinePurchaseDate, 'yyyy-MM-dd')}"></span>
-			<span class="explain-container" th:text="'가격 : ' + ${#numbers.formatDecimal(vo.machinePrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span>
-			<span class="explain-container" th:text="'AS번호 : ' + ${vo.machineServiceContact}">기구명</span>
-			<button>수정</button>
-			<button>삭제</button>							
-		</div>
-			
-	</div>	
-
-  </div>
-<div th:insert="~{footer :: footer}"></div>
-</body>
 <style>
 .group-container{
 	
@@ -36,7 +16,7 @@
   padding: 12px;         /* 바깥 여백(선택) */
   box-sizing: border-box;
   padding-bottom:120px;  /*바텀부분에 가려지는거 방지*/
-
+}
 .explain-container{
 	
 
@@ -70,4 +50,25 @@
 }
 
 </style>
+</head>
+<body>
+<div th:insert="~{header :: header}" class="gympage"></div>
+
+	
+	<div class="group-container" >
+		<div class="img-container" th:each="vo : ${vo}">			
+			<img th:src="${vo.machineImg}" class="healthimg">				
+			<span class="explain-container" th:text="'기구이름 : ' + ${vo.machineName}"></span>
+			<span class="explain-container" th:text="'입고날짜 : '+${#temporals.format(vo.machinePurchaseDate, 'yyyy-MM-dd')}"></span>
+			<span class="explain-container" th:text="'가격 : ' + ${#numbers.formatDecimal(vo.machinePrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span>
+			<span class="explain-container" th:text="'AS번호 : ' + ${vo.machineServiceContact}">기구명</span>
+			<button>수정</button>
+			<button>삭제</button>							
+		</div>
+			
+	</div>	
+
+  </div>
+<div th:insert="~{footer :: footer}"></div>
+</body>
 </html>
