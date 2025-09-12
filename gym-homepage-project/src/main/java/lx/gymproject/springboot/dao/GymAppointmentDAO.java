@@ -16,23 +16,12 @@ public class GymAppointmentDAO {
 	SqlSession session;
 	
 	public int insertDB1(GymAppointmentVO ap) throws Exception {
-		return session.insert("insertDB1", ap);
+		return session.insert("insertApp", ap);
 	}
 	
 	public List<GymAppointmentVO> getDBList() throws Exception {
-		return session.selectList("getDBList");
+		return session.selectList("getAppList");
 	}
 	
-	public GymAppointmentVO getDB(int Id) throws Exception {
-		return session.selectOne("getDB", Id);
-	}
-	
-	public int updateDB(GymAppointmentVO ap) throws Exception {
-		return session.update("updateDB", ap);
-	}
-	
-	public boolean deleteDB(int Id) throws Exception {
-		return false;
-	}
 	
 }

@@ -60,9 +60,13 @@
         delete from post where post_id = #{poId}
     </delete>
 	
-	<insert id="insertDB1" parameterType="lx.gymproject.springboot.vo.GymAppointmentVO">
+	<insert id="insertApp" parameterType="lx.gymproject.springboot.vo.GymAppointmentVO">
         insert into appointment(userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1) values(#{userName}, #{email}, #{phone}, #{address}, #{serviceType}, #{appointmentDate}, #{appointmentDuration}, #{status1}) </insert>
 	
+	<select id="getAppList" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+        select userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1
+        from appointment
+    </select>
 	
 	
 
