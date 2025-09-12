@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper-gym">
+	<!-- 로그인 -->
+	<select id="doLoginById" parameterType="String" resultType="lx.gymproject.springboot.vo.GymUserVO">
+		select * from users where user_email = #{userEmail}	
+	</select>
+	<!-- 회원가입 -->
+	<insert id="doRegisterByUserVO" parameterType="lx.gymproject.springboot.vo.GymUserVO">
+		insert into users (user_email, user_password, user_name, user_tel, user_birth, user_gender)
+			values(#{userEmail},#{userPassword},#{userName},#{userTel},#{userBirth},#{userGender})
+	</insert>
+
+	
+	<select id="getDB" parameterType="int" resultType="lx.gymproject.springboot.vo.GymPostVO">
+        select post_id poId
+            ,post_name poName
+            ,post_content poContent       
+            ,post_user_id poUserId
+            ,post_tag poTag
+            ,post_img poImg
+            ,post_like poLike
+            ,post_view poView
+            ,post_dislike poDislike
+            ,post_board_code poBoardCode from post
+        where post_id = #{poId}
+    </select>
+
+    <select id="getDBList" resultType="lx.gymproject.springboot.vo.GymPostVO">
+        select post_id poId
+            ,post_name poName
+            ,post_content poContent       
+            ,post_user_id poUserId
+            ,post_tag poTag
+            ,post_img poImg
+            ,post_like poLike
+            ,post_view poView
+            ,post_dislike poDislike
+            ,post_board_code poBoardCode from post
+    </select>
+
+    <insert id="insertDB" parameterType="lx.gymproject.springboot.vo.GymPostVO">
+        insert into post(post_name, post_content, post_user_id, post_tag, post_img, post_like,
+                        post_view, post_dislike, post_board_code) values(#{poName}, #{poContent}, #{poUserId}, #{poTag}, #{poImg}, #{poLike}, #{poView}, #{poDislike}, #{poBoardCode}) </insert>
+
+    <update id="updateDB" parameterType="lx.gymproject.springboot.vo.GymPostVO">
+        UPDATE post
+        SET post_name = #{poName},
+            post_content = #{poContent},      
+            post_user_id = #{poUserId},
+            post_tag = #{poTag},
+            post_img = #{poImg},
+            post_like = #{poLike},
+            post_view = #{poView},
+            post_dislike = #{poDislike},
+            post_board_code = #{poBoardCode} WHERE post_id = #{poId}
+    </update>
+
+    <delete id="deleteDB" parameterType="int">
+        delete from post where post_id = #{poId}
+    </delete>
+	
+	<insert id="insertApp" parameterType="lx.gymproject.springboot.vo.GymAppointmentVO">
+        insert into appointment(userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1) values(#{userName}, #{email}, #{phone}, #{address}, #{serviceType}, #{appointmentDate}, #{appointmentDuration}, #{status1}) </insert>
+	
+	<select id="getAppList" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+        select userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1
+        from appointment
+    </select>
+	
+	
+	
+  <select id="getMachineList" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
+    select machine_id , machine_name , machine_purchase_date , machine_price, machine_service_contact , machine_img , machine_video from gym_machine; 
+  </select>
+  
+  <update id="updateMachine" parameterType="lx.gymproject.springboot.vo.GymMachineVO">
+  	update gym_machine
+  	<trim prefix="SET">
+  	<if test="machineName != null"> machine_name = #{machineName},</if>
+  	<if test="machinePurchaseDate != null"> machine_purchase_date = #{machinePurchaseDate},</if>
+  	<if test="machinePrice != null"> machine_price = #{machinePrice},</if>
+  	<if test="machineServiceContact != null"> machine_service_contact = #{machineServiceContact}</if>
+  	</trim>
+  	where machine_id = #{machineId}    
+  </update>
+  
+  
+
+ <select id="getMachine" parameterType="int" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
+    select machine_id 
+    , machine_name 
+    , machine_purchase_date 
+    , machine_price
+    , machine_service_contact 
+    , machine_img 
+    , machine_video from gym_machine where machine_id = #{machineId}; 
+  </select>
+  
+  
+	<insert id= "insertMachine" parameterType="lx.gymproject.springboot.vo.GymMachineVO">
+			insert into gym_machine(machine_name, machine_purchase_date, machine_price,
+								 machine_service_contact, machine_img, machine_video)
+			values(#{machineName}, #{machinePurchaseDate}, #{machinePrice}, #{ machineServiceContact}, #{machineImg}, #{machineVideo})
+	</insert>
+	
+	
+	<delete id="deleteMachine" parameterType="int">
+        delete from gym_machine where machine_id = #{machineId}
+    </delete>
+	
+	
+	
+	
+	
+	
+	
+
+</mapper>

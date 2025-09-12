@@ -17,51 +17,29 @@ import lx.gymproject.springboot.vo.GymMachineVO;
 @Controller
 public class MachineController {
 
-   
 	@Autowired
 	GymMachineDAO dao;
 
-	/*
-	 * @RequestMapping("/explainMachine.do") public String getMachine(Model model)
-	 * throws Exception { GymMachineVO vo =dao.getMachine();
-	 * model.addAttribute("vo", vo); System.out.println(vo); return
-	 * "explainMachine"; }
-	 */ 
-	
 	@RequestMapping("/explainMachine.do")
 	public String machineList(HttpServletRequest req, Model model) {
-		List <GymMachineVO> list= dao.getMachineList();
+		List<GymMachineVO> list = dao.getMachineList();
 		model.addAttribute("data", list);
 		return "explainMachine";
 	}
-	
+
 	@PostMapping("/updateMachine.do")
 	public String updateMachine(GymMachineVO vo) throws Exception {
-		System.out.println("vo = " +vo);
+		System.out.println("vo = " + vo);
 		try {
 			dao.updateMachine(vo);
-			
-		}catch(Exception e) {
+	
+		} catch (Exception e) {
 			System.out.println(e);
 		}
-		System.out.println(vo.machinePrice); 
+		System.out.println(vo.machinePrice);
 		return "redirect:explainMachine.do";
 	}
-	
-	
-	/*
-	 * @RequestMapping("/machine_edit_form.do") public String
-	 * edit(HttpServletRequest req) throws Exception{
-	 * System.out.println(req.getParameter("machineId")); int machineId =
-	 * Integer.parseInt(req.getParameter("machineId"));
-	 * 
-	 * GymMachineVO vo = dao.getMachine(machineId);
-	 * 
-	 * req.setAttribute("vo", vo); return "machine_edit_form"; }
-	 */
-	
-	
-	
+
 	@RequestMapping("/machine_edit_form.do")
 	public String edit(@RequestParam("machineId") int machineId, Model model) throws Exception {
 		GymMachineVO vo = dao.getMachine(machineId);

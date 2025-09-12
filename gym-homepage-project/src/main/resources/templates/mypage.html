@@ -11,17 +11,84 @@
 <div th:insert="~{header :: header}"></div>
 
 <div class="wrapper">
-<div class="container">
-    <h1>마이페이지</h1>
-    <div th:if="${user}">
-        <p>이메일: <span th:text="${user.userEmail}"></span></p>
-        <p>이름: <span th:text="${user.userEmail}"></span></p>
-        <p>생년월일: <span th:text="${user.userEmail}"></span></p>
-        <p>성별: <span th:text="${user.userEmail}"></span></p>
-    </div>
-</div>
+	<div class="container">
+		<h1>일산 탄현점의 가족을 환영합니다</h1>
+		<p>회원님의 정보를 수정하고 PT예약을 확인하세요</p>
+	</div>
+	<div class="mypage d-flex flex-column justify-content-center align-items-center">
+		<h1 class="mb-4 fw-bold fs-2">마이페이지</h1>
+	    <form action="userUpdate.do" method="post">
+		    <div class="section-modify">
+		        <input type="hidden" name="userId" th:value="${user.userId}">
+		        <p class="p-id">이메일: <input type="text" name="userEmail" th:value="${user.userEmail}"></p>
+		        <p>비밀번호: <input type="password" name="userPassword" th:value="${user.userPassword}"></p>
+		        <p class="p-name">이름: <input type="text" name="userName" th:value="${user.userName}"></p>
+		        <p class="p-tel">전화번호: <input type="text" name="userTel" th:value="${user.userTel}"></p>
+		        <p class="p-birth">생년월일: <input type="date" name="userBirth" th:value="${user.userBirth}"></p>
+		        <p class="p-g">성별: 
+		            <input type="radio" name="userGender" value="m" th:checked="${user.userGender == 'm'}">남자
+		            <input type="radio" name="userGender" value="w" th:checked="${user.userGender == 'w'}">여자
+		        </p>
+		    </div>
+		    <button class="btn btn-outline-primary" type="submit">수정</button>
+		    <button class="btn btn-outline-danger ms-4" type="reset">취소</button>
+		</form>
+	    <div class="section-checkReservation">
+	    	
+	    </div>
+	</div>
 </div>
 
 <div th:insert="~{footer :: footer}"></div>
 </body>
+<style>
+html, body{height: 100%}
+.wrapper{
+    height:auto;
+    min-height: 100%;
+    padding-bottom: 100px;
+    padding-top: 150px;
+}
+.container{
+	text-align: center;
+    margin-bottom: 40px;
+}
+.container h1{
+	color: #198754;
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+.container p{
+	color: #666;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+.p-id{
+	margin-left: 15px;
+}
+.p-name{
+	margin-left: 30px;
+}
+.p-g{
+	margin-right:94px;
+}
+.p-birth{
+	margin-right:53px;
+}
+.mypage{
+	text-align: center;
+    width: 40%;
+    margin: 0 auto;
+    padding: 25px;
+    border-radius: 10px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+.btn{
+	padding:8px;
+	width: 100px;
+}
+</style>
 </html>

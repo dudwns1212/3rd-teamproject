@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import lx.gymproject.springboot.dao.GymAppointmentDAO;
 import lx.gymproject.springboot.dao.GymUserDAO;
-import lx.gymproject.springboot.vo.GymAppointmentVO;
 import lx.gymproject.springboot.vo.GymUserVO;
 import lx.gymproject.springboot.vo.GymAppointmentVO;
 
@@ -32,22 +30,22 @@ public class UserController {
 	@Autowired
 	GymAppointmentDAO appDao;
 	
-	@RequestMapping("loginPage.do")
+	@RequestMapping("/loginPage.do")
 	public String loginPage() {
 		return "loginPage";
 	}
 	
-	@RequestMapping("registerPage.do")
+	@RequestMapping("/registerPage.do")
 	public String registerPage() {
 		return "registerPage";
 	}
 	
-  @PostMapping("login.do")
+  @PostMapping("/login.do")
 	public String login(Model model, HttpSession session,
 			@RequestParam(value="userEmail") String userEmail,
 			@RequestParam(value="userPassword") String userPassword) {
 		
-		GymUserVO vo = dao.doLoginById(userEmail);
+		GymUserVO vo = dao.doLoginByUserId(userEmail);
 		
 		// 사용자가 존재하지 않거나 비밀번호가 틀린 경우
 		if(vo == null || !vo.getUserPassword().equals(userPassword)) {
@@ -60,7 +58,7 @@ public class UserController {
 		return "home";
 	}
 	
-	@PostMapping("register.do")
+	@PostMapping("/register.do")
 	public String register(GymUserVO vo, Model model) {
 		int checkpw = 0;
 		try {
@@ -78,13 +76,13 @@ public class UserController {
 		return "registerPage";
 	}
 	
-	@RequestMapping("logout.do")
+	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) {
 		session.invalidate(); // 세션 무효화
 		return "redirect:loginPage.do";
 	}
 	
-	@RequestMapping("mypage.do")
+	@RequestMapping("/mypage.do")
 	public String mypage(HttpSession session, Model model) {
 		GymUserVO loginUser = (GymUserVO) session.getAttribute("loginUser");
 		if(loginUser == null) {
@@ -94,21 +92,24 @@ public class UserController {
 		return "mypage";
 	}
 	
+	@RequestMapping("/userUpdate.do")
+	public String update(GymUserVO vo, HttpSession session) {
+		int result = dao.updateUserInfo(vo);
+	    if(result > 0) {
+	        session.setAttribute("loginUser", vo);
+	    }
+		return "redirect:mypage.do";
+	}
 	
-	@RequestMapping("reservation.do")
+	
+	@RequestMapping("/reservation.do")
 	public String reservation() throws Exception {
 		
 		return "reservation";
 	}
-
-	@RequestMapping("reservationDashboard.do")
-	public String reservationDashboard() {
-		return "dashboard";
-	}
 	
 	@RequestMapping("appointmentHome.do")
-	public String appointmentHome() throws Exception {
-		
+	public String appointmentHome() {
 		return "appointmentHome";
 	}
 	
@@ -135,7 +136,4 @@ public class UserController {
         return "dashboard"; 
     }
 
-	
-	
-	
 }

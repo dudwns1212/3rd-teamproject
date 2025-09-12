@@ -1,8 +1,7 @@
 package lx.gymproject.springboot.vo;
 
 public class GymUserVO {
-
-	public int userId;
+	
 	public String userEmail;
 	public String userPassword;
 	public String userName;
@@ -10,7 +9,6 @@ public class GymUserVO {
 	public String userBirth;
 	public String userGender;
 
-	
 	public int getUserId() {
 		return userId;
 	}
