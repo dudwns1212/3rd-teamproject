@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" href="/css/footer.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title></title>
+</head>
+<body>
+<div th:insert="~{header :: header}" class="gympage"></div>
+
+	
+	<div class="group-container" >
+		<div class="img-container" th:each="vo : ${vo}">			
+			<img th:src="${vo.machineImg}" class="healthimg">				
+			<span class="explain-container" th:text="'기구이름 : ' + ${vo.machineName}"></span>
+			<span class="explain-container" th:text="'입고날짜 : '+${#temporals.format(vo.machinePurchaseDate, 'yyyy-MM-dd')}"></span>
+			<span class="explain-container" th:text="'가격 : ' + ${#numbers.formatDecimal(vo.machinePrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span>
+			<span class="explain-container" th:text="'AS번호 : ' + ${vo.machineServiceContact}">기구명</span>
+			<button>수정</button>
+			<button>삭제</button>							
+		</div>
+			
+	</div>	
+
+  </div>
+<div th:insert="~{footer :: footer}"></div>
+</body>
+<style>
+.group-container{
+	
+	display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2열 */
+  gap: 20px;             /* 카드 사이 간격 */
+  align-items: start;    /* 카드 상단 맞춤 */
+  padding: 12px;         /* 바깥 여백(선택) */
+  box-sizing: border-box;
+  padding-bottom:120px;  /*바텀부분에 가려지는거 방지*/
+
+.explain-container{
+	
+
+	 display: block;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #374151;
+}
+
+.img-container{
+	width:900px;
+	height: 420px;
+	position: relative; 
+	margin-bottom: 50px;  
+	margin-top: 50px;
+}
+
+
+.main {
+	width: 1000px; 
+	height: 1000px; 
+	dispaly: flex;
+	flex-direction: row; 
+	justify-content: space-between;
+	align-items: space-between;
+	position: relative;
+	
+}
+.img-container > .healthimg{
+	width: 300px; height: 300px; object-fit: cover;padding:60px; cursor:pointer;
+}
+
+</style>
+<<<<<<< HEAD
+</html>
+=======
+
+</head>
+
+</html>
+>>>>>>> 7e72fbeb7fb79b3962a0b2ecca49b16696f872c9

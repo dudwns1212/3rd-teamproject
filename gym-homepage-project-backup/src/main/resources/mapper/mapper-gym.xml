@@ -10,17 +10,6 @@
 		insert into users (user_email, user_password, user_name, user_tel, user_birth, user_gender)
 			values(#{userEmail},#{userPassword},#{userName},#{userTel},#{userBirth},#{userGender})
 	</insert>
-	<!-- 회원수정 -->
-	<update id="updateUserVO" parameterType="lx.gymproject.springboot.vo.GymUserVO">
-	    UPDATE users 
-	    SET user_email = #{userEmail},
-	        user_password = #{userPassword},
-	        user_name = #{userName},
-	        user_tel = #{userTel},
-	        user_birth = #{userBirth},
-	        user_gender = #{userGender}
-	    WHERE user_id = #{userId}
-	</update>
 
 	
 	<select id="getDB" parameterType="int" resultType="lx.gymproject.springboot.vo.GymPostVO">
@@ -82,13 +71,7 @@
 	
 	
   <select id="getMachineList" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
-    select machine_id 
-    , machine_name 
-    , machine_purchase_date 
-    , machine_price
-    , machine_service_contact 
-    , machine_img 
-    , machine_video from gym_machine; 
+    select machine_id , machine_name , machine_purchase_date , machine_price, machine_service_contact , machine_img , machine_video from gym_machine; 
   </select>
   
   <update id="updateMachine" parameterType="lx.gymproject.springboot.vo.GymMachineVO">

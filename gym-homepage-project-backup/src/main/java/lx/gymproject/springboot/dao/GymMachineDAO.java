@@ -42,6 +42,8 @@ public class GymMachineDAO {
 	  public int deleteMachine(int machineId) throws Exception{
 	  		System.out.println("deleteMachine실행됨"); 
 	  		return session.insert("deleteMachine", machineId); 
-	  }
-	  		
+}
+	  
+	
+	
 }

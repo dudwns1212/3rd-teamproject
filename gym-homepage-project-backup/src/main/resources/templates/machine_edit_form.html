@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>운동기구 수정화면</title>
+<link rel="stylesheet" href="css/addrbook.css" type="text/css" media="screen" />
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+
+</head>
+
+<body>
+<div align="center">
+<H2>운동기구:수정화면 </H2>
+<HR>
+[<a href="/explainMachine.do">운동기구 목록으로</a>] <p>
+
+<form  Method="post" th:action="updateMachine.do">
+	<input type=hidden name="machineId" th:value="${vo.machineId}">
+		
+	<table border="1">
+		  <tr>
+		    <th>이 름</th>
+		    <td><input type="text" name="machineName" th:value="${vo.machineName}"></td>
+		  </tr>
+		  <tr>
+		    <th>구입일자</th>
+		    <td><input type="date" name="machinePurchaseDate" th:value="${#temporals.format(vo.machinePurchaseDate, 'yyyy-MM-dd')}"></td>
+		  </tr>
+		  		  
+		   <tr>
+		    <th>가격</th>
+		    <td>		    
+		     <!-- 전송되는 유일한 필드: 숫자만 -->
+    			<input type="number" step="0.01" min="0"
+           name="machinePrice" id="machinePrice"
+           th:value="${vo.machinePrice}"
+
+           oninput="updatePricePreview(this.value)"> 		    
+
+		    </td>
+		  </tr>	
+		  	  		  
+		  <tr>
+		    <th>AS 번호</th>
+		    <td><input type="text" name="machineServiceContact" th:value="${vo.machineServiceContact}"></td>
+		  </tr>
+		  </form>
+		  	<tr>
+		    <td colspan=2 align=center><input type=submit th:value="저장"></input>
+		    <input type=reset value="취소">
+		    
+		    <form th:action="deleteMachine.do">
+		    <input type=hidden name="machineId" th:value="${vo.machineId}">
+		    <input type="submit" value="삭제" >
+		    </form>
+		    
+		    
+		    </td>
+			</tr>
+	</table>
+
+
+</div>
+<script type="text/javascript">
+	
+	
+	
+	 // 표시용 업데이트(입력 중)
+  function updatePricePreview(v){
+    const n = Number(String(v||'').replace(/[^\d.\-]/g,''));
+    const el = document.getElementById('pricePreview');
+    if (el) el.textContent = n ? n.toLocaleString() + '원' : '';
+  }
+
+  // 제출 직전 숫자만 남기기 (최후 방어)
+  document.addEventListener('DOMContentLoaded', function(){
+    const form = document.querySelector('form[name="form1"]');
+    if (!form) return;
+
+    form.addEventListener('submit', function(){
+      const priceInput = form.querySelector('[name="machinePrice"]');
+      if (!priceInput) return;
+      priceInput.value = String(priceInput.value||'').replace(/[^\d.\-]/g,'');
+      // 디버그 확인용
+      console.log('machinePrice submitting =', priceInput.value);
+    });
+  });
+	
+
+</script>
+
+
+</body>
+</html>
