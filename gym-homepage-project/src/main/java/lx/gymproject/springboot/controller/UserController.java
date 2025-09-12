@@ -51,7 +51,7 @@ public class UserController {
 		return "home";
 	}
 	
-	@RequestMapping("register.do")
+	@PostMapping("register.do")
 	public String register(GymUserVO vo, Model model) {
 		int checkpw = 0;
 		try {
