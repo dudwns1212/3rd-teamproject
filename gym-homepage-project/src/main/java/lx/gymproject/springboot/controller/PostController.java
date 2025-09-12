@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -31,52 +30,46 @@ public class PostController {
 		}
 		
 		@RequestMapping("post.do")
-		public String post(@RequestParam("poId") int poId, Model model) throws Exception {
-			GymPostVO vo = dao.getDB(poId);
-			model.addAttribute("po", vo);
+		public String post(HttpSession session, HttpServletRequest req) throws Exception {
+			List<GymPostVO> list = dao.getDBList();
+			req.setAttribute("data", list);
 			return "post";
 		}		
-		
-		@RequestMapping("postWritePage.do")
-		public String postWritePage() throws Exception {
-			System.out.print("글 작성 페이지");
-			return "postWrite";
-		}
-		
-		@RequestMapping("postWrite.do")
-		public String postWrite(GymPostVO vo) throws Exception {
-			System.out.print(vo);
-			dao.insertDB(vo);
-			return "redirect:postBoard";
-		}
-		
-		@RequestMapping("postEdit.do")
-		public String postEdit(@RequestParam("poId") int poId, Model model) throws Exception {
-			GymPostVO vo = dao.getDB(poId);
-			model.addAttribute("po", vo);
-			return "post";
-		}
 		
 		@RequestMapping("/insert.do")
 		public String insert(GymPostVO vo) throws Exception {
 			System.out.print(vo);
 			dao.insertDB(vo);
-			return "redirect:postBoard";
+			return "redirect:addrbook_list.do";
+		}
+		
+		@RequestMapping("/addrbook_form.do")
+		public String form() {
+			return "addrbook_form";
+		}
+
+		@RequestMapping("addrbook_list.do")
+		public String list(HttpSession session, HttpServletRequest req) throws Exception {
+			List<GymPostVO> list = dao.getDBList();
+			req.setAttribute("data", list);
+			return "addrbook_list";
+		}
+		
+		@RequestMapping("edit.do")
+		public String getDB(@RequestParam("abId") int abId, HttpServletRequest req) throws Exception {
+			GymPostVO vo = dao.getDB(abId);
+			req.setAttribute("ab", vo);
+			return "addrbook_edit_form";
 		}
 		
 		@RequestMapping("update.do")
 		public String updateDB(GymPostVO vo) throws Exception {
 			System.out.print("vo = "+ vo);
 			dao.updateDB(vo);
-			return "redirect:postBoard";
+			return "redirect:addrbook_list.do";
 		}
 		
-		@RequestMapping("delete.do")
-		public String deleteDB(GymPostVO vo) throws Exception {
-			System.out.print(vo);
-			//dao.deleteDB(vo);
-			return "redirect:postBoard";
-		}
+
 
 	
 }

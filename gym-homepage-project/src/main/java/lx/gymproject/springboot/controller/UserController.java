@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import lx.gymproject.springboot.dao.GymAppointmentDAO;
 import lx.gymproject.springboot.dao.GymUserDAO;
-import lx.gymproject.springboot.vo.GymAppointmentVO;
 import lx.gymproject.springboot.vo.GymUserVO;
 
 
@@ -24,9 +22,6 @@ public class UserController {
 	
 	@Autowired
 	GymUserDAO dao;
-	
-	@Autowired
-	GymAppointmentDAO appDao;
 	
 	@RequestMapping("loginPage.do")
 	public String loginPage() {
@@ -56,7 +51,7 @@ public class UserController {
 		return "home";
 	}
 	
-	@PostMapping("register.do")
+	@RequestMapping("register.do")
 	public String register(GymUserVO vo, Model model) {
 		int checkpw = 0;
 		try {
@@ -92,8 +87,7 @@ public class UserController {
 	
 	
 	@RequestMapping("reservation.do")
-	public String reservation() throws Exception {
-		
+	public String reservation() {
 		return "reservation";
 	}
 
@@ -103,15 +97,8 @@ public class UserController {
 	}
 	
 	@RequestMapping("appointmentHome.do")
-	public String appointmentHome() throws Exception {
-		
+	public String appointmentHome() {
 		return "appointmentHome";
-	}
-	
-	@PostMapping("/revervationInsert.do")
-	public String insert(GymAppointmentVO vo) throws Exception {
-		appDao.insertDB1(vo);
-		return "dashboard";
 	}
 
 }
