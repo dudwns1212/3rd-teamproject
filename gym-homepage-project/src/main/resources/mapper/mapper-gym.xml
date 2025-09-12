@@ -66,14 +66,44 @@
 	
 	
 
-  <!-- 기구 리스트 -->
   <select id="getMachineList" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
-    select machine_id , machine_name , machine_purchase_date , machine_price, machine_service_contact , machine_img , machine_video from gym_machine; 
+    select machine_id 
+    , machine_name 
+    , machine_purchase_date 
+    , machine_price
+    , machine_service_contact 
+    , machine_img 
+    , machine_video from gym_machine; 
   </select>
-  <!--
-  <select id="getMachine" parameterType="int" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
-    select machine_id , machine_name , machine_purchase_date , machine_price, machine_service_contact , machine_img , machine_video from gym_machine where machine_id = 1; 
-  </select> -->
+  
+  <update id="updateMachine" parameterType="lx.gymproject.springboot.vo.GymMachineVO">
+  	update gym_machine
+  	<trim prefix="SET">
+  	<if test="machineName != null"> machine_name = #{machineName}</if>
+  	<if test="machinePurchaseDate != null"> machine_purchase_date = #{machinePurchaseDate}</if>
+  	<if test="machinePrice != null"> machine_price = #{machinePrice}</if>
+  	<if test="machineServiceContact != null"> machine_service_contact = #{machineServiceContact}</if>
+  	</trim>
+  	where machine_id = #{machineId}    
+  </update>
+  
+  
 
+ <select id="getMachine" parameterType="int" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
+    select machine_id 
+    , machine_name 
+    , machine_purchase_date 
+    , machine_price
+    , machine_service_contact 
+    , machine_img 
+    , machine_video from gym_machine where machine_id = #{machineId}; 
+  </select>
+  
+  
+	<insert id= "insertMachine" parameterType="lx.gymproject.springboot.vo.GymMachineVO">
+			insert into gym_machine(machine_name, machine_purchase_date, machine_price,
+								 machine_service_contact, machine_img, machine_video)
+			values(#{machineName}, #{machine_purchase_date}, #{machine_price}, #{ machine_service_contact}, #{machine_img}, #{machine_video})
+	</insert>
 
 </mapper>

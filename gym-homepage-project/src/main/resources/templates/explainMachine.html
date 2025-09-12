@@ -4,8 +4,64 @@
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/footer.css">
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	 function check(machine_id) {
+		//pwd = prompt('수정/삭제 하려면 비밀번호를 넣으세요');
+		document.location.href="machine_edit_form.do?machineId="+machine_id;
+		//document.location.href="editview.do?ab_id="+ab_id+"&upasswd="+pwd;
+	}
+</script>
+
+
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title></title>
+</head>
+<body>
+<div th:insert="~{header :: header}" class="gympage"></div>
+
+	
+	<div class="group-container" >
+		<div class="img-container" th:each="vo : ${data}">
+			<td><a th:href="|javascript:check(${vo.machineId})|" th:text="${vo.machineId}"></a></td>			
+			<img th:src="${vo.machineImg}" class="healthimg">				
+			<span class="explain-container" th:text="'기구이름 : ' + ${vo.machineName}"></span>
+			<span class="explain-container" th:text="'입고날짜 : '+${vo.machinePurchaseDate}"></span>
+			<span class="explain-container" th:text="'가격 : ' + ${vo.machinePrice} + '원'"></span>
+			<span class="explain-container" th:text="'AS번호 : ' + ${vo.machineServiceContact}">기구명</span>
+			
+			<form action="machine_edit_form.do">
+			<button type="button" class="change">수정</button>				
+			</form>
+			
+			<button>삭제</button>
+			
+			
+									
+		</div>
+			
+	</div>	
+
+  </div>
+  
+  <script type="text/javascript">
+	$(document).on('click','change', function(){		
+		let machineId = ($(this).closet('tr').find('.machine_id').text().tirm());		
+		
+		document.location.href="machine_edit_form.do?machineId=" + machineId;
+	});
+
+	</script>
+  
+  
+  
+  
+  
+  
+<div th:insert="~{footer :: footer}"></div>
+</body>
 <style>
 .group-container{
 	
@@ -46,7 +102,6 @@ display: grid;
 .img-container > .healthimg{
 	width: 300px; height: 300px; object-fit: cover;padding:60px; cursor:pointer;
 }
-
 </style>
 </head>
 <body>
