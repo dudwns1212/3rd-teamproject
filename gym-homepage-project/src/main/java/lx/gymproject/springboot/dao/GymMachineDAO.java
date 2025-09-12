@@ -14,7 +14,7 @@ public class GymMachineDAO {
 	@Autowired
 	SqlSession session;
 	
-	
+
 	public GymMachineVO getMachine(int machineId) throws Exception {
 		System.out.println("getMachine실행됨");
 		return session.selectOne("getMachine",machineId);
@@ -23,9 +23,9 @@ public class GymMachineDAO {
 	public List<GymMachineVO> getMachineList(){
 		
 		System.out.println("getMachineList실행됨");
+
 		return session.selectList("getMachineList");
 	}
-	
 	
 	public int updateMachine(GymMachineVO machineId) throws Exception {
 		System.out.println("updateMachine실행됨");

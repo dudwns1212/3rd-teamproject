@@ -3,6 +3,7 @@
 <head>
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/footer.css">
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	 function check(machine_id) {
@@ -64,7 +65,7 @@
 <style>
 .group-container{
 	
-	display: grid;
+display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2열 */
   gap: 20px;             /* 카드 사이 간격 */
   align-items: start;    /* 카드 상단 맞춤 */
@@ -73,12 +74,10 @@
   padding-bottom:120px;  /*바텀부분에 가려지는거 방지*/
 }
 .explain-container{
-	
-
-	 display: block;
-  font-size: 14px;
-  line-height: 1.4;
-  color: #374151;
+	display: block;
+	font-size: 14px;
+	line-height: 1.4;
+	color: #374151;
 }
 
 .img-container{
@@ -104,4 +103,25 @@
 	width: 300px; height: 300px; object-fit: cover;padding:60px; cursor:pointer;
 }
 </style>
+</head>
+<body>
+<div th:insert="~{header :: header}" class="gympage"></div>
+
+	
+	<div class="group-container" >
+		<div class="img-container" th:each="vo : ${vo}">			
+			<img th:src="${vo.machineImg}" class="healthimg">				
+			<span class="explain-container" th:text="'기구이름 : ' + ${vo.machineName}"></span>
+			<span class="explain-container" th:text="'입고날짜 : '+${#temporals.format(vo.machinePurchaseDate, 'yyyy-MM-dd')}"></span>
+			<span class="explain-container" th:text="'가격 : ' + ${#numbers.formatDecimal(vo.machinePrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span>
+			<span class="explain-container" th:text="'AS번호 : ' + ${vo.machineServiceContact}">기구명</span>
+			<button>수정</button>
+			<button>삭제</button>							
+		</div>
+			
+	</div>	
+
+  </div>
+<div th:insert="~{footer :: footer}"></div>
+</body>
 </html>

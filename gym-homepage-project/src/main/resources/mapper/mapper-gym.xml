@@ -60,9 +60,12 @@
         delete from post where post_id = #{poId}
     </delete>
 	
+	<insert id="insertDB1" parameterType="lx.gymproject.springboot.vo.GymAppointmentVO">
+        insert into appointment(userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1) values(#{userName}, #{email}, #{phone}, #{address}, #{serviceType}, #{appointmentDate}, #{appointmentDuration}, #{status1}) </insert>
+	
+	
 	
 
- 
   <select id="getMachineList" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
     select machine_id 
     , machine_name 
@@ -72,6 +75,7 @@
     , machine_img 
     , machine_video from gym_machine; 
   </select>
+
   
   <update id="updateMachine" parameterType="lx.gymproject.springboot.vo.GymMachineVO">
   	update gym_machine
@@ -103,8 +107,6 @@
 			values(#{machineName}, #{machine_purchase_date}, #{machine_price}, #{ machine_service_contact}, #{machine_img}, #{machine_video})
 	</insert>
 	
-  
-  
   
 
 </mapper>
