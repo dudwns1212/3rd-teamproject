@@ -51,7 +51,14 @@ main {
 	min-height: 100%;
 	padding-bottom: 100px;
 	margin-top: 100px;
-}
+	
+
+
+
+
+
+
+
 </style>
 
 <body>
@@ -70,29 +77,16 @@ main {
 								<h2 class="text text-center text-light"
 									th:text="${totalAppointments}"></h2>
 							</div>
+							
 						</div>
 					</div>
-					<div class="col">
-						<div class="card bg-primary">
-							<div class="card-body text-center text-light">
-								<h5 style="color: white;">
-									<i class="fa fa-check text-light"></i> Total Booked
-								</h5>
-								<h2 class="text text-center text-light" th:text="${totalBooked}"></h2>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card bg-warning">
-							<div class="card-body text-center text-light">
-								<h5 style="color: white;">
-									<i class="fa fa-clock-o text-light"></i> Total Pendings
-								</h5>
-								<h2 class="text text-center text-light"
-									th:text="${totalPending}"></h2>
-							</div>
-						</div>
-					</div>
+					
+					
+
+					
+					
+			
+			
 				</div>
 			</div>
 		</div>
@@ -101,36 +95,29 @@ main {
 			<div class="table-responsive">
 				<table class="table table-bordered">
 					<thead class="text text-light">
-						<th>SI.NO</th>
-						<th>User Name</th>
-						<th>Email</th>
-						<th>Phone</th>
-						<th>Address</th>
-						<th>Appointment ID</th>
-						<th>ServiceType</th>
-						<th>Appointment Date</th>
-						<th>Required Time</th>
-						<th>Status</th>
+						<th>id</th>
+						<th>고객명</th>
+						<th>이메일</th>
+						<th>전화번호</th>
+						<th>주소</th>
+						<th>강사명</th>
+						<th>날짜</th>
+						<th>시간대</th>
 					</thead>
-					<!-- <tbody>
-						<tr th:each="appointment, stat : ${appointments}">
-							<td th:text="${stat.count}"></td>
-							<td th:text="${appointment.userName}"></td>
-							<td th:text="${appointment.email}"></td>
-							<td th:text="${appointment.phone}"></td>
-							<td th:text="${appointment.address}"></td>
-							<td th:text="${appointment.appointmentId}"></td>
-							<td th:text="${appointment.serviceType}"></td>
-							<td th:text="${appointment.appointmentDate}"></td>
-							<td th:text="${appointment.appointmentDuration}"></td>
-							<td th:text="${appointment.status}"></td>
-						</tr>
-						<tr th:if="${#lists.size(appointments) == 0}">
-							<td colspan="11" class="text-center text-danger">
-								<h6>No Data Available</h6>
-							</td>
-						</tr>
-					</tbody> -->
+					<tbody>
+					    <tr th:each="appointment, stat : ${appointments}">
+					        <td th:text="${stat.count + 1}"></td>
+					        <td th:text="${appointment.userName}"></td>
+					        <td th:text="${appointment.email}"></td>
+					        <td th:text="${appointment.phone}"></td>
+					        <td th:text="${appointment.address}"></td>
+					        <td th:text="${appointment.serviceType}"></td>
+					        <td th:text="${appointment.appointmentDate}"></td>
+					        <td th:text="${appointment.appointmentDuration}"></td>
+					    </tr>
+				
+					</tbody>
+
 				</table>
 			</div>
 		</div>

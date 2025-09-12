@@ -60,15 +60,60 @@
         delete from post where post_id = #{poId}
     </delete>
 	
+	<insert id="insertApp" parameterType="lx.gymproject.springboot.vo.GymAppointmentVO">
+        insert into appointment(userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1) values(#{userName}, #{email}, #{phone}, #{address}, #{serviceType}, #{appointmentDate}, #{appointmentDuration}, #{status1}) </insert>
 	
-
-  <!-- 기구 리스트 --!>
+	<select id="getAppList" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+        select userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1
+        from appointment
+    </select>
+	
+	
+	
   <select id="getMachineList" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
     select machine_id , machine_name , machine_purchase_date , machine_price, machine_service_contact , machine_img , machine_video from gym_machine; 
   </select>
-  <!--
-  <select id="getMachine" parameterType="int" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
-    select machine_id , machine_name , machine_purchase_date , machine_price, machine_service_contact , machine_img , machine_video from gym_machine where machine_id = 1; 
-  </select> --!>
+  
+  <update id="updateMachine" parameterType="lx.gymproject.springboot.vo.GymMachineVO">
+  	update gym_machine
+  	<trim prefix="SET">
+  	<if test="machineName != null"> machine_name = #{machineName},</if>
+  	<if test="machinePurchaseDate != null"> machine_purchase_date = #{machinePurchaseDate},</if>
+  	<if test="machinePrice != null"> machine_price = #{machinePrice},</if>
+  	<if test="machineServiceContact != null"> machine_service_contact = #{machineServiceContact}</if>
+  	</trim>
+  	where machine_id = #{machineId}    
+  </update>
+  
+  
+
+ <select id="getMachine" parameterType="int" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
+    select machine_id 
+    , machine_name 
+    , machine_purchase_date 
+    , machine_price
+    , machine_service_contact 
+    , machine_img 
+    , machine_video from gym_machine where machine_id = #{machineId}; 
+  </select>
+  
+  
+	<insert id= "insertMachine" parameterType="lx.gymproject.springboot.vo.GymMachineVO">
+			insert into gym_machine(machine_name, machine_purchase_date, machine_price,
+								 machine_service_contact, machine_img, machine_video)
+			values(#{machineName}, #{machinePurchaseDate}, #{machinePrice}, #{ machineServiceContact}, #{machineImg}, #{machineVideo})
+	</insert>
+	
+	
+	<delete id="deleteMachine" parameterType="int">
+        delete from gym_machine where machine_id = #{machineId}
+    </delete>
+	
+	
+	
+	
+	
+	
+	
 
 </mapper>

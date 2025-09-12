@@ -20,5 +20,23 @@ public class MainController {
 	public String home() {
 		return "home";
 	}
+
+
+	// 트레이너 소개 페이지 추가
+	@RequestMapping("explainTrainer.do")
+	public String explainTrainer() {
+		return "explainTrainer";
+	}
+	
+	// 시설 안내 페이지 추가
+	@RequestMapping("facility.do")
+	public String facility() {
+		return "facility";
+	}
+	//지도
+	@RequestMapping("location.do")
+	public String location() {
+		return "location";
+	}
 	
 }

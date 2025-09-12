@@ -30,11 +30,31 @@ public class PostController {
 		}
 		
 		@RequestMapping("post.do")
-		public String post(HttpSession session, HttpServletRequest req) throws Exception {
-			List<GymPostVO> list = dao.getDBList();
-			req.setAttribute("data", list);
+		public String post(@RequestParam("poId") int poId, Model model) throws Exception {
+			GymPostVO vo = dao.getDB(poId);
+			model.addAttribute("data", vo);
 			return "post";
 		}		
+		
+		@RequestMapping("postWritePage.do")
+		public String postWritePage() throws Exception {
+			System.out.print("글 작성 페이지");
+			return "postWrite";
+		}
+		
+		@RequestMapping("postWrite.do")
+		public String postWrite(GymPostVO vo) throws Exception {
+			System.out.print(vo);
+			dao.insertDB(vo);
+			return "redirect:postBoard.do";
+		}
+		
+		@RequestMapping("postEdit.do")
+		public String postEdit(@RequestParam("poId") int poId, Model model) throws Exception {
+			GymPostVO vo = dao.getDB(poId);
+			model.addAttribute("po", vo);
+			return "postEdit";
+		}
 		
 		@RequestMapping("/insert.do")
 		public String insert(GymPostVO vo) throws Exception {
