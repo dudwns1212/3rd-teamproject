@@ -66,8 +66,11 @@ public class PostController {
 		public String deleteDB(@RequestParam("poId") int poId) throws Exception {
 			dao.deleteDB(poId);
 			return "redirect:postBoard.do";
-
+		}
 		@RequestMapping("/insert.do")
 		public String insert(GymPostVO vo) throws Exception {
 			System.out.print(vo);
 			dao.insertDB(vo);
+			return "redirect:postBoard.do";
+		}
+		}
