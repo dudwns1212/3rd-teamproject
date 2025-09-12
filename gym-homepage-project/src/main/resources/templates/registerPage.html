@@ -3,55 +3,54 @@
 <head>
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/footer.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title>회원가입 - 짐 케어 헬스&PT</title>
+<title></title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div th:insert="~{header :: header}" class="gympage"></div>
 
 <div class="wrapper">
-    <div class="login-header">
-        <h1>일산 탄현점에 오신 것을 환영합니다</h1>
-    </div>
-    <div class="container">
-
-        <div class="login-section">
-            <h1 class="fw-bold fs-3">회원가입</h1>
-            <form action="register.do" method="post">
-                <label id="label-id">이메일 : <input type="email" name="userEmail" placeholder="example@example.com" required></label>
-                <label>비밀번호 : <input type="password" name="userPassword" placeholder="password" required></label>
-                <label id="label-2">이름 : <input type="text" name="userName" placeholder="이름" required></label>
-                <label>전화번호 : <input type="text" name="userTel" placeholder="010-1234-5678" required></label>
-                <label id="label-2">성별 : <input type="text" name="userGender" placeholder="남자/여자" required></label>
-                <label>생년월일 : <input type="date" name="userBirth" required></label>
-                <button type="submit" class="btn btn-secondary" id="registerbtn">회원가입</button>
-                
-                <div th:if="${registerSuccess}" class="alert alert-success mt-3" role="alert">
-                    ✅ 회원가입에 성공하셨습니다! 로그인해주세요.
-                </div>
-                <div th:if="${registerFailed}" class="alert alert-danger mt-3" role="alert">
-                    ❌ 회원가입에 실패하셨습니다. 다시 시도해주세요.
-                </div>
-            </form>
-            <a href="loginPage.do" id="registerlink">로그인</a>
-        </div>
-
-    </div>
+	<div class="container">
+		<h1 class="fw-bold fs-2">회원가입 페이지</h1>
+		
+		<div class="register-section">
+			<form action="register.do" method="post">
+				<label id="label-id">아이디 : <input type="email" name="userEmail" placeholder="example@example.com"></label>
+				<label>비밀번호 : <input type="password" name="userPassword" placeholder="password"></label>
+				<label id="label-2">이름 : <input type="text" name="userName" placeholder="이름"></label>
+				<label>전화번호 : <input type="text" name="userTel" placeholder="전화번호"></label>
+				<label id="label-2">성별 : <input type="text" name="userGender" placeholder="남자/여자"></label>
+				<label>생년월일 : <input type="date" name="userBirth" placeholder="생년월일"></label>
+				<button type="submit" class="btn btn-secondary" id="registerbtn">회원가입</button>
+			</form>
+			<div th:if="${registerSuccess}" class="alert alert-success mt-3" role="alert">
+				회원가입에 성공하셨습니다! 로그인해주세요.
+			</div>
+			<div th:if="${registerFailed}" class="alert alert-danger mt-3" role="alert">
+				회원가입에 실패하셨습니다.
+			</div>
+			<a href="loginPage.do" id="registerlink">로그인</a>
+		</div>
+		
+	</div>
 </div>
 
 <div th:insert="~{footer :: footer}"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 <style>
-html, body { height: 100% }
-
-.wrapper {
-    height: auto;
-    min-height: 100%;
-    padding-bottom: 100px;
-    padding-top: 150px;
+html, body{height: 100%}
+    .wrapper{
+        height:auto;
+        min-height: 100%;
+        padding-bottom: 100px;
+        margin-top: 100px;
+   }
+    footer{
+       height:100px;
+       position: relative;
+       transform: translateY(-100%);
 }
 .container {
     text-align: center;
@@ -59,66 +58,39 @@ html, body { height: 100% }
     margin: 0 auto;
     padding: 25px;
     border-radius: 10px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
-
-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
-
-input {
-    width: 200px;
-    height: 30px;
-    margin-top: 5px;
-    margin-bottom: 10px;
+input{
+	width: 200px;
+	height: 30px;
+	margin-top:5px;
 }
-
-#registerbtn {
-    margin-top: 10px;
-    margin-bottom: 5px;
-    width: 100px;
-    padding: 5px;
-    font-size: large;
-    font-weight: bold;
+#registerbtn{
+	margin-top:10px;
+	margin-bottom:5px;
+	width:100px;
+	padding: 5px;
+	font-size: large;
+	font-weight: bold; 
 }
-
-#label-id {
-    margin-left: 15px;
+#label-id{
+	margin-left:15px;
 }
-
-#label-2 {
-    margin-left: 30px;
+#label-2{
+	margin-left:30px;
 }
-
-#registerlink {
-    color: black;
+#registerlink{
+	color: black;
 }
-
-#registerlink:hover {
-    color: blue;
-    text-decoration: underline;
-}
-
-.login-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.login-header h1 {
-    color: #198754;
-    font-size: 2.2rem;
-    font-weight: bold;
-}
-
-.login-header p {
-    color: #666;
-    font-size: 1rem;
-    margin-bottom: 0;
+#registerlink:hover{
+	color: blue;
+	text-decoration: underline;
 }
 </style>
+
 </html>

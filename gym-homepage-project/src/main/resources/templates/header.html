@@ -11,11 +11,19 @@
         <!-- 로고 -->
         <div class="logo">
             <form action="home.do">
+<<<<<<< HEAD
+                <button type="submit"><img src="asset/images/lxcinema.png"></button>
+=======
 
                 <button type="submit"><img src="images/logo.jpg"></button>
 
+>>>>>>> 7e72fbeb7fb79b3962a0b2ecca49b16696f872c9
             </form>
         </div>    
+
+			<form action="postBoard.do" method="post">
+	            <button type="submit">게시판</button>
+	        </form>
 
         <!-- 사이트명 -->
         <h1 class="brand">
@@ -23,24 +31,7 @@
                 <div class="en">짐 케어 헬스&PT</div>
             </a>
         </h1>
-        
-		<div class="menu-section">
-            <form action="explainMachine.do" method="post" style="display: inline;">
-                <button type="submit">운동기구 소개</button>
-            </form>
 
-            <form action="appointmentHome.do" method="get" style="display: inline;">
-                <button type="submit">개인 PT 신청</button>
-            </form>
-
-            <form action="postBoard.do" method="get" style="display: inline;">
-                <button type="submit">게시판</button>
-            </form>
-            <form action="location.do" method="get" style="display: inline;">
-                <button type="submit">위치</button>
-            </form>
-        </div>
-        
         <div class="user-section" th:unless="${session.loginUser}">
 	        <form action="loginPage.do" method="post">
 	            <button type="submit">로그인</button>
