@@ -72,7 +72,7 @@
         <h2 class="text p-2 text-center">Book Your Appointment</h2>
             <div class="d-flex justify-content-center">
             
-                <form th:action="@{/appointment}" method="post" class="form-control p-4 mt-4">
+                <form action="revervationInsert.do" method="post" class="form-control p-4 mt-4">
 
                     <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
                         <strong><span th:text="${success}"></span></strong>
