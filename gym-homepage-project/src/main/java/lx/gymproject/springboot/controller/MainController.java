@@ -26,14 +26,7 @@ public class MainController {
 	public String home() {
 		return "home";
 	}
-	
-	@RequestMapping("explainMachine.do")
-	public String machineList(HttpServletRequest req, Model model) {
-		List<GymMachineVO> list = dao.getMachineList();
-		model.addAttribute("vo", list);
-		return "explainMachine";
-	}
-	
+		
 	// 트레이너 소개 페이지 추가
 	@RequestMapping("explainTrainer.do")
 	public String explainTrainer() {

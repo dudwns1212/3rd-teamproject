@@ -10,35 +10,24 @@
 <body>
 	<div th:replace="~{header :: header}" class="gympage"></div>
 	<div class="wrapper">
-
-		<H2>post : 작성화면</H2>
-		<HR>
-		<form name=form1 method=post action="insert.do">
+		<form name=form1 method=post action="postWrite.do">
 			<input type=hidden name="action" value="insert">
 			<table border="1">
 				<tr>
-					<th>이 름</th>
-					<td><input type="text" name="abName" maxlength="15"></td>
+					<th>제목</th>
+					<td><input type="text" name="poName" maxlength="15"></td>
 				</tr>
 				<tr>
-					<th>email</th>
-					<td><input type="email" name="abEmail" maxlength="50"></td>
+					<th>내용</th>
+					<td><input type="text" name="poContent" maxlength="50"></td>
 				</tr>
 				<tr>
-					<th>전화번호</th>
-					<td><input type="text" name="abTel" maxlength="20"></td>
+					<th>이미지</th>
+					<td><input type="file" name="poImg" maxlength="20"></td>
 				</tr>
 				<tr>
-					<th>생 일</th>
-					<td><input type="date" name="abBirth"></td>
-				</tr>
-				<tr>
-					<th>회 사</th>
-					<td><input type="text" name="abComdept" maxlength="20"></td>
-				</tr>
-				<tr>
-					<th>메 모</th>
-					<td><input type="text" name="abMemo"></td>
+					<th>태그</th>
+					<td><input type="text" name="poTag"></td>
 				</tr>
 				<tr>
 					<td colspan=2 align=center><input type=submit value="저장"><input

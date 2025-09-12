@@ -33,7 +33,7 @@ public class PostController {
 		@RequestMapping("post.do")
 		public String post(@RequestParam("poId") int poId, Model model) throws Exception {
 			GymPostVO vo = dao.getDB(poId);
-			model.addAttribute("po", vo);
+			model.addAttribute("data", vo);
 			return "post";
 		}		
 		
@@ -47,14 +47,14 @@ public class PostController {
 		public String postWrite(GymPostVO vo) throws Exception {
 			System.out.print(vo);
 			dao.insertDB(vo);
-			return "redirect:postBoard";
+			return "redirect:postBoard.do";
 		}
 		
 		@RequestMapping("postEdit.do")
 		public String postEdit(@RequestParam("poId") int poId, Model model) throws Exception {
 			GymPostVO vo = dao.getDB(poId);
 			model.addAttribute("po", vo);
-			return "post";
+			return "postEdit";
 		}
 		
 		@RequestMapping("/insert.do")
