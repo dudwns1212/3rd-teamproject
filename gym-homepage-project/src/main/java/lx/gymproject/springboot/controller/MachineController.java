@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,7 +35,7 @@ public class MachineController {
 		return "explainMachine";
 	}
 	
-	@RequestMapping("/updateMachine.do")
+	@PostMapping("/updateMachine.do")
 	public String updateMachine(GymMachineVO vo) throws Exception {
 		System.out.println("vo = " +vo);
 		try {
@@ -65,17 +66,20 @@ public class MachineController {
 	public String edit(@RequestParam("machineId") int machineId, Model model) throws Exception {
 		GymMachineVO vo = dao.getMachine(machineId);
 		model.addAttribute("vo", vo);
-		return "machine_form";
+		return "machine_edit_form";
 	}
 	
 	
-	@RequestMapping("/insertMachine.do")
-	public String insertMachine(GymMachineVO vo) throws Exception {
-		System.out.println(vo);
-		dao.insertMachine(vo);
-		return "redirect:explainMachine.do";
-	}
 	
+	  @RequestMapping("/insertMachine.do") public String insertMachine(GymMachineVO
+	  vo) throws Exception { System.out.println(vo); dao.insertMachine(vo); return
+	 "redirect:explainMachine.do"; }
 	
+	  @RequestMapping("/deleteMachine.do")
+	public String deleteMachine(@RequestParam (value="machineId") int machineId) throws Exception {
+		  System.out.println("deleteMachine 실행됨" + machineId);
+		  dao.deleteMachine(machineId);
+		  return "redirect:explainMachine.do";
+	  }
 	
 }
