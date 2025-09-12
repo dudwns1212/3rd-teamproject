@@ -66,5 +66,6 @@ public class GymMachineVO {
 		return "GymMachineVO [machineId=" + machineId + ", machineName=" + machineName + ", machinePurchaseDate=" + machinePurchaseDate
 				+ ", machinePrice=" + machinePrice + ", machineServiceContact=" + machineServiceContact + ", machineImg=" + machineImg + ", machineVideo=" + machineVideo + "]";
 	}
-    
+
 }
+
