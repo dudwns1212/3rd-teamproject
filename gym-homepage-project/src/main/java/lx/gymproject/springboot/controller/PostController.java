@@ -50,32 +50,24 @@ public class PostController {
 			return "redirect:postBoard.do";
 		}
 		
-		@RequestMapping("postEdit.do")
-		public String postEdit(@RequestParam("poId") int poId, Model model) throws Exception {
+		@RequestMapping("postEditPage.do")
+		public String postEditPage(@RequestParam("poId") int poId, Model model) throws Exception {
 			GymPostVO vo = dao.getDB(poId);
 			model.addAttribute("po", vo);
 			return "postEdit";
 		}
 		
-		@RequestMapping("/insert.do")
-		public String insert(GymPostVO vo) throws Exception {
-			System.out.print(vo);
-			dao.insertDB(vo);
-			return "redirect:postBoard";
-		}
-		
-		@RequestMapping("update.do")
-		public String updateDB(GymPostVO vo) throws Exception {
-			System.out.print("vo = "+ vo);
+		@RequestMapping("postEdit.do")
+		public String postEdit(GymPostVO vo) throws Exception {
+			System.out.print(" vo = "+ vo);
 			dao.updateDB(vo);
-			return "redirect:postBoard";
+			return "redirect:postBoard.do";
 		}
 		
-		@RequestMapping("delete.do")
-		public String deleteDB(GymPostVO vo) throws Exception {
-			System.out.print(vo);
-			//dao.deleteDB(vo);
-			return "redirect:postBoard";
+		@RequestMapping("deleteDB.do") 
+		public String deleteDB(@RequestParam("poId") int poId) throws Exception {
+			dao.deleteDB(poId);
+			return "redirect:postBoard.do";
 		}
 
 	

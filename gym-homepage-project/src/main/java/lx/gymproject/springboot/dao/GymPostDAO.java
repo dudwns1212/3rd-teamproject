@@ -30,8 +30,8 @@ public class GymPostDAO {
 		return session.update("updateDB", vo);
 	}
 	
-	public boolean deleteDB(int poId) throws Exception {
-		return false;
+	public int deleteDB(int poId) throws Exception {
+		return session.delete("deleteDB", poId);
 	}
 	
 }
