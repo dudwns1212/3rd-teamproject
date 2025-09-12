@@ -82,13 +82,7 @@
 	
 	
   <select id="getMachineList" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
-    select machine_id 
-    , machine_name 
-    , machine_purchase_date 
-    , machine_price
-    , machine_service_contact 
-    , machine_img 
-    , machine_video from gym_machine; 
+    select machine_id , machine_name , machine_purchase_date , machine_price, machine_service_contact , machine_img , machine_video from gym_machine; 
   </select>
   
   <update id="updateMachine" parameterType="lx.gymproject.springboot.vo.GymMachineVO">
