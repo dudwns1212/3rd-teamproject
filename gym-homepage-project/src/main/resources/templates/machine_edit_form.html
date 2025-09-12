@@ -49,7 +49,12 @@
 		  </form>
 		  	<tr>
 		    <td colspan=2 align=center><input type=submit th:value="저장"></input>
-		    <input type=reset value="취소">
+		   
+		   <form th:action="cancle.do">
+			<input type=submit value="취소">
+		</form>
+		   
+		   
 		    
 		    <form th:action="deleteMachine.do">
 		    <input type=hidden name="machineId" th:value="${vo.machineId}">
