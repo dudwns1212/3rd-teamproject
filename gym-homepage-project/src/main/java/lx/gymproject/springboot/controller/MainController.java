@@ -27,6 +27,7 @@ public class MainController {
 		return "home";
 	}
 	
+
 	// 트레이너 소개 페이지 추가
 	@RequestMapping("explainTrainer.do")
 	public String explainTrainer() {
