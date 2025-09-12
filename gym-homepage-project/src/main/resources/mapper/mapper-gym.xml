@@ -75,7 +75,6 @@
     , machine_img 
     , machine_video from gym_machine; 
   </select>
-
   
   <update id="updateMachine" parameterType="lx.gymproject.springboot.vo.GymMachineVO">
   	update gym_machine
@@ -106,7 +105,5 @@
 								 machine_service_contact, machine_img, machine_video)
 			values(#{machineName}, #{machine_purchase_date}, #{machine_price}, #{ machine_service_contact}, #{machine_img}, #{machine_video})
 	</insert>
-	
-  
 
 </mapper>
