@@ -41,16 +41,15 @@
 				<td th:text="${vo.poView}"></td>
 				<td th:text="${vo.poDislike}"></td>
 				<td th:text="${vo.poBoardCode}"></td>
-				<td><button class="edit-btn" th:data-poid="${vo.poId}">수정</button></td>
+				<td><button class="edit" th:data-poid="${vo.poId}">수정</button></td>
 			<tr>
 			
 		</table>
 
 		<script type="text/javascript">
-			$('.edit-btn').on('click', function() {
+			$('.edit').on('click', function() {
 				let poId = ($(this).data('poid'));
-				alert(poId);
-				document.location.href = "postEdit.do?poId=" + poId;
+				document.location.href = "postEditPage.do?poId=" + poId;
 				return;
 			});
 		</script>
