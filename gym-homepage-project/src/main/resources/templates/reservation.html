@@ -2,6 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
+
+	<link rel="stylesheet" href="/css/header.css">
+	<link rel="stylesheet" href="/css/footer.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3301/3301556.png">
@@ -26,13 +31,6 @@
         font-weight: bold;
     }
 
-    form {
-        border-radius: 4px !important;
-        max-width: 1200px;
-        height: auto;
-        margin: auto;
-        border: 1px solid rgb(5, 182, 5) !important;
-    }
 
     label {
         text-align: left !important;
@@ -56,19 +54,11 @@
 </style>
 
 <body>
-    <nav class="navbar navbar-expand-sm navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#"><i class="fa fa-files-o" aria-hidden="true" style="color: white;"></i>
-                Appointment System</a>
-            <div class="ml-auto">
-                <a th:href="@{/user/login}" class="btn" type="button" id="dashboard_link"><i class="fa fa-sign-out" aria-hidden="true"></i> logout</a>&nbsp;&nbsp;
-            </div>
-        </div>
-    </nav>
-
+ 
+	<div th:insert="~{header :: header}" class="gympage"></div>
 
     <main>
-        <div class="container p-3 mt-3">
+        <div class="container p-3 mt-3" style="margin-bottom:100px; ">
         <h2 class="text p-2 text-center">Book Your Appointment</h2>
             <div class="d-flex justify-content-center">
             
@@ -87,19 +77,19 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for=""><i class="fa fa-user"></i> User Name</label>
+                                <label for=""><i class="fa fa-user"></i> 회원 이름</label>
                                 <input type="text" name="userName" class="form-control" id="" required>
                             </div>
                             <div class="mb-3">
-                                <label for=""><i class="fa fa-envelope"></i> Email Address</label>
+                                <label for=""><i class="fa fa-envelope"></i> 이메일 </label>
                                 <input type="text" name="email" class="form-control" id="" required>
                             </div>
                             <div class="mb-3">
-                                <label for=""><i class="fa fa-phone"></i> Phone Number</label>
+                                <label for=""><i class="fa fa-phone"></i> 전화번호</label>
                                 <input type="text" name="phone" class="form-control" id="" required>
                             </div>
                             <div class="mb-3">
-                                <label for="">Address</label>
+                                <label for="">주소</label>
                                 <textarea name="address" id="" cols="30" rows="1" class="form-control" required></textarea>
                             </div>
                         </div>
@@ -116,12 +106,12 @@
                         </select>
                             </div>
                             <div class="mb-3">
-                                <label for=""><i class="fa fa-clock-o"></i> Appointment Date</label>
+                                <label for=""><i class="fa fa-clock-o"></i> 상담날짜</label>
                                 <input type="date" name="appointmentDate" class="form-control" id="" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="">Required Time</label>
+                                <label for="">시간선택</label>
                             <select id="role" class="form-control form-select" name="appointmentDuration" required>
                             <option>시간을 선택해주세요</option>
                             <option value="13:00-14:00">13:00-14:00</option>
@@ -130,19 +120,17 @@
                             <option value="22:00-23:00">22:00-23:00</option>
                         </select>
                             </div>
-                            <div class="mb-3">
-                                <label for=""><i class="fa fa-check"></i> Status</label>
-                                <input type="text" name="status" class="form-control"  id="status">
-                            </div>
+                          
                         </div>
                     </div>
 
                     <div class="row p-2 mt-2 mb-3">
-                        <button class="btn text-light" type="submit">Book Appointment</button>
+                        <button class="btn text-light" type="submit">신청하기</button>
                     </div>
                 </form>
             </div>
         </div>
+        <div th:insert="~{footer :: footer}"></div>
     </main>
 
 <script>
