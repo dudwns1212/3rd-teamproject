@@ -16,28 +16,38 @@
 <table border="1">
 		  <tr>
 		    <th>이 름</th>
-		    <td><input type="text" name="machineName" th:value="${vo.machineName}"></td>
+		    <td><input type="text" name="machineName" ></td>
 		  </tr>
 		  <tr>
 		    <th>구입일자</th>
-		    <td><input type="date" name="machinePurchaseDate" th:value="${#temporals.format(vo.machinePurchaseDate, 'yyyy-MM-dd')}"></td>
+		    <td><input type="date" name="machinePurchaseDate" ></td>
 		  </tr>
 		    <tr>
 		    <th>가격</th>
-		    <td><input type="text" name="machinePrice" th:value="${#numbers.formatDecimal(vo.machinePrice, 0, 'COMMA', 0, 'POINT')} + '원'"></td>
+		    <td><input type="text" name="machinePrice" ></td>
 		  </tr>
 		      <tr>
 		    <th>AS 번호</th>
-		    <td><input type="text" name="machineServiceContact" th:value="${vo.machineServiceContact}"></td>
+		    <td><input type="text" name="machineServiceContact" ></td>
 		  </tr>
 		  
 		  	<tr>
-		    <td colspan=2 align=center><input type=submit th:value="저장"><input type=reset value="취소"><input type="button" value="삭제" onClick="delcheck()"></td>
+		    <td colspan=2 align=center>
+		    <input type=submit th:value="저장">
+		    
+		    
+		    
+		    </td>
 			</tr>
 	</table>
 	
 	
 </form>
+
+		<form th:action="cancle.do">
+			<input type=submit value="취소">
+		</form>
+		
 <a href="logout_control.jsp">logout</a>
 </div>
 

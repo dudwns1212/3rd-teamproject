@@ -39,16 +39,14 @@
 			<span class="explain-container" th:text="'가격 : ' + ${vo.machinePrice} + '원'"></span>
 			<span class="explain-container" th:text="'AS번호 : ' + ${vo.machineServiceContact}">기구명</span>
 			
-			<form action="machine_edit_form.do">
-			<button type="button" class="change">수정</button>				
-			</form>
 			
-			<button>삭제</button>
-			
-			
-									
+															
 		</div>
-			
+		
+		<form action="machine_form.do">
+		<button>추가</button>	
+		</form>
+		
 	</div>	
 
   </div>

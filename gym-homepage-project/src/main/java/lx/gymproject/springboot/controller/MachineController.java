@@ -70,10 +70,11 @@ public class MachineController {
 	}
 	
 	
+		
 	
 	  @RequestMapping("/insertMachine.do") public String insertMachine(GymMachineVO
-	  vo) throws Exception { System.out.println(vo); dao.insertMachine(vo); return
-	 "redirect:explainMachine.do"; }
+	  vo) throws Exception { System.out.println(vo); dao.insertMachine(vo);
+	  return "redirect:explainMachine.do"; }
 	
 	  @RequestMapping("/deleteMachine.do")
 	public String deleteMachine(@RequestParam (value="machineId") int machineId) throws Exception {
@@ -81,5 +82,30 @@ public class MachineController {
 		  dao.deleteMachine(machineId);
 		  return "redirect:explainMachine.do";
 	  }
+	  
+	
+	  
+	  
+	  
+	  
+	  
+	//추가화면으로(marchine_form)
+		@RequestMapping("/machine_form.do")
+		public String goToMarchineForm() {
+			return "machine_form";
+		}
+		
+		
+		
+		
+		  @RequestMapping("/cancle.do")
+		  public String goToExpainMachine() {
+			  return "redirect:explainMachine.do";
+		  }
+		
+		
+		
+		
+		
 	
 }
