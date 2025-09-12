@@ -8,51 +8,53 @@
 	crossorigin="anonymous"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title></title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 </head>
 
 <body>
 	<div th:replace="~{header :: header}" class="gympage"></div>
 	<div class="wrapper">
-		<form action="postEdit.do" method="post">
-			<button type="submit">수정</button>
-		</form>
-		<form action="/update.do" method="post">
-			<input type="hidden" name="poId" th:value="${po.poId}">
+		<H2>post : 내부</H2>
+		<HR>
 
-			<table border="1">
-				<tr>
-					<th>제목</th>
-					<th>내용</th>
-					<th>작성자</th>
-					<th>태그</th>
-					<th>미지</th>
-					<th>좋아요</th>
-					<th>조회수</th>
-					<th>싫어요</th>
-					<th>게시판 구분</th>
-				</tr>
-				<tr th:each="vo : ${data}" th:data-poid="${vo.poId}">
-					<td th:text="${vo.poName}"></td>
-					<td th:text="${vo.poContent}"></td>
-					<td th:text="${vo.poUserId}"></td>
-					<td th:text="${vo.poTag}"></td>
-					<td th:text="${vo.poImg}"></td>
-					<td th:text="${vo.poLike}"></td>
-					<td th:text="${vo.poView}"></td>
-					<td th:text="${vo.poDislike}"></td>
-					<td th:text="${vo.poBoardCode}"></td>
-				<tr>
-			</table>
-		</form>
+		<table border="1">
+			<tr>
+				<th>제목</th>
+				<th>내용</th>
+				<th>작성자</th>
+				<th>태그</th>
+				<th>미지</th>
+				<th>좋아요</th>
+				<th>조회수</th>
+				<th>싫어요</th>
+				<th>게시판 구분</th>
+			</tr>
+			<tr th:each="vo : ${data}" th:data-poid="${vo.poId}">
+				<td th:text="${vo.poName}"></td>
+				<td th:text="${vo.poContent}"></td>
+				<td th:text="${vo.poUserId}"></td>
+				<td th:text="${vo.poTag}"></td>
+				<td th:text="${vo.poImg}"></td>
+				<td th:text="${vo.poLike}"></td>
+				<td th:text="${vo.poView}"></td>
+				<td th:text="${vo.poDislike}"></td>
+				<td th:text="${vo.poBoardCode}"></td>
+				<td><button class="edit-btn" th:data-poid="${vo.poId}">수정</button></td>
+			<tr>
+			
+		</table>
+
 		<script type="text/javascript">
-			$('tr').on('click', function() {
+			$('.edit-btn').on('click', function() {
 				let poId = ($(this).data('poid'));
 				alert(poId);
-				document.location.href = "post.do?poId=" + poId;
+				document.location.href = "postEdit.do?poId=" + poId;
 				return;
 			});
 		</script>
+		
 		<div th:replace="~{footer :: footer}"></div>
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
