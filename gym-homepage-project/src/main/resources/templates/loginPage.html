@@ -3,24 +3,22 @@
 <head>
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/footer.css">
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title></title>
-
-
 </head>
 <body>
 <div th:insert="~{header :: header}" class="gympage"></div>
-
 <div class="wrapper">
+	<!-- 상단 맨트 -->
 	<div class="login-header">
-        <h1>일산 탄현점에 오신 것을 환영합니다</h1>
-    </div>
+		<h1>일산 탄현점에 오신 것을 환영합니다</h1>
+	</div>
+	<!-- 컨테이너 너비 조절 -->
 	<div class="container">
-		
 		<div class="login-section">
 			<h1 class="fw-bold fs-3">로그인</h1>
+			<!-- 로그인 폼 -->
 			<form action="login.do" method="post">
 				<label id="label-id">아이디 : <input type="email" name="userEmail" id="userName" placeholder="example@example.com"></label>
 				<label>비밀번호 : <input type="password" name="userPassword" placeholder="password"></label>
@@ -31,41 +29,35 @@
 			</form>
 			<a href="registerPage.do" id="registerlink">회원가입</a>
 		</div>
-		
 	</div>
 </div>
-
 <div th:insert="~{footer :: footer}"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <script>
-	const params = new URLSearchParams(window.location.search);
-	if(params.get('block') === 'true') {
-    	alert('로그인 후 이용해주세요');
-	}
+//인터셉터가 실행돼서 로그인 페이지로 오면 실행 alert창 띄우기
+const params = new URLSearchParams(window.location.search);
+if(params.get('block') === 'true') {
+alert('로그인 후 이용해주세요');
+}
 </script>
 <style>
 html, body{height: 100%}
 .wrapper{
-    height:auto;
-    min-height: 100%;
-    padding-bottom: 100px;
-    padding-top: 150px;
-}
-footer{
-   height:100px;
-   position: relative;
-   transform: translateY(-100%);
+	height:auto;
+	min-height: 100%;
+	padding-bottom: 100px;
+	padding-top: 150px;
 }
 .container{
 	text-align: center;
-	width: 40%;
-    margin: 0 auto;
-    padding: 25px;
-    border-radius: 10px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+	width: 40%;  
+	margin: 0 auto;
+	padding: 25px;
+	border-radius: 10px;
+	background: white;
+	border-radius: 15px;
+	box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 form{
 	display: flex;
@@ -74,42 +66,76 @@ form{
 	align-items: center;
 }
 input{
-	width: 200px;
-	height: 30px;
-	margin-top:5px;
+	width: 100%;
+	height: 40px;
+	margin-top: 5px;
+	padding: 8px 12px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	font-size: 14px;
 }
+label {
+	width: 100%;
+	max-width: 300px;
+	text-align: left;
+	margin-bottom: 15px;
+	font-weight: 500;
+}
+
 #loginbtn{
-	margin-top:10px;
-	margin-bottom:5px;
-	width:80px;
-	padding: 5px;
-	font-size: large;
-	font-weight: bold; 
+	margin-top: 20px;
+	margin-bottom: 15px;
+	width: 100%;
+	max-width: 150px;
+	min-width: 100px;
+	padding: 10px 5px;
+	font-size: 16px;
+	font-weight: bold;
 }
-#label-id{
-	margin-left:15px;
-}
+
 #registerlink{
 	color: black;
+	font-size: 14px;
 }
 #registerlink:hover{
 	color: blue;
 	text-decoration: underline;
 }
 .login-header {
-    text-align: center;
-    margin-bottom: 40px;
+	text-align: center;
+	margin-bottom: 40px;
+	padding: 0 20px;
 }
 .login-header h1 {
-    color: #198754;
-    font-size: 2.2rem;
-    font-weight: bold;
+	color: #198754;
+	font-size: 2.2rem;
+	font-weight: bold;
+}
+.login-header p {
+	color: #666;
+	font-size: 1rem;
+	margin-bottom: 0;
+}
+ /* 모바일 반응형으로 cotainer 축소시켰던거 다시 늘림 + h1 사이즈 축소 및 버튼 축소*/
+@media (max-width: 768px) {
+.container {
+    width: 90%;
+    padding: 20px;
+    margin: 0 20px;
 }
 
-.login-header p {
-    color: #666;
-    font-size: 1rem;
-    margin-bottom: 0;
+.login-header h1 {
+    font-size: 1.5rem;
+    line-height: 1.3;
 }
+
+#loginbtn {
+    font-size: 14px;
+    padding: 12px 5px;
+}
+}
+
+
+
 </style>
 </html>
