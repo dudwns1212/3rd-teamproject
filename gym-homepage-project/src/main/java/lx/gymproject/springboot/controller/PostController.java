@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lx.gymproject.springboot.dao.GymPostDAO;
 import lx.gymproject.springboot.vo.GymPostVO;
+import lx.gymproject.springboot.vo.GymUserVO;
 
 @Controller
 public class PostController {
@@ -41,13 +42,17 @@ public class PostController {
 		
 		@RequestMapping("/postWritePage.do")
 		public String postWritePage() throws Exception {
-			System.out.print("글 작성 페이지");
 			return "postWrite";
 		}
 		
 		@RequestMapping("/postWrite.do")
-		public String postWrite(GymPostVO vo) throws Exception {
-			System.out.print(vo);
+		public String postWrite(GymPostVO vo, HttpSession session) throws Exception {
+			if (vo.getPoUserId() == 0) {
+		        GymUserVO loginUser = (GymUserVO) session.getAttribute("loginUser");
+		        if (loginUser != null) {
+		            vo.setPoUserId(loginUser.getUserId());
+		        }
+			}
 			dao.insertDB(vo);
 			return "redirect:postBoard.do";
 		}
@@ -61,13 +66,13 @@ public class PostController {
 		
 		@RequestMapping("postEdit.do")
 		public String postEdit(GymPostVO vo) throws Exception {
-			System.out.print(" vo = "+ vo);
 			dao.updateDB(vo);
 			return "redirect:postBoard.do";
 		}
 		
 		@RequestMapping("deleteDB.do") 
 		public String deleteDB(@RequestParam("poId") int poId) throws Exception {
+			System.out.println(poId);
 			dao.deleteDB(poId);
 			return "redirect:postBoard.do";
 		}

@@ -6,28 +6,27 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lx.gymproject.springboot.vo.GymUserVO;
 
-
-//AuthInterceptor 는 request 요청이  
-//앞에 /auth/** 로 요청한 주소에서만 동작 하도록 설계 할 예정
-@Component // IoC 처리 확인 
-public class LoginCheckInterceptor implements HandlerInterceptor {
+@Component
+public class CheckUserIdAndPostUserId implements HandlerInterceptor{
 	
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler)
 			throws Exception {
-		System.out.println("로그인된 사용자를 구분합니다");
+		System.out.println("게시물 작성자인지 확인합니다");
 		
-		// 세션 여부 확인 
 		HttpSession session = req.getSession();
+		String authorName = req.getParameter("authorName");
 		
-		if(session.getAttribute("loginUser") == null) {
-			System.out.println("인증 안된 사용자");
-			res.sendRedirect("/loginPage.do?&block=true");
+        GymUserVO loginUser = (GymUserVO) session.getAttribute("loginUser");
+		
+		if(!loginUser.getUserName().equals(authorName)) {
+			System.out.println("작성자가 아닙니다");
+			res.sendRedirect("/postBoard.do?block=true");
 			return false;
 		}
 		
 		return true;
 	}
-	
 }

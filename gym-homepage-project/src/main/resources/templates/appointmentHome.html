@@ -14,7 +14,7 @@
 
 <body>
 <div th:insert="~{header :: header}" class="gympage"></div>
-    <nav class="navbar navbar-expand-sm gradient-bg py-3">
+    <nav class="navbar2 navbar-expand-sm gradient-bg py-3">
         <div class="container d-flex align-items-center justify-content-between">
 
             <a class="navbar-brand text-white fw-bold d-flex align-items-center" href="#">
@@ -168,15 +168,21 @@ label {
 .gap-2 > * + * {
     margin-left: 0.5rem;
 }
-.navbar {
-	height: 70px;
-    margin-top: 100px;
+.navbar2 {
+	margin-top:100px;
 }
 .wrapper {
-    margin-top: 70px;
+    min-height: 100%;
+    padding-bottom: 100px;
+    margin-top: 170px !important; /* 헤더(100px) + 네비바(70px) */
 }
 img{
     margin-top: 30px;
+}
+@media (max-width: 768px) {
+.navbar2 {
+	margin-top: 55px !important;
+}
 }
 </style>
 </html>
