@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper-gym">
 	<!-- 로그인 -->
-	<select id="doLoginById" parameterType="String" resultType="lx.gymproject.springboot.vo.GymUserVO">
+	<select id="doLoginByUserId" parameterType="String" resultType="lx.gymproject.springboot.vo.GymUserVO">
 		select * from users where user_email = #{userEmail}	
 	</select>
 	<!-- 회원가입 -->
@@ -55,8 +55,9 @@
     </select>
 
     <insert id="insertDB" parameterType="lx.gymproject.springboot.vo.GymPostVO">
-        insert into post(post_name, post_content, post_user_id, post_tag, post_img, post_like,
-                        post_view, post_dislike, post_board_code) values(#{poName}, #{poContent}, #{poUserId}, #{poTag}, #{poImg}, #{poLike}, #{poView}, #{poDislike}, #{poBoardCode}) </insert>
+        insert into post(post_name, post_content, post_user_id, post_tag, post_img, post_like, post_view, post_dislike, post_board_code)
+        	 values(#{poName}, #{poContent}, #{poUserId}, #{poTag}, #{poImg}, #{poLike}, #{poView}, #{poDislike}, #{poBoardCode}) 
+    </insert>
 
     <update id="updateDB" parameterType="lx.gymproject.springboot.vo.GymPostVO">
         UPDATE post
