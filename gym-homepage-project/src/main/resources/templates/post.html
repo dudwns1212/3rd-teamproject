@@ -31,36 +31,37 @@
 				<th>싫어요</th>
 				<th>게시판 구분</th>
 			</tr>
-			<tr th:each="vo : ${data}" th:data-poid="${vo.poId}">
+			<tr th:each="vo : ${data}">
 				<td th:text="${vo.poName}"></td>
 				<td th:text="${vo.poContent}"></td>
-				<td th:text="${vo.poUserId}"></td>
+				<td th:text="${vo.authorName}"></td>
 				<td th:text="${vo.poTag}"></td>
 				<td th:text="${vo.poImg}"></td>
 				<td th:text="${vo.poLike}"></td>
 				<td th:text="${vo.poView}"></td>
 				<td th:text="${vo.poDislike}"></td>
 				<td th:text="${vo.poBoardCode}"></td>
-				<td><button class="edit" th:data-poid="${vo.poId}">수정</button></td>
+				<td><button class="edit" th:data-poid="${vo.poId}" th:data-pname="${vo.authorName}">수정</button></td>
 			<tr>
 			
 		</table>
 
-		<script type="text/javascript">
-			$('.edit').on('click', function() {
-				let poId = ($(this).data('poid'));
-				document.location.href = "postEditPage.do?poId=" + poId;
-				return;
-			});
-		</script>
 		
-		<div th:replace="~{footer :: footer}"></div>
+		
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	</div>
 
+<div th:replace="~{footer :: footer}"></div>
 </body>
-
+<script type="text/javascript">
+	$('.edit').on('click', function() {
+		let poId = ($(this).data('poid'));
+		let poName = ($(this).data('pname'));
+		document.location.href = "/postEditPage.do?poId=" + poId + "&authorName=" + encodeURIComponent(poName);
+		return;
+	});
+</script>
 <style>
 html, body {
 	height: 100%

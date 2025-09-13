@@ -33,7 +33,8 @@
 <div class="wrapper">
 	<div class="group-container" >
 		<div class="img-container" th:each="vo : ${data}">
-			<a th:href="|javascript:check(${vo.machineId})|" th:text="${vo.machineId}"></a>			
+			<a th:if="${session.loginUser != null && session.loginUser.userEmail == '1@1.com'}" 
+				th:href="|javascript:check(${vo.machineId})|" th:text="${vo.machineId}"></a>			
 			<img th:src="${vo.machineImg}" class="healthimg">				
 			<span class="explain-container" th:text="'기구이름 : ' + ${vo.machineName}"></span>
 			<span class="explain-container" th:text="'입고날짜 : '+${vo.machinePurchaseDate}"></span>
@@ -47,10 +48,6 @@
 		<img src="images/plus.png" class="img-container">
 		</button>	
 		</form>
-		
-		
-		
-		
 	</div>	
 
   </div>
