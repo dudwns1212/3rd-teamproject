@@ -8,88 +8,219 @@
 <title>마이페이지</title>
 </head>
 <body>
-<div th:insert="~{header :: header}"></div>
-
+<div th:insert="~{header :: header}" class="gympage"></div>
 <div class="wrapper">
-	<div class="container">
-		<h1>일산 탄현점의 가족을 환영합니다</h1>
-		<p>회원님의 정보를 수정하고 PT예약을 확인하세요</p>
+	<!-- 상단 맨트 -->
+	<div class="login-header">
+	<h1>일산 탄현점의 가족을 환영합니다</h1>
+	<p>회원님의 정보를 수정하고 PT예약을 확인하세요</p>
 	</div>
-	<div class="mypage d-flex flex-column justify-content-center align-items-center">
-		<h1 class="mb-4 fw-bold fs-2">마이페이지</h1>
-	    <form action="userUpdate.do" method="post">
-		    <div class="section-modify">
-		        <input type="hidden" name="userId" th:value="${user.userId}">
-		        <p class="p-id">이메일: <input type="text" name="userEmail" th:value="${user.userEmail}"></p>
-		        <p>비밀번호: <input type="password" name="userPassword" th:value="${user.userPassword}"></p>
-		        <p class="p-name">이름: <input type="text" name="userName" th:value="${user.userName}"></p>
-		        <p class="p-tel">전화번호: <input type="text" name="userTel" th:value="${user.userTel}"></p>
-		        <p class="p-birth">생년월일: <input type="date" name="userBirth" th:value="${user.userBirth}"></p>
-		        <p class="p-g">성별: 
-		            <input type="radio" name="userGender" value="m" th:checked="${user.userGender == 'm'}">남자
-		            <input type="radio" name="userGender" value="w" th:checked="${user.userGender == 'w'}">여자
-		        </p>
-		    </div>
-		    <button class="btn btn-outline-primary" type="submit">수정</button>
-		    <button class="btn btn-outline-danger ms-4" type="reset">취소</button>
-		</form>
-	    <div class="section-checkReservation">
-	    	
-	    </div>
+	<!-- 컨테이너 너비 조절 -->
+	<div class="container">
+		<div class="login-section">
+			<h1 class="fw-bold fs-3">마이페이지</h1>
+			<!-- 정보수정 폼 -->
+			<form action="userUpdate.do" method="post">
+				<input type="hidden" name="userId" th:value="${user.userId}">
+				<label class="label-email">이메일 : <input type="text" name="userEmail" th:value="${user.userEmail}"></label>
+				<label>비밀번호 : <input type="password" name="userPassword" th:value="${user.userPassword}"></label>
+				<label class="label-name">이름 : <input type="text" name="userName" th:value="${user.userName}"></label>
+				<label class="label-tel">전화번호 : <input type="text" name="userTel" th:value="${user.userTel}"></label>
+				<label class="label-birth">생년월일 : <input type="date" name="userBirth" th:value="${user.userBirth}"></label>
+				<div class="gender-section">
+					<label class="gender-label">성별 :</label>
+					<div class="gender-options">
+						<label class="radio-label">
+							<input type="radio" name="userGender" value="m" th:checked="${user.userGender == 'm'}">
+							<span>남자</span>
+						</label>
+						
+						<label class="radio-label">
+						<input type="radio" name="userGender" value="w" th:checked="${user.userGender == 'w'}">
+						<span>여자</span>
+						</label>
+					</div>
+				</div>
+				<div class="button-group">
+					<button class="btn btn-primary" type="submit" id="updatebtn">수정</button>
+					<button class="btn btn-secondary" type="reset" id="cancelbtn">취소</button>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
-
 <div th:insert="~{footer :: footer}"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <style>
 html, body{height: 100%}
 .wrapper{
-    height:auto;
-    min-height: 100%;
-    padding-bottom: 100px;
-    padding-top: 150px;
+height:auto;
+min-height: 100%;
+padding-bottom: 100px;
+padding-top: 150px;
 }
 .container{
-	text-align: center;
-    margin-bottom: 40px;
+text-align: center;
+width: 40%;
+margin: 0 auto;
+padding: 25px;
+border-radius: 10px;
+background: white;
+border-radius: 15px;
+box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
-.container h1{
-	color: #198754;
-    font-size: 2.2rem;
-    font-weight: bold;
-}
-.container p{
-	color: #666;
-    font-size: 1rem;
-    margin-bottom: 0;
+form{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 }
 
-.p-id{
-	margin-left: 15px;
+.login-header {
+text-align: center;
+margin-bottom: 40px;
+padding: 0 20px;
 }
-.p-name{
-	margin-left: 30px;
+.login-header h1 {
+color: #198754;
+font-size: 2.2rem;
+font-weight: bold;
 }
-.p-g{
-	margin-right:94px;
+.login-header p {
+color: #666;
+font-size: 1rem;
+margin-bottom: 0;
 }
-.p-birth{
-	margin-right:53px;
+ /*특정 type만 가져오고 싶을 때*/
+input[type="text"], input[type="password"], input[type="date"]{
+width: 100%;
+height: 40px;
+margin-top: 5px;
+padding: 8px 12px;
+border: 1px solid #ddd;
+border-radius: 5px;
+font-size: 14px;
+box-sizing: border-box;
 }
-.mypage{
-	text-align: center;
-    width: 40%;
-    margin: 0 auto;
-    padding: 25px;
-    border-radius: 10px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+
+label {
+width: 100%;
+max-width: 300px;
+text-align: left;
+margin-bottom: 15px;
+font-weight: 500;
 }
-.btn{
-	padding:8px;
-	width: 100px;
+
+/* 성별 선택 영역 */
+.gender-section {
+width: 100%;
+max-width: 300px;
+margin-bottom: 15px;
+}
+
+.gender-label {
+text-align: left;
+font-weight: 500;
+margin-bottom: 10px;
+display: block;
+}
+
+.gender-options {
+display: flex;
+gap: 20px;
+justify-content: flex-start;
+margin-left: 65px; /* 성별 라벨과 맞춤 */
+}
+
+.radio-label {
+display: flex;
+align-items: center;
+gap: 5px;
+font-weight: normal;
+margin-bottom: 0;
+width: auto;
+max-width: none;
+}
+
+.radio-label input[type="radio"] {
+width: auto;
+height: auto;
+margin: 0;
+}
+
+.radio-label span {
+font-size: 14px;
+}
+
+/* 버튼 그룹 */
+.button-group {
+display: flex;
+gap: 15px;
+margin-top: 20px;
+margin-bottom: 15px;
+}
+
+#updatebtn, #cancelbtn {
+width: 100px;
+min-width: 80px;
+padding: 10px 5px;
+font-size: 16px;
+font-weight: bold;
+}
+
+#updatebtn {
+background-color: #198754;
+border-color: #198754;
+}
+
+#updatebtn:hover {
+background-color: #157347;
+border-color: #146c43;
+}
+
+#cancelbtn {
+background-color: #6c757d;
+border-color: #6c757d;
+}
+
+#cancelbtn:hover {
+background-color: #5c636a;
+border-color: #565e64;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+.container {
+width: 90%;
+padding: 20px;
+margin: 0 20px;
+}
+
+.login-header h1 {
+font-size: 1.8rem;
+line-height: 1.3;
+}
+
+.login-header p {
+font-size: 0.9rem;
+}
+
+.gender-options {
+margin-left: 45px;
+}
+
+.button-group {
+flex-direction: column;
+align-items: center;
+gap: 10px;
+}
+
+#updatebtn, #cancelbtn {
+width: 120px;
+font-size: 14px;
+padding: 12px 5px;
+}
 }
 </style>
 </html>
