@@ -54,7 +54,7 @@ public class PostController {
 		public String postEdit(@RequestParam("poId") int poId, Model model) throws Exception {
 			GymPostVO vo = dao.getDB(poId);
 			model.addAttribute("po", vo);
-			return "postEditPage";
+			return "postEdit";
 		}
 		
 		@RequestMapping("postEdit.do")
