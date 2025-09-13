@@ -29,34 +29,45 @@
 <body>
 <div th:insert="~{header :: header}" class="gympage"></div>
 
-	
+<div class="wrapper">
 	<div class="group-container" >
 		<div class="img-container" th:each="vo : ${data}">
-			<td><a th:href="|javascript:check(${vo.machineId})|" th:text="${vo.machineId}"></a></td>			
+			<a th:href="|javascript:check(${vo.machineId})|" th:text="${vo.machineId}"></a>			
 			<img th:src="${vo.machineImg}" class="healthimg">				
 			<span class="explain-container" th:text="'기구이름 : ' + ${vo.machineName}"></span>
 			<span class="explain-container" th:text="'입고날짜 : '+${vo.machinePurchaseDate}"></span>
 			<span class="explain-container" th:text="'가격 : ' + ${vo.machinePrice} + '원'"></span>
 			<span class="explain-container" th:text="'AS번호 : ' + ${vo.machineServiceContact}">기구명</span>
-			
-			
-															
+																		
 		</div>
 		
 		<form action="machine_form.do">
-		<button>추가</button>	
+		<button  action="machine_form.do" >
+		<img src="images/plus.png" class="img-container">
+		</button>	
 		</form>
+		
+		
+		
 		
 	</div>	
 
   </div>
+</div>
 <div th:insert="~{footer :: footer}"></div>
 </body>
 <style>
+html, body{height: 100%}
+.wrapper{
+    height:auto;
+    min-height: 100%;
+    padding-bottom: 100px;
+    padding-top: 150px;
+}
 .group-container{
 	
 display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2열 */
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3열 */
   gap: 20px;             /* 카드 사이 간격 */
   align-items: start;    /* 카드 상단 맞춤 */
   padding: 12px;         /* 바깥 여백(선택) */
@@ -71,11 +82,20 @@ display: grid;
 }
 
 .img-container{
-	width:900px;
-	height: 420px;
-	position: relative; 
-	margin-bottom: 50px;  
-	margin-top: 50px;
+	  padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 5px 5px 10px;
+    width: 400px;
+    height:550px;
+    
+     /* 추가 */
+  display:flex;
+  flex-direction:column;   /* 위→아래로 쌓기 */
+  align-items:center;      /* 가운데 정렬 */
+  gap:8px;                 /* 요소 간 간격 */
+    
 }
 
 
@@ -89,8 +109,9 @@ display: grid;
 	position: relative;
 	
 }
-.img-container > .healthimg{
-	width: 300px; height: 300px; object-fit: cover;padding:60px; cursor:pointer;
+
+ .healthimg{
+	width:100%; height:100%; 
 }
 </style>
 

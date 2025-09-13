@@ -91,7 +91,9 @@
 	  	<if test="machineName != null"> machine_name = #{machineName},</if>
 	  	<if test="machinePurchaseDate != null"> machine_purchase_date = #{machinePurchaseDate},</if>
 	  	<if test="machinePrice != null"> machine_price = #{machinePrice},</if>
-	  	<if test="machineServiceContact != null"> machine_service_contact = #{machineServiceContact}</if>
+	  	<if test="machineServiceContact != null"> machine_service_contact = #{machineServiceContact},</if>
+	  	<if test="machineImg != null"> machine_img = #{machineImg}</if>
+	  	
   	</trim>
   	where machine_id = #{machineId}    
   </update>
