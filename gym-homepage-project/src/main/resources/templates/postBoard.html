@@ -25,12 +25,13 @@
 			            <th scope="col" class="col-like">👍</th>
 			            <th scope="col" class="col-dislike">👎</th>
 			            <th scope="col" class="col-view">조회수</th>
+			            
 			        </tr>
 			    </thead>
 			    <tbody> <tr th:each="vo : ${data}" th:data-poid="${vo.poId}">
 			            <td th:text="${vo.poId}"></td>
 			            <td th:text="${vo.poName}"></td>
-			            <td th:text="${vo.poUserId}"></td>
+			            <td th:text="${session.userId}"></td>
 			            <td th:text="${vo.poTag}"></td>       
 			            <td><img th:src="${vo.poImg}"></td>
 			            <td th:text="${vo.poLike}"></td>

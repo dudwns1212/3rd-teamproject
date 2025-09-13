@@ -39,7 +39,6 @@ public class GymPostVO {
 		this.poUserId = poUserId;
 	}
 	public String getPoTag() {
-		System.out.println(poTag);
 		return poTag;
 	}
 	public void setPoTag(String poTag) {
