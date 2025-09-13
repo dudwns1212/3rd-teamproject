@@ -57,7 +57,6 @@
 	</div>
 	
 <script>
-$(document).ready(function() {
     $('.delete').on('click', function() {
         let poId = $(this).data('poid');
         if (confirm("정말로 삭제하시겠습니까?")) {
@@ -66,7 +65,6 @@ $(document).ready(function() {
             console.log("삭제 취소됨");
         }
     });
-});
 </script>
 	
 </body>

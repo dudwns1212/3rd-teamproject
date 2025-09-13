@@ -27,6 +27,8 @@ public class PostController {
 		public String postBoard(HttpSession session, HttpServletRequest req) throws Exception {
 			List<GymPostVO> list = dao.getDBList();
 			req.setAttribute("data", list);
+			
+			System.out.println();
 			return "postBoard";
 		}
 		
@@ -69,10 +71,5 @@ public class PostController {
 			dao.deleteDB(poId);
 			return "redirect:postBoard.do";
 		}
-		@RequestMapping("/insert.do")
-		public String insert(GymPostVO vo) throws Exception {
-			System.out.print(vo);
-			dao.insertDB(vo);
-			return "redirect:postBoard.do";
-		}
+
 		}

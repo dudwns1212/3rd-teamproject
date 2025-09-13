@@ -12,7 +12,7 @@ public class GymUserDAO {
 	SqlSession session;
 	
 	public GymUserVO doLoginByUserId(String userEmail) {
-		return session.selectOne("doLoginById",userEmail);
+		return session.selectOne("doLoginByUserId",userEmail);
 	}
 	
 	public int doRegisterByUserVO(GymUserVO vo) {
