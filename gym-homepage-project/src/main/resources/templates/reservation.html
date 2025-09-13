@@ -1,18 +1,12 @@
-<<<<<<< HEAD
-=======
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
-
-	<link rel="stylesheet" href="/css/header.css">
-	<link rel="stylesheet" href="/css/footer.css">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" href="/css/footer.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3301/3301556.png">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <meta charset="UTF-8">
     <title>Appointment system</title>
 </head>
@@ -24,7 +18,7 @@
 
     .navbar-brand {
         font-weight: bold;
-        color: white !important;
+        color: white;
     }
 
     .head1,
@@ -136,18 +130,19 @@
     </main>
 
 <script>
-        // Define the possible statuses
-        const statuses = ["booked", "pending"];
+    // Define the possible statuses
+    const statuses = ["booked", "pending"];
 
-        // Function to get a random status
-        function getRandomStatus() {
-            const randomIndex = Math.floor(Math.random() * statuses.length);
-            return statuses[randomIndex];
-        }
+    // Function to get a random status
+    function getRandomStatus() {
+        const randomIndex = Math.floor(Math.random() * statuses.length);
+        return statuses[randomIndex];
+    }
 
-        // Set the random status to the input field
-        document.getElementById('status').value = getRandomStatus();
-    </script>
+    // Set the random status to the input field
+    document.getElementById('status').value = getRandomStatus();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>    
 </body>
 
 </html>

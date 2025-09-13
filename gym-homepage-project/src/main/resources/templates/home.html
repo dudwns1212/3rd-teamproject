@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" th:href="@{/css/header.css}">
 <link rel="stylesheet" href="/css/footer.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title></title>
@@ -33,30 +32,36 @@
             </div>
         </div>
 
-        <div class="section2">
+        <div class="section2 text-center">
             <h2>운동 프로그램</h2>
-            <div class="card-grid">
-            	<form action="explainTrainer.do">
-				    <button class="card">
-				        <h3>웨이트 트레이닝</h3>
-				        <p>전문 트레이너와 함께하는 체계적인 근력 운동</p>
-				        <img src="images/tranning.jpg">
-				    </button>
-			    </form>
-			    <form action="explainMachine.do">
-				    <button class="card">
-				        <h3>유산소 운동</h3>
-				        <p>다양한 유산소 기구로 건강한 심폐 기능 향상</p>
-				        <img src="images/running.jpg">
-				    </button>
-			    </form>
-			    <form action="appointmentHome.do">
-				    <button class="card">
-				        <h3>개인 맞춤 PT</h3>
-				        <p>1:1 맞춤형 운동 프로그램으로 효과적인 운동</p>
-				        <img src="images/pt.jpg" style="object-fit: fill;">
-				    </button>
-			    </form>
+            <div class="row">
+            	<div class="col">
+	            	<form action="explainTrainer.do">
+					    <button class="card">
+					        <h3>웨이트 트레이닝</h3>
+					        <p>전문 트레이너와 함께하는 체계적인 근력 운동</p>
+					        <img src="images/tranning.jpg">
+					    </button>
+				    </form>
+            	</div>
+            	<div class="col">
+				    <form action="explainMachine.do">
+					    <button class="card">
+					        <h3>유산소 운동</h3>
+					        <p>다양한 유산소 기구로 건강한 심폐 기능 향상</p>
+					        <img src="images/running.jpg">
+					    </button>
+				    </form>
+			    </div>
+			    <div class="col">
+			    	<form action="appointmentHome.do">
+				    	<button class="card">
+				        	<h3>개인 맞춤 PT</h3>
+				        	<p>1:1 맞춤형 운동 프로그램으로 효과적인 운동</p>
+				        	<img src="images/pt.jpg" style="object-fit: fill;">
+				    	</button>
+			    	</form>
+			    </div>
 			</div>
         </div>
 
