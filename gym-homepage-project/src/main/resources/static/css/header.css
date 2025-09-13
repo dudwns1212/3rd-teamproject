@@ -30,7 +30,23 @@
     letter-spacing: 0.1em;
     margin: 0;
 }
-
+.menu-section{
+	margin-left:880px;
+	color: white;
+	border:2px;
+}
+.menu-section button{
+    background: transparent;
+    color: #eee;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 5px;
+    border: none;
+}
+.menu-section button:hover {
+    background-color: #333;
+}
 .brand {
     margin-left: 130px;
     position: absolute;

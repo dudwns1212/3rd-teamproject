@@ -3,20 +3,44 @@
 <head>
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/footer.css">
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	 function check(machine_id) {
+		//pwd = prompt('수정/삭제 하려면 비밀번호를 넣으세요');
+		document.location.href="machine_edit_form.do?machineId="+machine_id;
+		//document.location.href="editview.do?ab_id="+ab_id+"&upasswd="+pwd;
+	}
+</script>
+
+<script type="text/javascript">
+	$(document).on('click','change', function(){		
+		let machineId = ($(this).closet('tr').find('.machine_id').text().tirm());		
+		
+		document.location.href="machine_edit_form.do?machineId=" + machineId;
+	});
+</script>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title></title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div th:insert="~{header :: header}" class="gympage"></div>
 
 	
 	<div class="group-container" >
-		<div class="img-container" th:each="vo : ${vo}">			
+		<div class="img-container" th:each="vo : ${data}">
+			<td><a th:href="|javascript:check(${vo.machineId})|" th:text="${vo.machineId}"></a></td>			
 			<img th:src="${vo.machineImg}" class="healthimg">				
 			<span class="explain-container" th:text="'기구이름 : ' + ${vo.machineName}"></span>
-			<span class="explain-container" th:text="'입고날짜 : '+${#temporals.format(vo.machinePurchaseDate, 'yyyy-MM-dd')}"></span>
-			<span class="explain-container" th:text="'가격 : ' + ${#numbers.formatDecimal(vo.machinePrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span>
-			<span class="explain-container" th:text="'AS번호 : ' + ${vo.machineServiceContact}">기구명</span>							
+			<span class="explain-container" th:text="'입고날짜 : '+${vo.machinePurchaseDate}"></span>
+			<span class="explain-container" th:text="'가격 : ' + ${vo.machinePrice} + '원'"></span>
+			<span class="explain-container" th:text="'AS번호 : ' + ${vo.machineServiceContact}">기구명</span>
+			
+			
+															
 		</div>
 		
 		<form action="machine_form.do">
@@ -31,7 +55,7 @@
 <style>
 .group-container{
 	
-	display: grid;
+display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2열 */
   gap: 20px;             /* 카드 사이 간격 */
   align-items: start;    /* 카드 상단 맞춤 */
@@ -40,12 +64,10 @@
   padding-bottom:120px;  /*바텀부분에 가려지는거 방지*/
 }
 .explain-container{
-	
-
-	 display: block;
-  font-size: 14px;
-  line-height: 1.4;
-  color: #374151;
+	display: block;
+	font-size: 14px;
+	line-height: 1.4;
+	color: #374151;
 }
 
 .img-container{
@@ -70,10 +92,8 @@
 .img-container > .healthimg{
 	width: 300px; height: 300px; object-fit: cover;padding:60px; cursor:pointer;
 }
-
 </style>
 
 </head>
 
 </html>
-

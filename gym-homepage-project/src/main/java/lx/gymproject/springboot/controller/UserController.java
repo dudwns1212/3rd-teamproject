@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lx.gymproject.springboot.dao.GymAppointmentDAO;
 import lx.gymproject.springboot.dao.GymUserDAO;
 import lx.gymproject.springboot.vo.GymUserVO;
 import lx.gymproject.springboot.vo.GymAppointmentVO;
