@@ -36,7 +36,7 @@
             ,post_board_code poBoardCode from post
         where post_id = #{poId}
     </select>
-
+	
     <select id="getDBList" resultType="lx.gymproject.springboot.vo.GymPostVO">
         select post_id poId
             ,post_name poName

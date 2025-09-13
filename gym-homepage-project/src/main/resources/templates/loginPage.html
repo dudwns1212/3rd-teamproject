@@ -14,19 +14,22 @@
 <div th:insert="~{header :: header}" class="gympage"></div>
 
 <div class="wrapper">
+	<div class="login-header">
+        <h1>일산 탄현점에 오신 것을 환영합니다</h1>
+    </div>
 	<div class="container">
-		<h1 class="fw-bold fs-3">로그인 페이지</h1>
 		
 		<div class="login-section">
+			<h1 class="fw-bold fs-3">로그인</h1>
 			<form action="login.do" method="post">
 				<label id="label-id">아이디 : <input type="email" name="userEmail" id="userName" placeholder="example@example.com"></label>
 				<label>비밀번호 : <input type="password" name="userPassword" placeholder="password"></label>
 				<button type="submit" class="btn btn-secondary" id="loginbtn">로그인</button>
 				<div th:if="${loginFailed}" class="alert alert-danger mt-3" role="alert">
-					로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.
+					❌ 로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.
 				</div>
 			</form>
-			<a href="register.do" id="registerlink">회원가입</a>
+			<a href="registerPage.do" id="registerlink">회원가입</a>
 		</div>
 		
 	</div>
@@ -43,23 +46,26 @@
 </script>
 <style>
 html, body{height: 100%}
-    .wrapper{
-        height:auto;
-        min-height: 100%;
-        padding-bottom: 100px;
-        margin-top: 100px;
+.wrapper{
+    height:auto;
+    min-height: 100%;
+    padding-bottom: 100px;
+    padding-top: 150px;
 }
-    footer{
-       height:100px;
-       position: relative;
-       transform: translateY(-100%);
+footer{
+   height:100px;
+   position: relative;
+   transform: translateY(-100%);
 }
 .container{
 	text-align: center;
-	width: 60%;
+	width: 40%;
     margin: 0 auto;
     padding: 25px;
     border-radius: 10px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 form{
 	display: flex;
@@ -89,6 +95,21 @@ input{
 #registerlink:hover{
 	color: blue;
 	text-decoration: underline;
+}
+.login-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.login-header h1 {
+    color: #198754;
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.login-header p {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 0;
 }
 </style>
 </html>
