@@ -113,3 +113,71 @@
 #logoutlink:hover{
 	color: pink;
 }
+
+
+/* 모바일 헤더 스타일 (기본적으로 숨김) */
+.mobile-header {
+    display: none;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.mobile-nav-brand {
+    font-size: 1.2rem !important;
+    font-weight: bold !important;
+    color: #667eea !important;
+}
+.mobile-nav-brand:hover{
+	color: #c0c0c0 !important;
+}
+
+.navbar-toggler {
+    border: none !important;
+    padding: 0.25rem 0.5rem !important;
+}
+.navbar-toggler:focus {
+    box-shadow: none !important;
+}
+
+.mobile-menu {
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+.mobile-menu button,
+.mobile-menu a {
+    width: 100% !important;
+    text-align: left !important;
+    background: none !important;
+    border: none !important;
+    padding: 1rem !important;
+    color: #333 !important;
+    text-decoration: none !important;
+    display: block !important;
+}
+
+.mobile-menu button:hover,
+.mobile-menu a:hover {
+    background-color: #f8f9fa !important;
+    color: #667eea !important;
+}
+
+/* 반응형 미디어 쿼리 */
+@media (max-width: 768px) {
+    .header-container {
+        display: none;
+    }
+    
+    .mobile-header {
+        display: block;
+    }
+}
+
+@media (min-width: 769px) {
+    .header-container {
+        display: block;
+    }
+    
+    .mobile-header {
+        display: none;
+    }
+}
