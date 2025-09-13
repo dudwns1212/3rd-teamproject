@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -49,17 +50,18 @@ public class PostController {
 			return "redirect:postBoard.do";
 		}
 		
-		@RequestMapping("/postEdit.do")
+		@RequestMapping("/postEditPage.do")
 		public String postEdit(@RequestParam("poId") int poId, Model model) throws Exception {
 			GymPostVO vo = dao.getDB(poId);
 			model.addAttribute("po", vo);
-			return "postEdit";
+			return "postEditPage";
 		}
 		
 		@RequestMapping("postEdit.do")
 		public String postEdit(GymPostVO vo) throws Exception {
 			System.out.print(" vo = "+ vo);
 			dao.updateDB(vo);
+			return "redirect:postBoard.do";
 		}
 		
 		@RequestMapping("deleteDB.do") 
