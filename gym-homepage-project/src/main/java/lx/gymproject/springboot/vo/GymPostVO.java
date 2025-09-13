@@ -13,7 +13,26 @@ public class GymPostVO {
 	public int poDislike;
 	public int poBoardCode;
 	
+	public String authorName;	
 	
+	public String getPoContent() {
+		return poContent;
+	}
+	public void setPoContent(String poContent) {
+		this.poContent = poContent;
+	}
+	public int getPoView() {
+		return poView;
+	}
+	public void setPoView(int poView) {
+		this.poView = poView;
+	}
+	public String getAuthorName() {
+		return authorName;
+	}
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
 	public int getPoId() {
 		return poId;
 	}
@@ -79,9 +98,9 @@ public class GymPostVO {
 	
 	@Override
 	public String toString() {
-		return "GymPostVO [poId=" + poId + ", poName=" + poName + ", psContent=" + poContent + ", poUserId=" + poUserId
-				+ ", poTag=" + poTag + ", poImg=" + poImg + ", poLike=" + poLike + ", poview=" + poView + ", poDislike="
-				+ poDislike + ", poBoardCode=" + poBoardCode + "]";
+		return "GymPostVO [poId=" + poId + ", poName=" + poName + ", poContent=" + poContent + ", poUserId=" + poUserId
+				+ ", poTag=" + poTag + ", poImg=" + poImg + ", poLike=" + poLike + ", poView=" + poView + ", poDislike="
+				+ poDislike + ", poBoardCode=" + poBoardCode + ", authorName=" + authorName + "]";
 	}
 
 }

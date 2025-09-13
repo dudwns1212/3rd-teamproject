@@ -14,14 +14,14 @@
 	<div class="wrapper">
 
 		<form name=form1 method=post action="postWrite.do">
-		<input type=hidden name="action" value="insert">
+		    <input type="hidden" name="postUserId" th:value="${session.loginUser.userId}">
 			<div>
 				<label for="exampleFormControlInput1">제목</label> 
 				<input type="text" class="form-control" id="exampleFormControlInput1" name="poName" placeholder="제목">
 			</div>
 			<div class="form-group">
 				<label for="exampleFormControlSelect1">태그</label> 
-				<select class="form-control" id="exampleFormControlSelect1" name="poContent">
+				<select class="form-control" id="exampleFormControlSelect1" name="poTag">
 					<option value ="자유">자유</option>
 					<option value ="건의사항">건의사항</option>
 					<option value ="칭찬합니다">칭찬합니다</option>

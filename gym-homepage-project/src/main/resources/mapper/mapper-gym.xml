@@ -24,41 +24,44 @@
 
 	
 	<select id="getDB" parameterType="int" resultType="lx.gymproject.springboot.vo.GymPostVO">
-        select post_id poId
-            ,post_name poName
-            ,post_content poContent       
-            ,post_user_id poUserId
-            ,post_tag poTag
-            ,post_img poImg
-            ,post_like poLike
-            ,post_view poView
-            ,post_dislike poDislike
-            ,post_board_code poBoardCode from post
-        where post_id = #{poId}
+        select p.post_id poId
+            ,p.post_name poName
+            ,p.post_content poContent       
+            ,u.user_name AS authorName
+            ,p.post_tag poTag
+            ,p.post_img poImg
+            ,p.post_like poLike
+            ,p.post_view poView
+            ,p.post_dislike poDislike
+            ,p.post_board_code poBoardCode from post p
+            left join users u
+            	on p.post_user_id = u.user_id
+        where p.post_id = #{poId}
     </select>
 	
     <select id="getDBList" resultType="lx.gymproject.springboot.vo.GymPostVO">
-        select post_id poId
-            ,post_name poName
-            ,post_content poContent       
-            ,post_user_id poUserId
-            ,post_tag poTag
-            ,post_img poImg
-            ,post_like poLike
-            ,post_view poView
-            ,post_dislike poDislike
-            ,post_board_code poBoardCode from post
+        select p.post_id poId
+            ,p.post_name poName
+            ,p.post_content poContent       
+            ,u.user_name AS authorName
+            ,p.post_tag poTag
+            ,p.post_img poImg
+            ,p.post_like poLike
+            ,p.post_view poView
+            ,p.post_dislike poDislike
+            ,p.post_board_code poBoardCode from post p
+            left join users u
+            	on p.post_user_id = u.user_id
     </select>
 
     <insert id="insertDB" parameterType="lx.gymproject.springboot.vo.GymPostVO">
         insert into post(post_name, post_content, post_user_id, post_tag, post_img, post_like,
-                        post_view, post_dislike, post_board_code) values(#{poName}, #{poContent}, #{poUserId}, #{poTag}, #{poImg}, #{poLike}, #{poView}, #{poDislike}, #{poBoardCode}) </insert>
+                        post_view, post_dislike, post_board_code) values(#{poName}, #{poContent}, #{poUserId}, #{poTag}, #{poImg}, 0, 0, 0, null) </insert>
 
     <update id="updateDB" parameterType="lx.gymproject.springboot.vo.GymPostVO">
         UPDATE post
         SET post_name = #{poName},
             post_content = #{poContent},      
-            post_user_id = #{poUserId},
             post_tag = #{poTag},
             post_img = #{poImg},
             post_like = #{poLike},

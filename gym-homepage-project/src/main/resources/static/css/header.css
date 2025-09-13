@@ -89,18 +89,18 @@
 
 /* 로고 */
 .logo button {
-    position: absolute;
-    left: 30px;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: black;
-    border: none;
+    position: absolute !important;
+    left: 30px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background-color: black !important;
+    border: none !important;
 }
 
 .logo img {
-    width: 70px;
-    height: 70px;
-    border: none;
+    width: 70px !important;
+    height: 70px !important;
+    border: none !important;
 }
 #mypagebtn{
 	margin-bottom:10px;

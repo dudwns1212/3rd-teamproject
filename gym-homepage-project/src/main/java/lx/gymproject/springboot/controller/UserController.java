@@ -41,7 +41,7 @@ public class UserController {
 		return "registerPage";
 	}
 	
-  @PostMapping("/login.do")
+	@PostMapping("/login.do")
 	public String login(Model model, HttpSession session,
 			@RequestParam(value="userEmail") String userEmail,
 			@RequestParam(value="userPassword") String userPassword) {
@@ -86,9 +86,6 @@ public class UserController {
 	@RequestMapping("/mypage.do")
 	public String mypage(HttpSession session, Model model) {
 		GymUserVO loginUser = (GymUserVO) session.getAttribute("loginUser");
-		if(loginUser == null) {
-			return "redirect:loginPage.do";
-		}
 		model.addAttribute("user", loginUser);
 		return "mypage";
 	}
