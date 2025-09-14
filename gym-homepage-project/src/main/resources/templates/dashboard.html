@@ -65,51 +65,48 @@
 						</div>
 					</div>
 					
-			<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-<div class="carousel-inner" style="height:300px; width:1000px; object-fit:cover;">
-  
-  <div class="carousel-item">
-    <img src="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMDhfMjYw/MDAxNzM2MjY1NjU3Mzk2.vyM72kRssMkb_LJKHJS-ekbB-3KDJYxC1JbRcE-hR8cg.GOHXRq3LrMB1KXIo7LpX020Sav-XXvys2-iUiEjiUxog.PNG/image.PNG?type=w800" style=" object-fit: cover; width:80% ; height:20%;"  alt="...">
-  </div>
-  
-  
-  <div class="carousel-item active">
-    <img src="https://img.freepik.com/free-vector/gym-training-twitter-header-template_23-2150678510.jpg?semt=ais_incoming&w=740&q=80" alt="...">
-  </div>
-  <div class="carousel-item">
-    <img src="https://dimg.donga.com/wps/NEWS/IMAGE/2025/07/21/132039643.1.jpg" style=" object-fit: cover; width:80% ; height:40%;"  alt="...">
-  </div>
-  
-</div>
-</div>		
-					
-					
-					
+	<div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-inner" style="height: 300px; width: 800px; overflow: hidden; margin: auto;">
+    
+    <div class="carousel-item active">
+      <img src="https://img.freepik.com/free-vector/gym-training-twitter-header-template_23-2150678510.jpg?semt=ais_incoming&w=740&q=80"
+           class="d-block w-100 h-100 object-fit-cover" alt="...">
+    </div>
 
-					
-					
-			
-			
+    <div class="carousel-item">
+      <img src="https://mblogthumb-phinf.pstatic.net/MjAyNTAxMDhfMjYw/MDAxNzM2MjY1NjU3Mzk2.vyM72kRssMkb_LJKHJS-ekbB-3KDJYxC1JbRcE-hR8cg.GOHXRq3LrMB1KXIo7LpX020Sav-XXvys2-iUiEjiUxog.PNG/image.PNG?type=w800"
+           class="d-block w-100 h-100 object-fit-cover" alt="...">
+    </div>
+
+    <div class="carousel-item">
+      <img src="https://dimg.donga.com/wps/NEWS/IMAGE/2025/07/21/132039643.1.jpg"
+           class="d-block w-100 h-100 object-fit-cover" alt="...">
+    </div>
+
+  </div>
+</div>
 				</div>
 			</div>
 		</div>
-		<br>
-		<div class="container">
-			<div class="table-responsive">
-				<table class="table table-bordered">
-					<thead class="text text-light">
-						<th>id</th>
-						<th>고객명</th>
-						<th>이메일</th>
-						<th>전화번호</th>
-						<th>주소</th>
-						<th>강사명</th>
-						<th>날짜</th>
-						<th>시간대</th>
-					</thead>
-					<tbody>
-					    <tr th:each="appointment, stat : ${appointments}">
-					        <td th:text="${stat.count + 1}"></td>
+		<div>
+
+			<div>
+	<div class="wrapper">		
+			<table class="table table-hover">
+			    <thead> <tr>
+			            <th scope="col" class="col-id">게시물 번호</th>
+			            <th scope="col" class="col-name">고객명</th>
+			            <th scope="col" class="col-author">이메일</th>
+			            <th scope="col" class="col-tag">전화번호</th>
+			            <th scope="col" class="col-img">주소</th>		            
+			            <th scope="col" class="col-like">강사명</th>
+			            <th scope="col" class="col-dislike">날짜</th>
+			            <th scope="col" class="col-view">시간대</th>
+			            
+			        </tr>
+			    </thead>
+			    <tbody> <tr th:each="appointment, stat : ${appointments}">
+			           <td th:text="${stat.count + 1}"></td>
 					        <td th:text="${appointment.userName}"></td>
 					        <td th:text="${appointment.email}"></td>
 					        <td th:text="${appointment.phone}"></td>
@@ -117,11 +114,30 @@
 					        <td th:text="${appointment.serviceType}"></td>
 					        <td th:text="${appointment.appointmentDate}"></td>
 					        <td th:text="${appointment.appointmentDuration}"></td>
-					    </tr>
-				
-					</tbody>
+			        </tr> </tbody>
+			</table>
 
-				</table>
+			</div>	
+				
+				<!-- 페이징 네비게이션 추가 -->
+
+				<nav aria-label="Page navigation" style="margin-top: 10px;">
+				  <ul class="pagination justify-content-center">
+				    <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+				      <a class="page-link" th:href="@{/reservationDashboard.do(page=${currentPage - 1})}" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${i == currentPage} ? 'active'">
+				      <a class="page-link" th:href="@{/reservationDashboard.do(page=${i})}" th:text="${i}">1</a>
+				    </li>
+				    <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+				      <a class="page-link" th:href="@{/reservationDashboard.do(page=${currentPage + 1})}" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
 			</div>
 		</div>
 
@@ -130,8 +146,42 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <style>
+
+
+.object-fit-cover {
+    object-fit: cover;
+}
+
+
+
+.wrapper {
+	height: auto;
+	min-height: 80%;
+	padding-bottom: 100px;
+	margin-top: 80px;
+}
+
+.table {
+    width: 1300px;
+    margin: 50px auto;
+    text-align: center; 
+}
+
+.table > thead {
+    border-bottom: 2px solid #212529;
+}
+
+
+.table .col-name {
+    width: 10%; 
+}
+.table .col-author,
+.table .col-tag {
+    width: 15%; 
+}
+
 nav, thead {
-	background-color: rgb(5, 182, 5);
+	background-color: white;
 }
 
 .navbar-brand {

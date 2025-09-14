@@ -4,185 +4,165 @@
 <head>
     <meta charset="UTF-8">
     <title>개인 PT 신청</title>
-  
-	<link rel="stylesheet" href="/css/header.css">
-	<link rel="stylesheet" href="/css/footer.css">
+
+   
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3301/3301556.png">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-<div th:insert="~{header :: header}" class="gympage"></div>
+
+   
+    <div th:insert="~{header :: header}" class="gympage"></div>
+
+  
     <nav class="navbar2 navbar-expand-sm gradient-bg py-3">
         <div class="container d-flex align-items-center justify-content-between">
-
             <a class="navbar-brand text-white fw-bold d-flex align-items-center" href="#">
-                개인 1:1 PT 신청 
+                개인 1:1 PT 신청
             </a>
 
-            
-                <div class="flex-grow-1 mx-4 overflow-hidden"> 
-                    <div class="animated-title">
-                        <div class="track">
-                            <div class="content">
-                         &nbsp; ✨연중무휴 365일 24시간 운영 🥇지인 등록 / 재등록률 1위 센터 📄체계적인 관리+맞춤 운동 프로그램 💸민생회복지원금, 사용 가능! &nbsp;
-                            </div>
+           
+            <div class="flex-grow-1 mx-4 overflow-hidden">
+                <div class="animated-title">
+                    <div class="track">
+                        <div class="content">
+                            &nbsp; ✨연중무휴 365일 24시간 운영 🥇지인 등록 / 재등록률 1위 센터 📄체계적인 관리+맞춤 운동 프로그램 💸민생회복지원금 사용 가능! &nbsp;
                         </div>
                     </div>
                 </div>
-
-                <!-- 우측 버튼 -->
-                <div class="d-flex align-items-center gap-6" style= "margin-right: 10px">
-                    <a th:href="@{/reservationDashboard.do}" class="btn btn-light d-flex align-items-center"
-                        id="dashboard_link"> 
-                       
-                        신청조회
-                    </a>
-                 </div>    
-                 
-                 <div>
-                 <a th:href="@{/reservation.do}" class="btn btn-light d-flex align-items-center"
-                        id="appointment_status_link">
-                        <div style="margin-left:16px;">신청</div>
-                    </a>
-                </div>
-
-            </div>
-        </nav>
-
-        <!-- 메인 타이틀 -->
-        <div class="wrapper">
-            <div class="container">
-                <h1 class="text-center p-5" style="font-weight: bold; color: rgb(5, 182, 5)">개인 PT 신청</h1>
             </div>
 
-            <!-- 트레이너 리스트와 이미지 -->
-            <div class="row" style="margin-left:30px">
-                <div class="col-4">
+          
+            <div class="d-flex align-items-center gap-2 me-2">
+                <a th:href="@{/reservationDashboard.do}" class="btn btn-light fw-bold text-success" id="dashboard_link">
+                    신청조회
+                </a>
+                <a th:href="@{/reservation.do}" class="btn btn-light fw-bold text-success" id="appointment_status_link">
+                    신청
+                </a>
+            </div>
+        </div>
+    </nav>
+
+ 
+    <div class="wrapper">
+        <div class="container">
+            <h1 class="text-center p-5 fw-bold text-success">개인 PT 신청</h1>
+
+            <div class="row ms-3">
+ 
+                <div class="col-md-4">
                     <div id="list-example" class="list-group">
                         <a class="list-group-item list-group-item-action" href="#list-item-1">조상현</a>
                         <a class="list-group-item list-group-item-action" href="#list-item-2">김도우</a>
                         <a class="list-group-item list-group-item-action" href="#list-item-3">이주호</a>
                         <a class="list-group-item list-group-item-action" href="#list-item-4">강현민</a>
                     </div>
-                    
-                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250818_216%2F17554876646808id2d_PNG%2FKakaoTalk_20250818_122642330.png">
+
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250818_216%2F17554876646808id2d_PNG%2FKakaoTalk_20250818_122642330.png" class="img-fluid mt-3" alt="센터 이미지">
                 </div>
-                <div class="col-8">
-                    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true"
-                        class="scrollspy-example" tabindex="0">
+
+                <!-- 트레이너 소개 -->
+                <div class="col-md-8">
+                    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
                         <h4 id="list-item-1">조상현</h4>
-                        <p><img
-                                src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250305_51%2F1741163766126f47L0_JPEG%2F%25C1%25FC%25C4%25C9%25BE%25EE_%25C1%25B6%25BB%25F3%25C7%25F6_%25C7%25C1%25B7%25CE%25C7%25CA.jpg"
-                                class="img-fluid" alt="조상현 PT"></p>
+                        <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250305_51%2F1741163766126f47L0_JPEG%2F%25C1%25FC%25C4%25C9%25BE%25EE_%25C1%25B6%25BB%25F3%25C7%25F6_%25C7%25C1%25B7%25CE%25C7%25CA.jpg" class="img-fluid mb-4" alt="조상현 PT">
 
                         <h4 id="list-item-2">김도우</h4>
-                        <p><img
-                                src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250305_229%2F1741163752563woKjP_JPEG%2F%25C1%25FC%25C4%25C9%25BE%25EE_%25B1%25E8%25B5%25B5%25BF%25EC_%25C7%25C1%25B7%25CE%25C7%25CA.jpg"
-                                class="img-fluid" alt="김도우 PT"></p>
+                        <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250305_229%2F1741163752563woKjP_JPEG%2F%25C1%25FC%25C4%25C9%25BE%25EE_%25B1%25E8%25B5%25B5%25BF%25EC_%25C7%25C1%25B7%25CE%25C7%25CA.jpg" class="img-fluid mb-4" alt="김도우 PT">
 
                         <h4 id="list-item-3">이주호</h4>
-                        <p><img
-                                src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250305_12%2F1741163762447W6lyl_PNG%2F%25C1%25FC%25C4%25C9%25BE%25EE_%25C0%25CC%25C1%25D6%25C8%25A3_%25C7%25C1%25B7%25CE%25C7%25CA.png"
-                                style="height: 1400px;width:960px;object-fit: cover;" alt="이주호 PT"></p>
+                        <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250305_12%2F1741163762447W6lyl_PNG%2F%25C1%25FC%25C4%25C9%25BE%25EE_%25C0%25CC%25C1%25D6%25C8%25A3_%25C7%25C1%25B7%25CE%25C7%25CA.png"
+                             style="height: 1200px; width: 960px; object-fit: cover;" class="img-fluid mb-4" alt="이주호 PT">
 
                         <h4 id="list-item-4">강현민</h4>
-                        <p><img
-                                src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250403_44%2F1743678298074jXnAa_JPEG%2F%25C1%25FC%25C4%25C9%25BE%25EE_%25B0%25AD%25C7%25F6%25B9%25CE_%25C7%25C1%25B7%25CE%25C7%25CA.jpg"
-                                class="img-fluid" alt="강현민 PT"></p>
+                        <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250403_44%2F1743678298074jXnAa_JPEG%2F%25C1%25FC%25C4%25C9%25BE%25EE_%25B0%25AD%25C7%25F6%25B9%25CE_%25C7%25C1%25B7%25CE%25C7%25CA.jpg" class="img-fluid mb-4" alt="강현민 PT">
                     </div>
                 </div>
             </div>
         </div>
-<div th:insert="~{footer :: footer}"></div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-<style>
-.gradient-bg {
-    background: linear-gradient(90deg, #4b6cb7, #182848);
-    color: white;
+    </div>
+
+
+    <div th:insert="~{footer :: footer}"></div>
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+   
+    <style>
+        .gradient-bg {
+            background: linear-gradient(90deg, #4b6cb7, #182848);
+            color: white;
+        }
+
+        .animated-title {
+            font-size: 16px;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400;
+            height: 30px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .animated-title .track {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        .btn {
+            background-color: rgb(5, 182, 5);
+            font-weight: 600;
+            width: 90px;
+            text-align: center;
+        }
+
+        #dashboard_link,
+        #appointment_status_link {
+            background-color: white;
+            border: none;
+        }
+
+        .wrapper {
+    margin-top: 50px; 
 }
 
-.animated-title {
-    font-size: 16px;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 400;
-    height: 30px;
-    position: relative;
-    white-space: nowrap;
-    overflow: hidden;
-}
+        label {
+            text-align: left;
+            color: black;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
 
-.animated-title .track {
-    display: inline-block;
-    white-space: nowrap;
-    animation: marquee 25s linear infinite;
-}
-
-
-@keyframes marquee {
-	from {
-		transform: translateX(100%);
-	}
-
-    to {
-        transform: translateX(-100%);
-    }
-}
-
-.btn {
-    background-color: rgb(5, 182, 5);
-    font-weight: 600;
-    width:90px;
-    text-align : ceter;
-}
-
-#dashboard_link,
-#appointment_status_link {
-    color: rgb(5, 182, 5) ;
-    background-color: white ;
-    border: none;
-    font-weight: 600;
-}
-
-.wrapper {
-    min-height: 100%;
-    padding-bottom: 100px;
+        .navbar2 {
     margin-top: 100px;
 }
 
-label {
-    text-align: left ;
-    color: black;
-    font-weight: 500;
-    margin-bottom: 5px;
-}
+        img {
+            margin-top: 30px;
+        }
 
-.head1,
-.fa {
-    color: rgb(5, 182, 5);
-    font-weight: bold;
-}
+        @media (max-width: 768px) {
+            .navbar2 {
+                margin-top: 55px !important;
+            }
+        }
+    </style>
+</body>
 
-.gap-2 > * + * {
-    margin-left: 0.5rem;
-}
-.navbar2 {
-	margin-top:100px;
-}
-.wrapper {
-    min-height: 100%;
-    padding-bottom: 100px;
-    margin-top: 170px !important; /* 헤더(100px) + 네비바(70px) */
-}
-img{
-    margin-top: 30px;
-}
-@media (max-width: 768px) {
-.navbar2 {
-	margin-top: 55px !important;
-}
-}
-</style>
 </html>
+

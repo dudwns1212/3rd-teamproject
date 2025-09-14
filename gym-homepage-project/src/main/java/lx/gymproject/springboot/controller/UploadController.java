@@ -40,11 +40,8 @@ public class UploadController {
         Files.createDirectories(path.getParent());
 
         // 파일 저장
-        file.transferTo(path);
-        
-        // 파일 DB에 저장
-        
-        
+        file.transferTo(path);     
+ 
         // 업로드 후 보여줄 이미지 경로 model에 담기
         model.addAttribute("imageUrl", "/images/" + fileName);
 
