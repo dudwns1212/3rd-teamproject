@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lx.gymproject.springboot.dao.GymPostDAO;
+import lx.gymproject.springboot.util.FileUploadUtil;
 import lx.gymproject.springboot.vo.GymPostVO;
 import lx.gymproject.springboot.vo.GymUserVO;
 
@@ -62,21 +63,9 @@ public class PostController {
 			GymUserVO loginUser = (GymUserVO) session.getAttribute("loginUser");
 		    vo.setPoUserId(loginUser.getUserId());
 		    
-		    MultipartFile file = vo.getFile();
-		    if (file != null && !file.isEmpty()) {
-		        try {
-		            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
-		            Path path = Paths.get("uploads", fileName);
-		            Files.createDirectories(path.getParent());
-		            file.transferTo(path);
-
-		            // DB에 저장할 파일명 세팅
-		            vo.setPoImg(fileName);
-		        } catch (IOException e) {
-		            e.printStackTrace();
-		        }
-		    }
-
+		    String savedFileName = FileUploadUtil.saveFile(vo.getFile(), null); // 새 글이니까 기존 파일 없음
+		    vo.setPoImg(savedFileName);
+		    
 		    dao.insertDB(vo);
 		    return "redirect:/postBoard.do";
 		}
@@ -91,10 +80,23 @@ public class PostController {
 		}
 		
 		@RequestMapping("postEdit.do")
-		public String postEdit(GymPostVO vo) throws Exception {
-			dao.updateDB(vo);
-			return "redirect:postBoard.do";
+		public String postEdit(GymPostVO vo, @RequestParam(value="file", required=false) MultipartFile file,
+		                       HttpSession session) throws Exception {
+			
+		    GymPostVO existingPost = dao.getDB(vo.getPoId());
+		    
+		    try {
+		        // 기존 파일명을 전달해서 업로드 + 삭제 처리
+		        String savedFileName = FileUploadUtil.saveFile(file, existingPost.getPoImg());
+		        vo.setPoImg(savedFileName);
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+
+		    dao.updateDB(vo);
+		    return "redirect:postBoard.do";
 		}
+
 		
 		@RequestMapping("deleteDB.do") 
 		public String deleteDB(@RequestParam("poId") int poId) throws Exception {
