@@ -11,43 +11,15 @@
 
 <body>
 
-<!--
-		<form name=form1 method=post action="postWrite.do">
-		    <input type="hidden" name="postUserId" th:value="${session.loginUser.userId}">
-			<div>
-				<label for="exampleFormControlInput1">제목</label> 
-				<input type="text" class="form-control" id="exampleFormControlInput1" name="poName" placeholder="제목">
-			</div>
-			<div class="form-group">
-				<label for="exampleFormControlSelect1">태그</label> 
-				<select class="form-control" id="exampleFormControlSelect1" name="poTag">
-					<option value ="자유">자유</option>
-					<option value ="건의사항">건의사항</option>
-					<option value ="칭찬합니다">칭찬합니다</option>
-					<option value ="!긴급!">!긴급!</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<label for="exampleFormControlTextarea1">내용</label>
-				<textarea class="form-control" id="exampleFormControlTextarea1" name="poContent" rows="3"></textarea>
-				<input type="file" name="poImg" maxlength="20">
-			</div>
-			<div >
-				<input type=submit value="저장">
-				<input type=reset value="취소">
-			</div>
-			
-		</form>
--->
 	<div th:replace="~{header :: header}"></div>
 
-		<div class="container py-5">
+		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-7">
 					<div class="card custom-card">
 						<div class="card-body p-5">
 							<h2 class="card-title text-center fw-bold mb-4">새 게시물 작성</h2>
-							<form name="form1" method="post" action="postWrite.do">
+							<form name="form1" method="post" action="postWrite.do" enctype="multipart/form-data">
 								<input type="hidden" name="action" value="insert">
 								<span  th:text="${param.userName}"> userName </span>
 	
@@ -63,7 +35,7 @@
 	
 								<div class="mb-4">
 									<label for="postImage" class="form-label">이미지</label>
-									<input type="file" class="form-control" id="postImage" name="poImg">
+									<input type="file" class="form-control" id="poImg" name="file">
 								</div>
 	
 								<div class="form-group">
@@ -85,6 +57,7 @@
 									</button>
 								</div>
 							</form>
+							
 						</div>
 					</div>
 				</div>
@@ -101,7 +74,9 @@
 html,body {
 	height: 100%;
 }
-
+.container{
+	padding: 150px 100px;
+}
 body {
 	background-color: #f4f7f6;
 }
