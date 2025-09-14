@@ -34,4 +34,27 @@ public class GymPostDAO {
 		return session.delete("deleteDB", poId);
 	}
 	
+	public int increaseLike(int poId) throws Exception {
+		return session.update("increaseLike", poId);
+	}
+	
+	public int increaseDisLike(int poId) throws Exception {
+		return session.update("increaseDislike", poId);
+	}
+
+	public int getLikeCount(int poId) {
+		return session.selectOne("getLikeCount", poId);
+	}
+
+	public int getDisLikeCount(int poId) {
+		return session.selectOne("getDislikeCount", poId);
+	}
+
+	public int  increaseView(int poId) {
+		return session.update("increaseView", poId);
+	}
+
+	public int getViewCount(int poId) {
+		return session.selectOne("getViewCount", poId);
+	}	
 }

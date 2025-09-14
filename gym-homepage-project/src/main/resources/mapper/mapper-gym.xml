@@ -23,6 +23,8 @@
 	</update>
 
 	
+		<!-- ========================= POST 시작 ========================= -->
+	
 	<select id="getDB" parameterType="int" resultType="lx.gymproject.springboot.vo.GymPostVO">
         select p.post_id poId
             ,p.post_name poName
@@ -79,6 +81,48 @@
         delete from post where post_id = #{poId}
     </delete>
 	
+	
+	
+	<update id="increaseLike" parameterType="int">
+	    UPDATE post
+	    SET post_like = post_like + 1
+	    WHERE post_id = #{poId}
+	</update>
+
+	<update id="increaseDislike" parameterType="int">
+	    UPDATE post
+	    SET post_dislike = post_dislike + 1
+	    WHERE post_id = #{poId}
+	</update>
+	
+	<select id="getLikeCount" parameterType="int" resultType="int">
+	    SELECT post_like 
+	    FROM post 
+	    WHERE post_id = #{poId}
+	</select>
+	
+	<select id="getDislikeCount" parameterType="int" resultType="int">
+	    SELECT post_dislike 
+	    FROM post 
+	    WHERE post_id = #{poId}
+	</select>
+	
+	<update id="increaseView" parameterType="int">
+	    UPDATE post
+	    SET post_view = post_view + 1
+	    WHERE post_id = #{poId}
+	</update>
+	
+	<select id="getViewCount" parameterType="int" resultType="int">
+	    SELECT post_view
+	    FROM post 
+	    WHERE post_id = #{poId}
+	</select>
+	
+		
+	<!-- ========================= POST 끝 ========================= -->
+	
+	
 	<insert id="insertApp" parameterType="lx.gymproject.springboot.vo.GymAppointmentVO">
         insert into appointment(userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1) values(#{userName}, #{email}, #{phone}, #{address}, #{serviceType}, #{appointmentDate}, #{appointmentDuration}, #{status1}) </insert>
 	
@@ -129,12 +173,6 @@
 	<delete id="deleteMachine" parameterType="int">
         delete from gym_machine where machine_id = #{machineId}
     </delete>
-	
-	
-	
-	
-	
-	
 	
 
 </mapper>
