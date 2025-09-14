@@ -1,5 +1,7 @@
 package lx.gymproject.springboot.vo;
 
+import java.time.LocalDateTime;
+
 public class GymPostVO {
 	
 	public int poId;
@@ -12,6 +14,7 @@ public class GymPostVO {
 	public int poView;
 	public int poDislike;
 	public int poBoardCode;
+	public LocalDateTime poTime;
 	
 	public String authorName;	
 	
@@ -93,13 +96,19 @@ public class GymPostVO {
 	public void setPoBoardCode(int poBoardCode) {
 		this.poBoardCode = poBoardCode;
 	}
+	public LocalDateTime getpotime() {
+		return poTime;
+	}
+	public void setpotime(LocalDateTime poTime) {
+		this.poTime = poTime;
+	}
 	
 	
 	@Override
 	public String toString() {
 		return "GymPostVO [poId=" + poId + ", poName=" + poName + ", poContent=" + poContent + ", poUserId=" + poUserId
 				+ ", poTag=" + poTag + ", poImg=" + poImg + ", poLike=" + poLike + ", poView=" + poView + ", poDislike="
-				+ poDislike + ", poBoardCode=" + poBoardCode + ", authorName=" + authorName + "]";
+				+ poDislike + ", poBoardCode=" + poBoardCode + ", authorName=" + authorName +  ", potime=" + poTime +"]";
 	}
 
 }
