@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,6 +35,7 @@ public class PostController {
 		@RequestMapping("/postBoard.do")
 		public String postBoard(HttpSession session, HttpServletRequest req) throws Exception {
 			List<GymPostVO> list = dao.getDBList();
+			Collections.reverse(list);
 			req.setAttribute("data", list);
 			System.out.println();
 			return "postBoard";

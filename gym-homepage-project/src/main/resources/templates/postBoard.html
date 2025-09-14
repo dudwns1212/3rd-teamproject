@@ -21,10 +21,10 @@
 			            <th scope="col" class="col-name">제목</th>
 			            <th scope="col" class="col-author">작성자</th>
 			            <th scope="col" class="col-tag">태그</th>
-			            <th scope="col" class="col-img">이미지</th>
+			            <th scope="col" class="col-img">이미지</th>		            
 			            <th scope="col" class="col-like">👍</th>
 			            <th scope="col" class="col-dislike">👎</th>
-			            <th scope="col" class="col-view">조회수</th>
+			            <th scope="col" class="col-view">👀</th>
 			            
 			        </tr>
 			    </thead>
@@ -35,10 +35,12 @@
 			            	<span th:if="${vo.authorName != null}" th:text="${vo.authorName}"></span>
 			            </td>
 			            <td th:text="${vo.poTag}"></td>       
+
 			            <td><img th:if="${post?.poImg}" 
              					th:src="@{'/uploads/' + ${vo.poImg}}" 
              					style="max-width: 100px; max-height: 100px;">
              			</td>
+
 			            <td th:text="${vo.poLike}"></td>
 			            <td th:text="${vo.poDislike}"></td>
 			            <td th:text="${vo.poView}"></td>

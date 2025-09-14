@@ -33,7 +33,9 @@
             ,p.post_like poLike
             ,p.post_view poView
             ,p.post_dislike poDislike
-            ,p.post_board_code poBoardCode from post p
+            ,p.post_board_code poBoardCode
+            ,p.post_time poTime
+            from post p
             left join users u
             	on p.post_user_id = u.user_id
         where p.post_id = #{poId}
@@ -49,14 +51,16 @@
             ,p.post_like poLike
             ,p.post_view poView
             ,p.post_dislike poDislike
-            ,p.post_board_code poBoardCode from post p
+            ,p.post_board_code poBoardCode 
+            ,p.post_time poTime
+            from post p
             left join users u
             	on p.post_user_id = u.user_id
     </select>
 
     <insert id="insertDB" parameterType="lx.gymproject.springboot.vo.GymPostVO">
-        insert into post(post_name, post_content, post_user_id, post_tag, post_img, post_like, post_view, post_dislike, post_board_code)
-        	 values(#{poName}, #{poContent}, #{poUserId}, #{poTag}, #{poImg}, #{poLike}, #{poView}, #{poDislike}, #{poBoardCode}) 
+        insert into post(post_name, post_content, post_user_id, post_tag, post_img, post_like, post_view, post_dislike, post_board_code, post_time)
+        	 values(#{poName}, #{poContent}, #{poUserId}, #{poTag}, #{poImg}, #{poLike}, #{poView}, #{poDislike}, #{poBoardCode}, current_timestamp)
     </insert>
 
     <update id="updateDB" parameterType="lx.gymproject.springboot.vo.GymPostVO">

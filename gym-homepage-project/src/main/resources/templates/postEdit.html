@@ -6,102 +6,122 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
 	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
 	crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title></title>
 </head>
 
 <body>
-	<div th:replace="~{header :: header}" class="gympage"></div>
-	<div class="wrapper">
-		<H2>post : 수정화면</H2>
 
-		<form action="/postEdit.do" method="post">
-		<input type="hidden" name="poId" th:value="${po.poId}">
-			<table border="1">
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="poName" th:value="${po.poName}"></td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td><input type="text" name="poContent" th:value="${po.poContent}"></td>
-				</tr>
-				<tr>
-					<th>태그</th>
-					<td><input type="text" name="poTag" th:value="${po.poTag}"></td>
-				</tr>
-				<tr>
-					<th>이미지 경로</th>
-					<td><input type="text" name="poImg" th:value="${po.poImg}"></td>
-				</tr>
-				<tr>
-					<th>게시판 코드</th>
-					<td><input type="number" name="poBoardCode"th:value="${po.poBoardCode}"></td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center">
-						<input type="submit" value="저장">
-						<input type="reset" value="취소">
-					</td>
-				</tr>
-			</table>
-		</form>
-		<button class="delete" th:data-poid="${po.poId}">삭제</button>
+	<div th:replace="~{header :: header}"></div>
+		<div class="container py-5">
+			<div class="row justify-content-center">
+				<div class="col-lg-7">
+					<div class="card custom-card">
+						<div class="card-body p-5">
+							<h2 class="card-title text-center fw-bold mb-4">새 게시물 작성</h2>
+							<form name="form1" method="post" action="postEdit.do">
+							<input type="hidden" name="poId" th:value="${po.poId}">
+								<input type="hidden" name="action" value="insert">
+								<span  th:text="${param.userName}"> userName </span>
+	
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="postName" name="poName" th:value="${po.poName}" maxlength="15">
+									<label for="postName">제목</label>
+								</div>
+	
+								<div class="form-floating mb-4">
+									<textarea class="form-control" id="postContent" name="poContent" th:text="${po.poContent}" style="height: 120px" maxlength="50"></textarea>
+									<label for="postContent">내용</label>
+								</div>
+	
+								<div class="mb-4">
+									<label for="postImage" class="form-label">이미지</label>
+									<input type="file" class="form-control" id="postImage" name="poImg">
+								</div>
+	
+								<div class="form-group">
+									<label for="exampleFormControlSelect1">태그</label> 
+									<select class="form-control" id="exampleFormControlSelect1" name="poTag" th:value="${po.poTag}">
+										<option value ="자유">자유</option>
+										<option value ="건의사항">건의사항</option>
+										<option value ="칭찬합니다">칭찬합니다</option>
+										<option value ="!긴급!">!긴급!</option>
+									</select>
+								</div>
+	
+								<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+									<button type="reset" class="btn btn-outline-secondary btn-lg">
+										<i class="bi bi-arrow-counterclockwise"></i> 다시작성
+									</button>
+									<button type="submit" class="btn btn-primary" id="edit">
+										<i class="bi bi-check-lg"></i> 수정하기
+									</button>
+									<button type="button" class="btn btn-danger btn-lg" id="delete" th:data-poid="${po.poId}">
+										<i class="bi bi-trash"></i> 삭제하기
+									</button>													
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div th:replace="~{footer :: footer}"></div>
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-	</div>
 	
 <script>
-    $('.delete').on('click', function() {
-        let poId = $(this).data('poid');
-        if (confirm("정말로 삭제하시겠습니까?")) {
+	
+$(function(){
+
+    $('#delete').on('click', function() {
+        if (confirm('정말로 삭제하시겠습니까?')) {
+            let poId = $(this).data('poid');
             location.href = "deleteDB.do?poId=" + poId;
         } else {
-            console.log("삭제 취소됨");
+        	console.log("삭제 취소됨");
         }
     });
+
+	$('#edit').on('click', function() {
+		let poId = ($(this).data('poid'));
+		document.location.href = "/postEdit.do?poId=" + poId;
+		return;
+	});
+});
+
 </script>
 	
 </body>
 
 <style>
-html, body {
-	height: 100%
+html,body {
+	height: 100%;
+}
+
+body {
+	background-color: #f4f7f6;
 }
 
 .wrapper {
-	height: auto;
 	min-height: 100%;
-	padding-bottom: 100px;
-	margin-top: 100px;
 }
 
-footer {
-	height: 100px;
-	position: relative;
-	transform: translateY(-100%);
+.custom-card {
+	border: none;
+	border-radius: 0.75rem;
+	box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
 }
 
-.container {
-	text-align: center;
-	width: 60%;
-	margin: 0 auto;
-	padding: 25px;
-	border-radius: 10px;
+.form-floating>.form-control {
+	height: calc(3.5rem + 2px);
+	line-height: 1.25;
 }
 
-form {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}
-
-input {
-	width: 200px;
-	height: 30px;
-	margin-top: 5px;
+.form-floating>label {
+	padding: 1rem 0.75rem;
 }
 </style>
 </html>
