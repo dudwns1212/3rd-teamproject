@@ -1,5 +1,6 @@
 package lx.gymproject.springboot.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,8 +28,8 @@ public class PostController {
 		@RequestMapping("/postBoard.do")
 		public String postBoard(HttpSession session, HttpServletRequest req) throws Exception {
 			List<GymPostVO> list = dao.getDBList();
+			Collections.reverse(list);
 			req.setAttribute("data", list);
-			
 			System.out.println();
 			return "postBoard";
 		}
