@@ -77,9 +77,17 @@
 
 					<div class="d-flex justify-content-between align-items-center mt-4">
 						<div class="stats text-body-secondary">
-							<span class="me-3" title="조회수"><i class="bi bi-eye-fill"></i> <span th:text="${data.poView}"></span></span>
-							<span class="me-3" title="좋아요"><i class="bi bi-hand-thumbs-up-fill"></i> <span th:text="${data.poLike}"></span></span>
-							<span title="싫어요"><i class="bi bi-hand-thumbs-down-fill"></i> <span th:text="${data.poDislike}"></span></span>
+							<a href="#" class="me-3" id="likeBtn" th:data-post-id="${data.poId}" title="좋아요">
+								<i class="bi bi-hand-thumbs-up-fill"></i>
+								<span id="likeCount" th:text="${data.poLike}"></span>
+							</a>
+							<a href="#" class="me-3" id="dislikeBtn" th:data-post-id="${data.poId}" title="싫어요">
+								<i class="bi bi-hand-thumbs-down-fill"></i>
+								<span id="dislikeCount" th:text="${data.poDislike}"></span>
+							</a>
+							<span class="ms-3" title="조회수">
+								<i class="bi bi-eye-fill"></i><span th:text="${data.poView}"></span>
+							</span>
 						</div>
 						<div>
 							<button class="btn btn-primary edit" th:data-poid="${data.poId}" th:data-pname="${data.authorName}">
@@ -101,18 +109,57 @@
 		document.location.href = "/postEditPage.do?poId=" + poId + "&authorName=" + encodeURIComponent(poName);
 		return;
 	});
+	
+	$(function() {
+		$('#likeBtn').on('click', function(e) {
+			e.preventDefault();
+			let postId = $(this).data('postId');
+			
+			$.ajax({
+				type: 'POST',
+				url: '/post/like',
+				data: { poId: postId },
+				success: function(response) {
+					$('#likeCount').text(response.newCount);
+				},
+				error: function() {
+					alert('좋아요 처리 오류 - 운영자에게 문의해주세요.')
+				}
+			});
+		});
+	});
+	
+	$(function() {
+		$('#dislikeBtn').on('click', function(e) {
+			e.preventDefault();
+			let postId = $(this).data('postId');
+			
+			$.ajax({
+				type: 'POST',
+				url: '/post/dislike',
+				data: { poId: postId },
+				success: function(response) {
+					$('#dislikeCount').text(response.newCount);
+				},
+				error: function() {
+					alert('싫어요 처리 오류 - 운영자에게 문의해주세요.')
+				}
+			});
+		});
+	});
+	
 </script>
 <style>
 html, body {
 	height: 100%
 }
 
-.footer {
+footer {
 	height: 100px;
 	position: relative;
 	transform: translateY(-100%);
 }
-.body {
+body {
 	background-color: #f8f9fa; 
 }
 .blog-post {

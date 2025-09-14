@@ -1,14 +1,18 @@
 package lx.gymproject.springboot.controller;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -36,6 +40,7 @@ public class PostController {
 		
 		@RequestMapping("/post.do")
 		public String post(@RequestParam("poId") int poId, Model model) throws Exception {
+			dao.increaseView(poId);
 			GymPostVO vo = dao.getDB(poId);
 			model.addAttribute("data", vo);
 			return "post";
@@ -78,4 +83,24 @@ public class PostController {
 			return "redirect:postBoard.do";
 		}
 
-		}
+	    @PostMapping("/post/like")
+	    @ResponseBody
+	    public Map<String, Object> updateLike(@RequestParam("poId") int poId) throws Exception {
+	        dao.increaseLike(poId); 
+	        int newLikeCount = dao.getLikeCount(poId); 
+	        Map<String, Object> response = new HashMap<>();
+	        response.put("newCount", newLikeCount);
+	        return response;    
+	    }
+	    
+	    @PostMapping("/post/dislike")
+	    @ResponseBody
+	    public Map<String, Object> updateDisLike(@RequestParam("poId") int poId) throws Exception {
+	        dao.increaseDisLike(poId); 
+	        int newDisLikeCount = dao.getDisLikeCount(poId); 
+	        Map<String, Object> response = new HashMap<>();
+	        response.put("newCount", newDisLikeCount);
+	        return response;
+	    }		
+		
+}
