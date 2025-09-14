@@ -21,7 +21,7 @@ public class MachineController {
 	GymMachineDAO dao;
 
 	@RequestMapping("/explainMachine.do")
-	public String machineList(HttpServletRequest req, Model model) {
+	public String machineList( Model model) {
 		List<GymMachineVO> list = dao.getMachineList();
 		model.addAttribute("data", list);
 		return "explainMachine";
