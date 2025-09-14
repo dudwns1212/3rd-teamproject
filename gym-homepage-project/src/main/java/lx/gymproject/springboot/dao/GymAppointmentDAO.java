@@ -1,5 +1,6 @@
 package lx.gymproject.springboot.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,5 +24,17 @@ public class GymAppointmentDAO {
 		return session.selectList("getAppList");
 	}
 	
+	 // 페이징된 리스트
+    public List<GymAppointmentVO> getDBListPaging(int offset, int limit) throws Exception {
+        HashMap<String, Integer> params = new HashMap<>();
+        params.put("offset", offset);
+        params.put("limit", limit);
+        return session.selectList("getAppListPaging", params);
+    }
+
+    // 총 개수
+    public int getDBCount() throws Exception {
+        return session.selectOne("getAppCount");
+    }
 	
 }
