@@ -1,5 +1,6 @@
 package lx.gymproject.springboot.vo;
 
+import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 
 public class GymPostVO {
@@ -16,6 +17,16 @@ public class GymPostVO {
 	public int poBoardCode;
 	public LocalDateTime poTime;
 	
+	public MultipartFile file;
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+
 	public String authorName;	
 	
 	public String getPoContent() {
@@ -108,7 +119,9 @@ public class GymPostVO {
 	public String toString() {
 		return "GymPostVO [poId=" + poId + ", poName=" + poName + ", poContent=" + poContent + ", poUserId=" + poUserId
 				+ ", poTag=" + poTag + ", poImg=" + poImg + ", poLike=" + poLike + ", poView=" + poView + ", poDislike="
-				+ poDislike + ", poBoardCode=" + poBoardCode + ", authorName=" + authorName +  ", potime=" + poTime +"]";
+				+ poDislike + ", poBoardCode=" + poBoardCode + ", file=" + file + ", authorName=" + authorName 
+			 +  ", potime=" + poTime +"]";
+
 	}
 
 }
