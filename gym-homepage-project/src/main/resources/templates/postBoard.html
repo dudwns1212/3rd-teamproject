@@ -35,7 +35,12 @@
 			            	<span th:if="${vo.authorName != null}" th:text="${vo.authorName}"></span>
 			            </td>
 			            <td th:text="${vo.poTag}"></td>       
-			            <td><img th:src="${vo.poImg}"></td>			            
+
+			            <td><img th:if="${post?.poImg}" 
+             					th:src="@{'/uploads/' + ${vo.poImg}}" 
+             					style="max-width: 100px; max-height: 100px;">
+             			</td>
+
 			            <td th:text="${vo.poLike}"></td>
 			            <td th:text="${vo.poDislike}"></td>
 			            <td th:text="${vo.poView}"></td>

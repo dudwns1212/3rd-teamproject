@@ -31,7 +31,7 @@
 		</div>
 		
 		<form action="machine_form.do">
-		<button  action="machine_form.do" >
+		<button th:if="${session.loginUser != null && session.loginUser.userEmail == '1@1.com'}" type="submit">
 		<img src="images/plus.png" class="img-container">
 		</button>	
 		</form>
