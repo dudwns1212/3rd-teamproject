@@ -36,10 +36,10 @@
 			            </td>
 			            <td th:text="${vo.poTag}"></td>       
 
-			            <td><img th:if="${post?.poImg}" 
-             					th:src="@{'/uploads/' + ${vo.poImg}}" 
-             					style="max-width: 100px; max-height: 100px;">
-             			</td>
+			            <td><img th:if="${vo.poImg != null and vo.poImg != ''}" 
+					         th:src="@{'/uploads/' + ${vo.poImg}}" 
+					         style="max-width: 100px; max-height: 100px;">
+						</td>
 
 			            <td th:text="${vo.poLike}"></td>
 			            <td th:text="${vo.poDislike}"></td>

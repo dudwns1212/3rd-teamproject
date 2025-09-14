@@ -2,139 +2,168 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper-gym">
 	<!-- 로그인 -->
-	<select id="doLoginByUserId" parameterType="String" resultType="lx.gymproject.springboot.vo.GymUserVO">
-		select * from users where user_email = #{userEmail}	
+	<select id="doLoginByUserId" parameterType="String"
+		resultType="lx.gymproject.springboot.vo.GymUserVO">
+		select * from users where user_email = #{userEmail}
 	</select>
 	<!-- 회원가입 -->
-	<insert id="doRegisterByUserVO" parameterType="lx.gymproject.springboot.vo.GymUserVO">
-		insert into users (user_email, user_password, user_name, user_tel, user_birth, user_gender)
-			values(#{userEmail},#{userPassword},#{userName},#{userTel},#{userBirth},#{userGender})
+	<insert id="doRegisterByUserVO"
+		parameterType="lx.gymproject.springboot.vo.GymUserVO">
+		insert into users (user_email, user_password, user_name,
+		user_tel, user_birth, user_gender)
+		values(#{userEmail},#{userPassword},#{userName},#{userTel},#{userBirth},#{userGender})
 	</insert>
 	<!-- 회원수정 -->
-	<update id="updateUserVO" parameterType="lx.gymproject.springboot.vo.GymUserVO">
-	    UPDATE users 
-	    SET user_email = #{userEmail},
-	        user_password = #{userPassword},
-	        user_name = #{userName},
-	        user_tel = #{userTel},
-	        user_birth = #{userBirth},
-	        user_gender = #{userGender}
-	    WHERE user_id = #{userId}
+	<update id="updateUserVO"
+		parameterType="lx.gymproject.springboot.vo.GymUserVO">
+		UPDATE users
+		SET user_email = #{userEmail},
+		user_password = #{userPassword},
+		user_name = #{userName},
+		user_tel = #{userTel},
+		user_birth = #{userBirth},
+		user_gender = #{userGender}
+		WHERE user_id = #{userId}
 	</update>
 
-	
-	<select id="getDB" parameterType="int" resultType="lx.gymproject.springboot.vo.GymPostVO">
-        select p.post_id poId
-            ,p.post_name poName
-            ,p.post_content poContent       
-            ,u.user_name AS authorName
-            ,p.post_tag poTag
-            ,p.post_img poImg
-            ,p.post_like poLike
-            ,p.post_view poView
-            ,p.post_dislike poDislike
-            ,p.post_board_code poBoardCode
-            ,p.post_time poTime
-            from post p
-            left join users u
-            	on p.post_user_id = u.user_id
-        where p.post_id = #{poId}
-    </select>
-	
-    <select id="getDBList" resultType="lx.gymproject.springboot.vo.GymPostVO">
-        select p.post_id poId
-            ,p.post_name poName
-            ,p.post_content poContent       
-            ,u.user_name AS authorName
-            ,p.post_tag poTag
-            ,p.post_img poImg
-            ,p.post_like poLike
-            ,p.post_view poView
-            ,p.post_dislike poDislike
-            ,p.post_board_code poBoardCode 
-            ,p.post_time poTime
-            from post p
-            left join users u
-            	on p.post_user_id = u.user_id
-    </select>
-
-    <insert id="insertDB" parameterType="lx.gymproject.springboot.vo.GymPostVO">
-        insert into post(post_name, post_content, post_user_id, post_tag, post_img, post_like, post_view, post_dislike, post_board_code, post_time)
-        	 values(#{poName}, #{poContent}, #{poUserId}, #{poTag}, #{poImg}, #{poLike}, #{poView}, #{poDislike}, #{poBoardCode}, current_timestamp)
-    </insert>
-
-    <update id="updateDB" parameterType="lx.gymproject.springboot.vo.GymPostVO">
-        UPDATE post
-        SET post_name = #{poName},
-            post_content = #{poContent},      
-            post_tag = #{poTag},
-            post_img = #{poImg},
-            post_like = #{poLike},
-            post_view = #{poView},
-            post_dislike = #{poDislike},
-            post_board_code = #{poBoardCode} WHERE post_id = #{poId}
-    </update>
-
-    <delete id="deleteDB" parameterType="int">
-        delete from post where post_id = #{poId}
-    </delete>
-	
-	<insert id="insertApp" parameterType="lx.gymproject.springboot.vo.GymAppointmentVO">
-        insert into appointment(userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1) values(#{userName}, #{email}, #{phone}, #{address}, #{serviceType}, #{appointmentDate}, #{appointmentDuration}, #{status1}) </insert>
-	
-	<select id="getAppList" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
-        select userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1
-        from appointment
-    </select>
-	
-	
-	
-  <select id="getMachineList" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
-    select machine_id , machine_name , machine_purchase_date , machine_price, machine_service_contact , machine_img , machine_video from gym_machine; 
-  </select>
-  
-  <update id="updateMachine" parameterType="lx.gymproject.springboot.vo.GymMachineVO">
-  	update gym_machine
-  	<trim prefix="SET">
-	  	<if test="machineName != null"> machine_name = #{machineName},</if>
-	  	<if test="machinePurchaseDate != null"> machine_purchase_date = #{machinePurchaseDate},</if>
-	  	<if test="machinePrice != null"> machine_price = #{machinePrice},</if>
-	  	<if test="machineServiceContact != null"> machine_service_contact = #{machineServiceContact},</if>
-	  	<if test="machineImg != null"> machine_img = #{machineImg}</if>
-	  	
-  	</trim>
-  	where machine_id = #{machineId}    
-  </update>
-  
-  
-
- <select id="getMachine" parameterType="int" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
-    select machine_id 
-    , machine_name 
-    , machine_purchase_date 
-    , machine_price
-    , machine_service_contact 
-    , machine_img 
-    , machine_video from gym_machine where machine_id = #{machineId}; 
-  </select>
-  
-  
-	<insert id= "insertMachine" parameterType="lx.gymproject.springboot.vo.GymMachineVO">
-			insert into gym_machine(machine_name, machine_purchase_date, machine_price,
-								 machine_service_contact, machine_img, machine_video)
-			values(#{machineName}, #{machinePurchaseDate}, #{machinePrice}, #{ machineServiceContact}, #{machineImg}, #{machineVideo})
+	<!-- 게시판 1개 가져오기 -->
+	<select id="getDB" parameterType="int"
+		resultType="lx.gymproject.springboot.vo.GymPostVO">
+		select p.post_id poId
+		,p.post_name poName
+		,p.post_content poContent
+		,u.user_name AS authorName
+		,p.post_tag poTag
+		,p.post_img poImg
+		,p.post_like poLike
+		,p.post_view poView
+		,p.post_dislike poDislike
+		,p.post_board_code poBoardCode
+		,p.post_time poTime
+		from post p
+		left join users u
+		on p.post_user_id = u.user_id
+		where p.post_id = #{poId}
+	</select>
+	<!-- 게시판 전체목록 가져오기 -->
+	<select id="getDBList"
+		resultType="lx.gymproject.springboot.vo.GymPostVO">
+		select p.post_id poId
+		,p.post_name poName
+		,p.post_content poContent
+		,u.user_name AS authorName
+		,p.post_tag poTag
+		,p.post_img poImg
+		,p.post_like poLike
+		,p.post_view poView
+		,p.post_dislike poDislike
+		,p.post_board_code poBoardCode
+		,p.post_time poTime
+		from post p
+		left join users u
+		on p.post_user_id = u.user_id
+	</select>
+	<!-- 게시판 추가 -->
+	<insert id="insertDB"
+		parameterType="lx.gymproject.springboot.vo.GymPostVO">
+		insert into post(post_name, post_content, post_user_id, post_tag, post_img,
+		post_like, post_view, post_dislike, post_board_code, post_time)
+		values(#{poName}, #{poContent}, #{poUserId}, #{poTag}, #{poImg},
+		#{poLike}, #{poView}, #{poDislike}, #{poBoardCode}, current_timestamp)
 	</insert>
-	
-	
-	<delete id="deleteMachine" parameterType="int">
-        delete from gym_machine where machine_id = #{machineId}
-    </delete>
-	
-	
-	
-	
-	
-	
-	
+	<!-- 게시판 수정 -->
+	<update id="updateDB"
+		parameterType="lx.gymproject.springboot.vo.GymPostVO">
+		UPDATE post
+		SET post_name = #{poName},
+		post_content = #{poContent},
+		post_tag = #{poTag},
+		post_img = #{poImg},
+		post_like = #{poLike},
+		post_view = #{poView},
+		post_dislike = #{poDislike},
+		post_board_code = #{poBoardCode} WHERE post_id = #{poId}
+	</update>
+	<!-- 게시판 삭제 -->
+	<delete id="deleteDB" parameterType="int">
+		delete from post where post_id = #{poId}
+	</delete>
 
+	<!-- PT예약 추가 -->
+	<insert id="insertApp"
+		parameterType="lx.gymproject.springboot.vo.GymAppointmentVO">
+		insert into appointment(userName,email,phone,address,
+		serviceType,appointmentDate,appointmentDuration,status1)
+		values(#{userName}, #{email}, #{phone}, #{address}, #{serviceType},
+		#{appointmentDate}, #{appointmentDuration}, #{status1})
+	</insert>
+	<!-- PT예약 리스트 -->
+	<select id="getAppList"
+		resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+		select userName,email,phone,address,
+		serviceType,appointmentDate,appointmentDuration,status1
+		from appointment
+	</select>
+
+	<!-- 운동기구 리스트 -->
+	<select id="getMachineList"
+		resultType="lx.gymproject.springboot.vo.GymMachineVO">
+		select machine_id , machine_name , machine_purchase_date , machine_price,
+		machine_service_contact , machine_img , machine_video from
+		gym_machine;
+	</select>
+	<!-- 기구 수정 -->
+	<update id="updateMachine"
+		parameterType="lx.gymproject.springboot.vo.GymMachineVO">
+		update gym_machine
+		<trim prefix="SET">
+			<if test="machineName != null"> machine_name = #{machineName},</if>
+			<if test="machinePurchaseDate != null"> machine_purchase_date = #{machinePurchaseDate},</if>
+			<if test="machinePrice != null"> machine_price = #{machinePrice},</if>
+			<if test="machineServiceContact != null"> machine_service_contact = #{machineServiceContact},</if>
+			<if test="machineImg != null"> machine_img = #{machineImg}</if>
+		</trim>
+		where machine_id = #{machineId}
+	</update>
+	<!-- 기구 하나 체크해서 가져오기 -->
+	<select id="getMachine" parameterType="int"
+		resultType="lx.gymproject.springboot.vo.GymMachineVO">
+		select machine_id
+		, machine_name
+		, machine_purchase_date
+		, machine_price
+		, machine_service_contact
+		, machine_img
+		, machine_video from gym_machine where machine_id = #{machineId};
+	</select>
+	<!-- 기구 하나 추가하기 -->
+	<insert id="insertMachine"
+		parameterType="lx.gymproject.springboot.vo.GymMachineVO">
+		insert into gym_machine(machine_name, machine_purchase_date, machine_price,
+		machine_service_contact, machine_img, machine_video)
+		values(#{machineName}, #{machinePurchaseDate}, #{machinePrice}, #{
+		machineServiceContact}, #{machineImg}, #{machineVideo})
+	</insert>
+	<!-- 기구 하나 삭제하기 -->
+	<delete id="deleteMachine" parameterType="int">
+		delete from gym_machine where machine_id = #{machineId}
+	</delete>
+
+	<!-- 댓글 목록 가져오기 (작성자 이름까지 조인) -->
+    <select id="getCommentsByPostId" parameterType="int" resultType="lx.gymproject.springboot.vo.GymPostCommentVO">
+        SELECT 
+            c.cm_id, c.po_id, c.user_id, u.user_name, c.cm_content, c.cm_time
+       	from post_comment c join users u on c.user_id = u.user_id
+       	where c.po_id = #{poId}
+        order by c.cm_time
+    </select>
+    <!-- 댓글 작성 -->
+    <insert id="insertComment" parameterType="lx.gymproject.springboot.vo.GymPostCommentVO">
+        insert into post_comment (po_id, user_id, cm_content)
+        value (#{poId}, #{userId}, #{cmContent})
+    </insert>
+    <!-- 댓글 삭제 -->
+    <delete id="deleteComment" parameterType="int">
+        delete from post_comment where cm_id = #{cmId}
+    </delete>
 </mapper>
