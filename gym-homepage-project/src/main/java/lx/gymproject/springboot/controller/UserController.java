@@ -118,20 +118,26 @@ public class UserController {
 	}
 
 	@GetMapping("reservationDashboard.do")
-    public String dashboard(Model model) {
+    public String dashboard(Model model, @RequestParam(defaultValue = "1") int page) {
         try {
-            List<GymAppointmentVO> appointmentList = appDao.getDBList();
+            int pageSize = 10;
+            int offset = (page - 1) * pageSize;
 
-            int totalAppointments = appointmentList.size();
+            List<GymAppointmentVO> appointmentList = appDao.getDBListPaging(offset, pageSize);
+            int totalAppointments = appDao.getDBCount();
+
+            int totalPages = (int) Math.ceil((double) totalAppointments / pageSize);
 
             model.addAttribute("appointments", appointmentList);
             model.addAttribute("totalAppointments", totalAppointments);
+            model.addAttribute("currentPage", page);
+            model.addAttribute("totalPages", totalPages);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return "dashboard"; 
+        return "dashboard";
     }
 
 }

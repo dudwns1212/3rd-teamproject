@@ -58,7 +58,6 @@
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-lg-8">
-
 			<article class="blog-post">
 				<h1 class="display-5 link-body-emphasis mb-1" th:text="${data.poName}"></h1>
 				<p class="blog-post-meta">작성자: <a href="#" th:text="${data.authorName}"></a>
@@ -74,14 +73,22 @@
 				<div class="post-content fs-5 mb-4" th:text="${data.poContent}">
 				</div>
 				<hr>
-
+      
 				<div class="d-flex justify-content-between align-items-center mt-4">
-					<div class="stats text-body-secondary">
-						<span class="me-3" title="조회수"><i class="bi bi-eye-fill"></i> <span th:text="${data.poView}"></span></span>
-						<span class="me-3" title="좋아요"><i class="bi bi-hand-thumbs-up-fill"></i> <span th:text="${data.poLike}"></span></span>
-						<span title="싫어요"><i class="bi bi-hand-thumbs-down-fill"></i> <span th:text="${data.poDislike}"></span></span>
-					</div>
-				<div>
+          <div class="stats text-body-secondary">
+            <a href="#" class="me-3" id="likeBtn" th:data-post-id="${data.poId}" title="좋아요">
+              <i class="bi bi-hand-thumbs-up-fill"></i>
+              <span id="likeCount" th:text="${data.poLike}"></span>
+            </a>
+            <a href="#" class="me-3" id="dislikeBtn" th:data-post-id="${data.poId}" title="싫어요">
+              <i class="bi bi-hand-thumbs-down-fill"></i>
+              <span id="dislikeCount" th:text="${data.poDislike}"></span>
+            </a>
+            <span class="ms-3" title="조회수">
+              <i class="bi bi-eye-fill"></i><span th:text="${data.poView}"></span>
+            </span>
+          </div>
+        </div>
 				
 				<button class="btn btn-primary edit" th:data-poid="${data.poId}" th:data-pname="${data.authorName}">
 					<i class="bi bi-pencil-square"></i> 수정
@@ -103,15 +110,55 @@
 </div>
 <div th:replace="~{footer :: footer}"></div>
 </body>
-<script th:inline="javascript">
-$('.edit').on('click', function() {
-	let poId = ($(this).data('poid'));
-	let poName = ($(this).data('pname'));
-	document.location.href = "/postEditPage.do?poId=" + poId + "&authorName=" + encodeURIComponent(poName);
-	return;
-});
-
-document.addEventListener("DOMContentLoaded", () => {
+<script type="text/javascript">
+	$('.edit').on('click', function() {
+		let poId = ($(this).data('poid'));
+		let poName = ($(this).data('pname'));
+		document.location.href = "/postEditPage.do?poId=" + poId + "&authorName=" + encodeURIComponent(poName);
+		return;
+	});
+	
+	$(function() {
+		$('#likeBtn').on('click', function(e) {
+			e.preventDefault();
+			let postId = $(this).data('postId');
+			
+			$.ajax({
+				type: 'POST',
+				url: '/post/like',
+				data: { poId: postId },
+				success: function(response) {
+					$('#likeCount').text(response.newCount);
+				},
+				error: function() {
+					alert('좋아요 처리 오류 - 운영자에게 문의해주세요.')
+				}
+			});
+		});
+	});
+	
+	$(function() {
+		$('#dislikeBtn').on('click', function(e) {
+			e.preventDefault();
+			let postId = $(this).data('postId');
+			
+			$.ajax({
+				type: 'POST',
+				url: '/post/dislike',
+				data: { poId: postId },
+				success: function(response) {
+					$('#dislikeCount').text(response.newCount);
+				},
+				error: function() {
+					alert('싫어요 처리 오류 - 운영자에게 문의해주세요.')
+				}
+			});
+		});
+	});
+  
+  
+  
+  document.addEventListener("DOMContentLoaded", () => {
     const poId = [[${data.poId}]]; // 서버에서 주입
 
     async function loadComments() {
@@ -162,12 +209,12 @@ html, body {
 .container{
 	padding:150px 100px;
 }
-.footer {
+footer {
 	height: 100px;
 	position: relative;
 	transform: translateY(-100%);
 }
-.body {
+body {
 	background-color: #f8f9fa; 
 }
 .blog-post {
