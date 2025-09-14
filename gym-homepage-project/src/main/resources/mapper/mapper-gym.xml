@@ -89,6 +89,23 @@
 	
 	
 	
+	<!-- 페이징 처리 쿼리 -->
+	<select id="getAppListPaging" parameterType="map" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+	    select userName, email, phone, address, serviceType, appointmentDate, appointmentDuration, status1
+	    from appointment
+	    order by appointmentDate desc
+	    limit #{limit} offset #{offset}
+	</select>
+
+	<!-- 총 개수 -->
+	<select id="getAppCount" resultType="int">
+		select count(*) from appointment
+	</select>
+	
+	
+	
+	
+	
   <select id="getMachineList" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
     select machine_id , machine_name , machine_purchase_date , machine_price, machine_service_contact , machine_img , machine_video from gym_machine; 
   </select>
