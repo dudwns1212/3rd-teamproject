@@ -21,8 +21,4 @@ public class GymPostCommentDAO {
 		return sqlSession.insert("insertComment", vo);
 	}
 
-	public int deleteComment(int cmId) {
-		return sqlSession.delete("deleteComment", cmId);
-	}
-
 }

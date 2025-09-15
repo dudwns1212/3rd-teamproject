@@ -80,14 +80,13 @@ public class PostController {
 		}
 		
 		@RequestMapping("postEdit.do")
-		public String postEdit(GymPostVO vo, @RequestParam(value="file", required=false) MultipartFile file,
-		                       HttpSession session) throws Exception {
+		public String postEdit(GymPostVO vo, HttpSession session) throws Exception {
 			
-		    GymPostVO existingPost = dao.getDB(vo.getPoId());
+		    GymPostVO existingFile = dao.getDB(vo.getPoId());
 		    
 		    try {
 		        // 기존 파일명을 전달해서 업로드 + 삭제 처리
-		        String savedFileName = FileUploadUtil.saveFile(file, existingPost.getPoImg());
+		        String savedFileName = FileUploadUtil.saveFile(vo.getFile(), existingFile.getPoImg());
 		        vo.setPoImg(savedFileName);
 		    } catch (IOException e) {
 		        e.printStackTrace();
