@@ -83,24 +83,13 @@
 	
 	 // 표시용 업데이트(입력 중)
   function updatePricePreview(v){
+  	//입력값 v 에서 숫자와 소수점 ''기호만 남기고 나머지 제거
     const n = Number(String(v||'').replace(/[^\d.\-]/g,''));
     const el = document.getElementById('pricePreview');
     if (el) el.textContent = n ? n.toLocaleString() + '원' : '';
   }
 
-  // 제출 직전 숫자만 남기기 (최후 방어)
-  document.addEventListener('DOMContentLoaded', function(){
-    const form = document.querySelector('form[name="form1"]');
-    if (!form) return;
-
-    form.addEventListener('submit', function(){
-      const priceInput = form.querySelector('[name="machinePrice"]');
-      if (!priceInput) return;
-      priceInput.value = String(priceInput.value||'').replace(/[^\d.\-]/g,'');
-      // 디버그 확인용
-      console.log('machinePrice submitting =', priceInput.value);
-    });
-  });
+ 
 	
 
 </script>

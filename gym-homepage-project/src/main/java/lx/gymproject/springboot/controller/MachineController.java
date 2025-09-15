@@ -28,15 +28,8 @@ public class MachineController {
 	}
 
 	@PostMapping("/updateMachine.do")
-	public String updateMachine(GymMachineVO vo) throws Exception {
-		System.out.println("vo = " + vo);
-		try {
-			dao.updateMachine(vo);
-	
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		System.out.println(vo.machinePrice);
+	public String updateMachine(GymMachineVO vo) throws Exception {		
+			dao.updateMachine(vo);					
 		return "redirect:explainMachine.do";
 	}
 
