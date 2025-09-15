@@ -55,65 +55,193 @@
 	</div> -->
 
 
-	<div class="container py-5">
-		<div class="row justify-content-center">
-			<div class="col-lg-8">
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-lg-8">
+			<article class="blog-post">
+				<h1 class="display-5 link-body-emphasis mb-1" th:text="${data.poName}"></h1>
+				<p class="blog-post-meta">작성자: <a href="#" th:text="${data.authorName}"></a>
+					<span class="ms-3">태그: <span class="badge text-bg-secondary" th:text="${data.poTag}"></span></span>
+					<span class="ms-3">작성일: <span class="badge text-bg-secondary" th:text="${#temporals.format(data.poTime, 'yyyy-MM-dd')}"></span></span>
+				</p>
+				<hr>
+				<!-- data값으로 받은 poImg가 없거나 공백이 아니면 사진을 보여줌, 없다면 없는 필드
+					img-fluid로 영역 안에 사진을 넣어줌, 모바일 화면에서도 사진이 같이 작아짐, 영역 밖으로 안나감 -->
+				<div th:if="${data.poImg != null and data.poImg != ''}" class="text-center my-4">
+				    <img th:src="@{'/uploads/' + ${data.poImg}}" class="img-fluid rounded shadow" style="max-height: 400px;">
+				</div>
 
-				<article class="blog-post">
-					<h1 class="display-5 link-body-emphasis mb-1" th:text="${data.poName}"></h1>
-					<p class="blog-post-meta">작성자: <a href="#" th:text="${data.authorName}"></a>
-						<span class="ms-3">태그: <span class="badge text-bg-secondary" th:text="${data.poTag}"></span></span>
-						<span class="ms-3">작성일: <span class="badge text-bg-secondary" th:text="${#temporals.format(data.poTime, 'yyyy-MM-dd')}"></span></span>
-					</p>
-					<hr>
-
-					<div th:if="${data.poImg != null and data.poImg != ''}" class="text-center my-4">
-						<img th:src="${data.poImg}" class="img-fluid rounded shadow-sm" alt="Post Image" style="max-height: 400px;">
-					</div>
-
-					<div class="post-content fs-5 mb-4" th:text="${data.poContent}">
-					</div>
-					<hr>
-
-					<div class="d-flex justify-content-between align-items-center mt-4">
-						<div class="stats text-body-secondary">
-							<span class="me-3" title="조회수"><i class="bi bi-eye-fill"></i> <span th:text="${data.poView}"></span></span>
-							<span class="me-3" title="좋아요"><i class="bi bi-hand-thumbs-up-fill"></i> <span th:text="${data.poLike}"></span></span>
-							<span title="싫어요"><i class="bi bi-hand-thumbs-down-fill"></i> <span th:text="${data.poDislike}"></span></span>
-						</div>
-						<div>
-							<button class="btn btn-primary edit" th:data-poid="${data.poId}" th:data-pname="${data.authorName}">
-								<i class="bi bi-pencil-square"></i> 수정
-							</button>
-						</div>
-					</div>
-				</article>
-
+				<div class="post-content fs-5 mb-4" th:text="${data.poContent}">
+				</div>
+				<hr>
+      
+				<div class="d-flex justify-content-between align-items-center mt-4">
+          <div class="stats text-body-secondary">
+            <a href="#" class="me-3" id="likeBtn" th:data-post-id="${data.poId}" title="좋아요">
+              <i class="bi bi-hand-thumbs-up-fill"></i>
+              <span id="likeCount" th:text="${data.poLike}"></span>
+            </a>
+            <a href="#" class="me-3" id="dislikeBtn" th:data-post-id="${data.poId}" title="싫어요">
+              <i class="bi bi-hand-thumbs-down-fill"></i>
+              <span id="dislikeCount" th:text="${data.poDislike}"></span>
+            </a>
+            <span class="ms-3" title="조회수">
+              <i class="bi bi-eye-fill"></i><span th:text="${data.poView}"></span>
+            </span>
+          </div>
+        </div>
+				
+				<button class="btn btn-primary edit" th:data-poid="${data.poId}" th:data-pname="${data.authorName}">
+					<i class="bi bi-pencil-square"></i> 수정
+				</button>
+				
+			</article>
+			
+			<div id="post-data" th:attr="data-poid=${data.poId}"></div>
+			
+			<div id="comments-section" class="mt-5">
+			    <h3>댓글</h3>
+			    <div id="comment-list" class="mb-3"></div>
+			
+			    <div class="input-group">
+			        <textarea id="comment-content" class="form-control" placeholder="댓글을 입력하세요"></textarea>
+			        <button id="comment-submit" class="btn btn-primary">등록</button>
+			    </div>
 			</div>
 		</div>
 	</div>
+</div>
 <div th:replace="~{footer :: footer}"></div>
 </body>
 <script type="text/javascript">
-	$('.edit').on('click', function() {
-		let poId = ($(this).data('poid'));
-		let poName = ($(this).data('pname'));
-		document.location.href = "/postEditPage.do?poId=" + poId + "&authorName=" + encodeURIComponent(poName);
-		return;
+$('.edit').on('click', function() {
+	let poId = ($(this).data('poid'));
+	let poName = ($(this).data('pname'));
+	document.location.href = "/postEditPage.do?poId=" + poId + "&authorName=" + encodeURIComponent(poName);
+	return;
+});
+
+$(function() {
+	$('#likeBtn').on('click', function(e) {
+		e.preventDefault();
+		let postId = $(this).data('postId');
+		
+		$.ajax({
+			type: 'POST',
+			url: '/post/like',
+			data: { poId: postId },
+			success: function(response) {
+				$('#likeCount').text(response.newCount);
+			},
+			error: function() {
+				alert('좋아요 처리 오류 - 운영자에게 문의해주세요.')
+			}
+		});
 	});
+});
+
+$(function() {
+	$('#dislikeBtn').on('click', function(e) {
+		e.preventDefault();
+		let postId = $(this).data('postId');
+		
+		$.ajax({
+			type: 'POST',
+			url: '/post/dislike',
+			data: { poId: postId },
+			success: function(response) {
+				$('#dislikeCount').text(response.newCount);
+			},
+			error: function() {
+				alert('싫어요 처리 오류 - 운영자에게 문의해주세요.')
+			}
+		});
+	});
+});
+
+// 댓글 불러오기
+function loadComments() {
+    const poId = $('#post-data').data('poid');
+    // 요청 
+    $.ajax({
+        type: 'GET',
+        url: `/list?poId=${poId}`,
+        success: function(data) { // 요청 성공 시 실행되면서 restcontroller로 json배열 형태를 받음
+            const list = $('#comment-list'); // 댓글이 표시될 영역을 변수로 지정
+            list.empty(); // 기존 댓글 모두 지움
+			
+			//댓글없으면 저 문장을 넣어줌
+            if (data.length === 0) {
+                list.append("<p class='text-muted'>첫 댓글을 남겨보세요!</p>");
+                return;
+            }
+			//반복문을 통해 배열을 돌면서 하나씩 화면에 추가
+            data.forEach(function(vo) {
+                list.append(`
+                    <div class="border rounded p-2 mb-2">
+                        <span class="fw-bold">${vo.authorName}</span>
+                        <span class="text-muted">${vo.cmTime}</span>
+                        <p class="mb-0">${vo.cmContent}</p>
+                        <!-- <button class="btn btn-danger">ㅅㅈ</div> -->
+                    </div>
+                `);
+            });
+        },
+        //요청 실패시 alert창 띄우기
+        error: function() {
+            alert('댓글 불러오기 실패');
+        }
+    });
+}
+// 등록버튼 눌렀을 때 함수 실행
+$('#comment-submit').click(function() {
+	//입력한 값을 가져옴
+    const content = $('#comment-content').val();
+    //값이 없으면 alert
+    if (!content) { alert('댓글을 입력하세요!'); return; }
+	//똑같이 게시글 id 가져오기
+    const poId = $('#post-data').data('poid');
+	// 요청 /wirte 
+    $.ajax({
+        type: 'POST',
+        url: '/write',
+        contentType: 'application/json', //JSON 형식으로 보낸다고 선언 이거 없으면 오류남
+        //서버에 보낼 데이터, authorname - session값으로 넣어놓음
+        data: JSON.stringify({ poId: poId, cmContent: content }),
+        success: function(res) {// return -> success
+	        // 성공 -> 입력창 비우기 
+	        $('#comment-content').val('');
+	        loadComments(); // 댓글 목록 새로고침
+        },
+        // 실패 -> alert
+        error: function() {
+            alert('댓글 작성 오류 - 운영자에게 문의하세요.');
+        }
+    });
+});
+
+// 페이지 로드시 댓글 불러오기
+$(document).ready(function() {
+    loadComments();
+});
 </script>
 <style>
 html, body {
 	height: 100%
 }
-
-.footer {
+.container{
+	padding:150px 100px;
+}
+footer {
 	height: 100px;
 	position: relative;
 	transform: translateY(-100%);
 }
-.body {
+body {
 	background-color: #f8f9fa; 
+}
+#comment-list div {
+    word-break: break-word;
 }
 .blog-post {
 	padding: 2rem;

@@ -1,5 +1,8 @@
 package lx.gymproject.springboot.configuration;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +24,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 				.addPathPatterns("/mypage.do", "/reservation.do",
 				"/reservationDashboard.do", "/reservationInsert.do", "/updateMachine.do", "/machine_edit_form.do",
 				"/insertMachine.do", "/deleteMachine.do", "/post.do", "/postWritePage.do", "/postEdit.do",
-				"/postWrite.do");
+				"/postWrite.do","/write", "/list");
 	
 		registry.addInterceptor(new CheckUserIdAndPostUserId())
 				.order(2)
@@ -31,11 +34,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		
-		String uploadPath = Paths.get("uploads").toAbsolutePath().toUri().toString();
-		
-		 registry.addResourceHandler("/uploads/**")
-         .addResourceLocations(uploadPath);
+        // uploads 폴더 절대 경로
+        Path uploadPath = Paths.get("uploads").toAbsolutePath();
+        String resourceLocation = "file:" + uploadPath.toString().replace("\\", "/") + "/";
+
+        
+        // 리소스 핸들러 등록
+        registry.addResourceHandler("/uploads/**", "/images/**")
+                .addResourceLocations(resourceLocation);
     }
 	
 }

@@ -19,6 +19,8 @@
 					<div class="card custom-card">
 						<div class="card-body p-5">
 							<h2 class="card-title text-center fw-bold mb-4">새 게시물 작성</h2>
+							<!-- 이미지 파일을 멀티파트로 보냄 vo-file에서 multipartfile로 타입 지정
+								멀티파트가 아니면 파일 데이터가 전송되지 않음-->
 							<form name="form1" method="post" action="postWrite.do" enctype="multipart/form-data">
 								<input type="hidden" name="action" value="insert">
 								<span  th:text="${param.userName}"> userName </span>
