@@ -1,34 +1,19 @@
 package lx.gymproject.springboot.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @Controller
 public class MainController {
-
-	@RequestMapping("/test.do")
-	public String test() {
-		return "test";
-	}
 	
-	@RequestMapping("/test2.do")
-	public String test2() {
-		return "test2";
-	}
-	
-	@RequestMapping("/home.do")
+	@GetMapping("/home.do")
 	public String home() {
 		return "home";
 	}
 	
-
-	// 시설 안내 페이지 추가
-	@RequestMapping("/facility.do")
-	public String facility() {
-		return "facility";
-	}
 	//지도
-	@RequestMapping("/location.do")
+	@GetMapping("/location.do")
 	public String location() {
 		return "location";
 	}

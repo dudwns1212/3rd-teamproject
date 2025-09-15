@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+<link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" href="/css/footer.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+	crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+</head>
+
+<body>
+
+	<div th:replace="~{header :: header}"></div>
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-7">
+					<div class="card custom-card">
+						<div class="card-body p-5">
+							<h2 class="card-title text-center fw-bold mb-4">새 게시물 작성</h2>
+							<form name="form1" method="post" action="postEdit.do" enctype="multipart/form-data">
+							<input type="hidden" name="poId" th:value="${po.poId}">
+								<input type="hidden" name="action" value="insert">
+								<span  th:text="${param.userName}"> userName </span>
+	
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="postName" name="poName" th:value="${po.poName}" maxlength="15">
+									<label for="postName">제목</label>
+								</div>
+	
+								<div class="form-floating mb-4">
+									<textarea class="form-control" id="postContent" name="poContent" th:text="${po.poContent}" style="height: 120px" maxlength="50"></textarea>
+									<label for="postContent">내용</label>
+								</div>  
+	
+								<div th:if="${po.poImg != null and po.poImg != ''}" class="mb-3">
+	                                <label class="form-label">현재 이미지:</label>
+	                                <div>
+	                                    <img th:src="@{'/uploads/' + ${po.poImg}}" 
+	                                         style="max-width: 200px; max-height: 200px;" 
+	                                         class="img-thumbnail">
+	                                </div>
+	                            </div>
+	
+	                            <!-- 새 이미지 업로드 -->
+	                            <div class="mb-4">
+	                                <label for="postImage" class="form-label">새 이미지 (선택사항)</label>
+	                                <input type="file" class="form-control" id="poImg" name="file">
+	                                <small class="form-text text-muted">새 이미지를 선택하지 않으면 기존 이미지가 유지됩니다.</small>
+	                            </div>
+	
+								<div class="form-group">
+									<label for="exampleFormControlSelect1">태그</label> 
+									<select class="form-control" id="exampleFormControlSelect1" name="poTag" th:value="${po.poTag}">
+										<option value ="자유">자유</option>
+										<option value ="건의사항">건의사항</option>
+										<option value ="칭찬합니다">칭찬합니다</option>
+										<option value ="!긴급!">!긴급!</option>
+									</select>
+								</div>
+	
+								<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+									<button type="reset" class="btn btn-outline-secondary btn-lg">
+										<i class="bi bi-arrow-counterclockwise"></i> 다시작성
+									</button>
+									<button type="submit" class="btn btn-primary" id="edit">
+										<i class="bi bi-check-lg"></i> 수정하기
+									</button>
+									<button type="button" class="btn btn-danger btn-lg" id="delete" th:data-poid="${po.poId}">
+										<i class="bi bi-trash"></i> 삭제하기
+									</button>													
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div th:replace="~{footer :: footer}"></div>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	
+<script>
+	
+$(function(){
+      
+    $('#delete').on('click', function() {
+		
+        if (confirm('정말로 삭제하시겠습니까?')) {
+        	let poId = $(this).data('poid');
+            location.href = "deleteDB.do?poId=" + poId;
+        } else {
+        	console.log("삭제 취소됨");
+        }
+    });
+});
+
+</script>
+	
+</body>
+
+<style>
+html,body {
+	height: 100%;
+}
+.container{
+	padding:150px 100px;
+}
+body {
+	background-color: #f4f7f6;
+}
+
+.wrapper {
+	min-height: 100%;
+}
+
+.custom-card {
+	border: none;
+	border-radius: 0.75rem;
+	box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+}
+
+.form-floating>.form-control {
+	height: calc(3.5rem + 2px);
+	line-height: 1.25;
+}
+
+.form-floating>label {
+	padding: 1rem 0.75rem;
+}
+</style>
+</html>

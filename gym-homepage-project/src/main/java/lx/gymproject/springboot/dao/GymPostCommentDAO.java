@@ -11,14 +11,18 @@ import lx.gymproject.springboot.vo.GymPostCommentVO;
 public class GymPostCommentDAO {
 
 	@Autowired
-	SqlSession sqlSession;
+	SqlSession session;
 
 	public List<GymPostCommentVO> getCommentsByPostId(int poId) {
-		return sqlSession.selectList("getCommentsByPostId", poId);
+		return session.selectList("getCommentsByPostId", poId);
 	}
 
 	public int insertComment(GymPostCommentVO vo) {
-		return sqlSession.insert("insertComment", vo);
+		return session.insert("insertComment", vo);
+	}
+	
+	public int deletePostCommentByCmId(int cmId) {
+		return session.delete("deletePostCommentByCmId", cmId);
 	}
 
 }

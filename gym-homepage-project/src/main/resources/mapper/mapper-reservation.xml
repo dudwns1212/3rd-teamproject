@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper-lx.gymproject.springboot.dao.GymAppointmentDAO">
+
+<insert id="insertApp" parameterType="lx.gymproject.springboot.vo.GymAppointmentVO">
+    insert into appointment(id,userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1) values(#{id}, #{userName}, #{email}, #{phone}, #{address}, #{serviceType}, #{appointmentDate}, #{appointmentDuration}, #{status1}) 
+</insert>
+
+<select id="getAppList" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+    select id,userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1
+    from appointment
+</select>
+
+<select id="getAppListByServiceType" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+    select id,userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1
+    from appointment where serviceType = #{serviceType}
+</select>
+
+<!-- 페이징 처리 쿼리 -->
+<select id="getDBListPaging" parameterType="map" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+    select id, userName, email, phone, address, serviceType, appointmentDate, appointmentDuration, status1
+    from appointment
+    order by id desc
+    limit #{limit} offset #{offset}
+</select>
+
+<!-- 접수 중인 개수 -->
+<select id="getDBCount" resultType="int">
+    SELECT COUNT(*)
+    FROM appointment
+    WHERE status1 IS NULL
+</select>
+
+<select id="getDBCountAll" resultType="int">
+    SELECT COUNT(*)
+    FROM appointment
+</select>
+
+<select id="getAppById" parameterType="String" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+    SELECT * FROM appointment WHERE id = #{id}
+</select>
+
+<update id="updateAppStatus" parameterType="map">
+    UPDATE appointment
+    SET status1 = #{status1}
+    WHERE id = #{id}
+</update>
+
+</mapper>

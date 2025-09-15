@@ -5,6 +5,7 @@
 <link rel="stylesheet" th:href="@{/css/header.css}">
 <link rel="stylesheet" href="/css/footer.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title></title>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -15,10 +16,10 @@
     <div class="container">
     
     	<!-- 동영상 자동 재생 -autoplay, muted(안쓰면 안됨 왜인지는 모름) 및 controls로 하단에 재생 및 버튼 -->    
-    	<div class="vedio-section">
+    	<div class="video-section">
 			<video style="width: 100%; height: 600px; object-fit: fill;" 
 		           autoplay muted controls>
-		        <source src="/vedio/main.mp4" type="video/mp4">
+		        <source src="/video/mai.mp4" type="video/mp4">
 		    </video>       
 	    </div>
 	    
@@ -27,7 +28,7 @@
             <div class="context">	
                 <h1>건강한 삶의 시작</h1>
                 <p>당신의 피트니스 목표를 짐 케어 & PT에서 달성하세요</p>
-                <img src="images/home.png" style=" width:100%; height:100%;">
+                <img src="/uploads/home.png" style=" width:100%; height:100%;">
             </div>
         </div>
 		
@@ -40,7 +41,7 @@
 					    <button class="card">
 					        <h3>다양한 운동 기구</h3>
 					        <p>다양한 운동 기구로 체계적인 근력 운동 및 유산소 운동</p>
-					        <img src="images/tranning.jpg">
+					        <img src="/uploads/tranning.jpg">
 					    </button>
 				    </form>
             	</div>
@@ -49,7 +50,7 @@
 					    <button class="card">
 					        <h3>게시판 기능</h3>
 					        <p>필요한 건의사항을 게시판으로 건의 및 다양한 이벤트 참여</p>
-					        <img src="images/running.jpg">
+					        <img src="/uploads/running.jpg">
 					    </button>
 				    </form>
 			    </div>
@@ -58,7 +59,7 @@
 				    	<button class="card">
 				        	<h3>개인 맞춤 PT</h3>
 				        	<p>1:1 맞춤형 운동 프로그램으로 효과적인 운동</p>
-				        	<img src="images/pt.jpg" style="object-fit: fill;">
+				        	<img src="/uploads/pt.jpg" style="object-fit: fill;">
 				    	</button>
 			    	</form>
 			    </div>
@@ -91,7 +92,7 @@
 					    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250102_136%2F17358099935376SJIv_JPEG%2FKakaoTalk_20250101_195953600_01.jpg" class="d-block w-100" alt="...">
 					  </div>
 					</div>
-	
+					
 					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
 					  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 					  <span class="visually-hidden">Previous</span>
@@ -196,6 +197,16 @@ img{
 .carousel-item{
 	height: 550px;
 }
+@media (max-width: 768px) {
+.container {
+    width: 90%;
+    padding: 20px;
+    margin: 0 20px;
+}
+.card {
+	width:280px;
+	height:320px;
+}
+}
 </style>
-
 </html>

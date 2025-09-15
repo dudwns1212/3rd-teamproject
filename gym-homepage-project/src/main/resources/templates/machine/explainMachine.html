@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<link rel="stylesheet" href="/css/footer.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:insert="~{header :: header}" class="gympage"></div>
+
+<div class="wrapper">
+	<div class="group-container" >
+		<div class="img-container" th:each="vo : ${data}">
+			<a th:if="${session.loginUser != null && session.loginUser.userEmail == '1@1.com'}" 
+				th:href="|javascript:check(${vo.machineId})|" th:text="${vo.machineId}"></a>			
+			<img th:src="${'/uploads/' + vo.machineImg}" class="healthimg">			
+			<span class="explain-container" th:text="'기구이름 : ' + ${vo.machineName}"></span>
+			<span class="explain-container" th:text="'입고날짜 : '+${vo.machinePurchaseDate}"></span>
+			<span class="explain-container" th:text="'가격 : ' + ${vo.machinePrice} + '원'"></span>
+			<span class="explain-container" th:text="'AS번호 : ' + ${vo.machineServiceContact}">기구명</span>																		
+		</div>
+		
+		<form action="machine_form.do" method="get">
+		<button th:if="${session.loginUser != null && session.loginUser.userEmail == '1@1.com'}" type="submit">
+		<img src="/uploads/plus.png" class="img-container">
+		</button>	
+		</form>
+	</div>	
+
+  </div>
+</div>
+<div th:insert="~{footer :: footer}"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+<script type="text/javascript">
+	 function check(machine_id) {		
+		document.location.href="machine_edit_form.do?machineId="+machine_id;
+	}
+</script>
+
+
+<style>
+html, body{height: 100%}
+.wrapper{
+    height:auto;
+    min-height: 100%;
+    padding-bottom: 100px;
+    padding-top: 150px;
+}
+.group-container{
+	
+display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3열 */
+  gap: 20px;             /* 카드 사이 간격 */
+  align-items: start;    /* 카드 상단 맞춤 */
+  padding: 12px;         /* 바깥 여백(선택) */
+  box-sizing: border-box;
+  padding-bottom:120px;  /*바텀부분에 가려지는거 방지*/
+}
+.explain-container{
+	display: block;
+	font-size: 14px;
+	line-height: 1.4;
+	color: #374151;
+}
+
+.img-container{
+	  padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 5px 5px 10px;
+    width: 400px;
+    height:550px;
+    
+     /* 추가 */
+  display:flex;
+  flex-direction:column;   /* 위→아래로 쌓기 */
+  align-items:center;      /* 가운데 정렬 */
+  gap:8px;                 /* 요소 간 간격 */
+    
+}
+
+
+.main {
+	width: 1000px; 
+	height: 1000px; 
+	dispaly: flex;
+	flex-direction: row; 
+	justify-content: space-between;
+	align-items: space-between;
+	position: relative;
+	
+}
+
+ .healthimg{
+	width:100%; height:100%; 
+}
+</style>
+
+</head>
+
+</html>
