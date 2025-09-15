@@ -11,8 +11,8 @@
     <div class="header-inner">
         <!-- 로고 -->
         <div class="logo">
-            <form action="home.do">
-                <button type="submit"><img src="images/logo.jpg"></button>
+            <form action="home.do" method="get">
+                <button type="submit"><img src="/uploads/logo.jpg"></button>
             </form>
         </div>    
 
@@ -24,7 +24,7 @@
         </h1>
         
 		<div class="menu-section">
-            <form action="explainMachine.do" method="post" style="display: inline;">
+            <form action="explainMachine.do" method="get" style="display: inline;">
                 <button type="submit">운동기구 소개</button>
             </form>
 
@@ -43,16 +43,16 @@
         </div>
         
         <div class="user-section" th:unless="${session.loginUser}">
-	        <form action="loginPage.do" method="post">
+	        <form action="loginPage.do" method="get">
 	            <button type="submit">로그인</button>
 	        </form>
-	        <form action="registerPage.do" method="post">
+	        <form action="registerPage.do" method="get">
 	            <button type="submit">회원가입</button>
 	        </form>
         </div>
 
         <div class="user-section" th:if="${session.loginUser}">
-	        <form action="mypage.do">
+	        <form action="mypage.do" method="get">
 	            <button id="mypagebtn" type="submit">마이페이지</button>
 	        </form>
             <a href="/logout.do" id="logoutlink">로그아웃</a>
@@ -73,7 +73,7 @@
         <div class="collapse navbar-collapse" id="mobileNavbar">
             <div class="navbar-nav w-100">
                 <div class="mobile-menu">
-                    <form action="explainMachine.do" method="post">
+                    <form action="explainMachine.do" method="get">
                         <button type="submit">운동기구 소개</button>
                     </form>
                 </div>
@@ -95,12 +95,12 @@
                 
                 <div th:unless="${session.loginUser}">
                     <div class="mobile-menu">
-                        <form action="loginPage.do" method="post">
+                        <form action="loginPage.do" method="get">
                             <button type="submit">로그인</button>
                         </form>
                     </div>
                     <div class="mobile-menu">
-                        <form action="registerPage.do" method="post">
+                        <form action="registerPage.do" method="get">
                             <button type="submit">회원가입</button>
                         </form>
                     </div>
@@ -108,7 +108,7 @@
                 
                 <div th:if="${session.loginUser}">
                     <div class="mobile-menu">
-                        <form action="mypage.do">
+                        <form action="mypage.do" method="get">
                             <button type="submit">마이페이지</button>
                         </form>
                     </div>

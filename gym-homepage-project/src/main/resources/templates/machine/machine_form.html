@@ -1,6 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>운동기구 : 작성화면</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
@@ -10,7 +11,7 @@
 <H2>운동기구:작성화면 </H2>
 <HR>
 [<a href="explainMachine.do">운동기구 목록으로</a>] <P>
-<form name=form1 method=post action="insertMachine.do">
+<form name=form1 method=post action="insertMachine.do" enctype="multipart/form-data">
 <input type=hidden name="action" value="insert">
 
 <table border="1">
@@ -32,7 +33,7 @@
 		  </tr>
 		  <tr>
 		  	<th>이미지</th>
-		  	<td><input type="text" name="machineImg"></td>
+		  	<td><input type="file" name="file"></td>
 		  </tr>
 		  
 		  
