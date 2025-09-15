@@ -69,10 +69,11 @@ PRIMARY KEY (id)
 );
 
 create table post_comment (
-cm_id int auto_increment,
+cm_id bigint auto_increment default not null,
 po_id int,
 user_id int,
-cm_content text,
+author_name varchar(50) default not null,
+cm_content text default not null,
 cm_time timestamp default current_timestamp,
 primary key(cm_id),
 foreign key(po_id) references post(post_id),
