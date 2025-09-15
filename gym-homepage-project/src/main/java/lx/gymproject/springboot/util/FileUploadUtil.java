@@ -19,8 +19,11 @@ public class FileUploadUtil {
 
         // 새 파일명 생성
         String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+        // 경로를 만들어준다 라고 생각, uploads/파일이름
         Path path = Paths.get("uploads", fileName);
+        // uploads 라는 폴더가 없다면 새로 생성해줌
         Files.createDirectories(path.getParent());
+        // 실제 업로드 파일에 사진을 저장해줌/ 위에는 서버에 임시 저장해주는 역할임
         file.transferTo(path);
 
         // 기존 파일 삭제
