@@ -2,6 +2,8 @@ package lx.gymproject.springboot.vo;
 
 import java.time.LocalDate;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class GymMachineVO {
 	public int machineId;
 	public String machineName;
@@ -11,7 +13,15 @@ public class GymMachineVO {
 	public String  machineImg;
 	public String machineVideo;
 	
-	 // Getter & Setter
+	public MultipartFile file;
+	
+	 public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+	// Getter & Setter
     public int getMachineId() {
         return machineId;
     }

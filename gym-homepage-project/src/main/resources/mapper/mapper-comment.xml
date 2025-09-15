@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper-lx.gymproject.springboot.dao.GymPostCommentDAO">
+<!-- 댓글 목록 가져오기 (작성자 이름까지 조인) -->
+<select id="getCommentsByPostId" parameterType="int" resultType="lx.gymproject.springboot.vo.GymPostCommentVO">
+    SELECT 
+        c.cm_id, c.po_id, c.user_id, u.user_name as author_name, c.cm_content, c.cm_time
+   	from post_comment c join users u on c.user_id = u.user_id
+   	where c.po_id = #{poId}
+    order by c.cm_time
+</select>
+<!-- 댓글 작성 -->
+<insert id="insertComment" parameterType="lx.gymproject.springboot.vo.GymPostCommentVO">
+    insert into post_comment (po_id, user_id, cm_content, author_name)
+    value (#{poId}, #{userId}, #{cmContent}, #{authorName})
+</insert>
+<!-- 댓글 삭제 -->
+<delete id="deletePostCommentByCmId" parameterType="int" >
+	delete from post_comment where cm_id = #{cmId}
+</delete>
+    
+</mapper>

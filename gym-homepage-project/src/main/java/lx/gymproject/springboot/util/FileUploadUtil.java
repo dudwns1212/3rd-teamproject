@@ -15,8 +15,9 @@ public class FileUploadUtil {
      * 기존 파일이 있다면 삭제 처리
      */
     public static String saveFile(MultipartFile file, String oldFileName) throws IOException {
+    	
         if (file == null || file.isEmpty()) return oldFileName; // 업로드 없으면 기존 파일 유지
-
+        
         // 새 파일명 생성
         String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
         // 경로를 만들어준다 라고 생각, uploads/파일이름

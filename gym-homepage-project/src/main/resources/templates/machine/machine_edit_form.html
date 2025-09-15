@@ -1,7 +1,7 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>운동기구 수정화면</title>
 <link rel="stylesheet" href="css/addrbook.css" type="text/css" media="screen" />
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -16,7 +16,7 @@
 <HR>
 [<a href="/explainMachine.do">운동기구 목록으로</a>] <p>
 
-<form  Method="post" th:action="updateMachine.do">
+<form  Method="post" th:action="updateMachine.do" enctype="multipart/form-data">
 	<input type=hidden name="machineId" th:value="${vo.machineId}">
 		
 	<table border="1">
@@ -48,13 +48,29 @@
 		  </tr>
 		  
 		  <tr>
-		  	<th>이미지</th>
-		  	<td><input type="text" name="machineImg" th:value="${vo.machineImg}"></td>
+		  	<th>기존 이미지</th>
+		  	<td>
+		  		<div th:if="${vo.machineImg != null and vo.machineImg != ''}" class="mb-3">
+	            	<label class="form-label">현재 이미지:</label>
+	            	<div>
+                        <img th:src="@{'/uploads/' + ${vo.machineImg}}" 
+                             style="max-width: 200px; max-height: 200px;" 
+                             class="img-thumbnail">
+                    </div>
+	        	</div>
+	        </td>
 		  </tr>
 		  
-		  
-		  
-		  
+		  <tr>
+		  	<th>새 이미지</th>
+		  	<td>
+		  		<div class="mb-4">
+	            	<label for="machineImg" class="form-label">새 이미지 (선택사항)</label>
+	            	<input type="file" class="form-control" id="machineImg" name="file">
+	        	</div>
+		  	</td>
+		  </tr>
+
 		  </form>
 		  	<tr>
 		    <td colspan=2 align=center><input type=submit th:value="저장"></input>
@@ -65,9 +81,9 @@
 		   
 		   
 		    
-		    <form th:action="deleteMachine.do">
-		    <input type=hidden name="machineId" th:value="${vo.machineId}">
-		    <input type="submit" value="삭제" >
+		    <form th:action="deleteMachine.do" method="post">
+		    	<input type=hidden name="machineId" th:value="${vo.machineId}">
+		    	<input type="submit" value="삭제" >
 		    </form>
 		    
 		    

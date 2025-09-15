@@ -1,8 +1,5 @@
 package lx.gymproject.springboot.controller;
 
-import java.util.List;
-
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,14 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import lx.gymproject.springboot.dao.GymAppointmentDAO;
 import lx.gymproject.springboot.dao.GymUserDAO;
 import lx.gymproject.springboot.vo.GymUserVO;
-import lx.gymproject.springboot.vo.GymAppointmentVO;
+
 
 @Controller
 public class UserController {
@@ -28,17 +22,15 @@ public class UserController {
 	@Autowired
 	GymUserDAO dao;
 	
-	@Autowired
-	GymAppointmentDAO appDao;
 	
-	@RequestMapping("/loginPage.do")
+	@GetMapping("/loginPage.do")
 	public String loginPage() {
-		return "loginPage";
+		return "user/loginPage";
 	}
 	
-	@RequestMapping("/registerPage.do")
+	@GetMapping("/registerPage.do")
 	public String registerPage() {
-		return "registerPage";
+		return "user/registerPage";
 	}
 	
 	@PostMapping("/login.do")
@@ -51,7 +43,7 @@ public class UserController {
 		// 사용자가 존재하지 않거나 비밀번호가 틀린 경우
 		if(vo == null || !vo.getUserPassword().equals(userPassword)) {
 			model.addAttribute("loginFailed", true);
-			return "loginPage";
+			return "user/loginPage";
 		}
 		
 		// 로그인 성공 - 세션에 사용자 정보 저장
@@ -74,23 +66,23 @@ public class UserController {
 			model.addAttribute("registerFailed", checkpw+1);
 		}
 		System.out.println(checkpw);
-		return "registerPage";
+		return "user/registerPage";
 	}
 	
-	@RequestMapping("/logout.do")
+	@GetMapping("/logout.do")
 	public String logout(HttpSession session) {
 		session.invalidate(); // 세션 무효화
 		return "redirect:loginPage.do";
 	}
 	
-	@RequestMapping("/mypage.do")
+	@GetMapping("/mypage.do")
 	public String mypage(HttpSession session, Model model) {
 		GymUserVO loginUser = (GymUserVO) session.getAttribute("loginUser");
 		model.addAttribute("user", loginUser);
-		return "mypage";
+		return "user/mypage";
 	}
 	
-	@RequestMapping("/userUpdate.do")
+	@PostMapping("/userUpdate.do")
 	public String update(GymUserVO vo, HttpSession session) {
 		int result = dao.updateUserInfo(vo);
 	    if(result > 0) {
@@ -98,46 +90,5 @@ public class UserController {
 	    }
 		return "redirect:mypage.do";
 	}
-	
-	
-	@RequestMapping("/reservation.do")
-	public String reservation() throws Exception {
-		
-		return "reservation";
-	}
-	
-	@RequestMapping("appointmentHome.do")
-	public String appointmentHome() {
-		return "appointmentHome";
-	}
-	
-	@PostMapping("/revervationInsert.do")
-	public String insert(GymAppointmentVO vo) throws Exception {
-		appDao.insertDB1(vo);
-		return "redirect:reservationDashboard.do";
-	}
-
-	@GetMapping("reservationDashboard.do")
-    public String dashboard(Model model, @RequestParam(defaultValue = "1") int page) {
-        try {
-            int pageSize = 10;
-            int offset = (page - 1) * pageSize;
-
-            List<GymAppointmentVO> appointmentList = appDao.getDBListPaging(offset, pageSize);
-            int totalAppointments = appDao.getDBCount();
-
-            int totalPages = (int) Math.ceil((double) totalAppointments / pageSize);
-
-            model.addAttribute("appointments", appointmentList);
-            model.addAttribute("totalAppointments", totalAppointments);
-            model.addAttribute("currentPage", page);
-            model.addAttribute("totalPages", totalPages);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return "dashboard";
-    }
 
 }

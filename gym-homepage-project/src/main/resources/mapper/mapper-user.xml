@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper-lx.gymproject.springboot.dao.GymUserDAO">
+	<!-- 로그인 -->
+	<select id="doLoginByUserId" parameterType="String"
+		resultType="lx.gymproject.springboot.vo.GymUserVO">
+		select * from users where user_email = #{userEmail}
+	</select>
+	<!-- 회원가입 -->
+	<insert id="doRegisterByUserVO"
+		parameterType="lx.gymproject.springboot.vo.GymUserVO">
+		insert into users (user_email, user_password, user_name,
+		user_tel, user_birth, user_gender)
+		values(#{userEmail},#{userPassword},#{userName},#{userTel},#{userBirth},#{userGender})
+	</insert>
+	<!-- 회원수정 -->
+	<update id="updateUserVO"
+		parameterType="lx.gymproject.springboot.vo.GymUserVO">
+		UPDATE users
+		SET user_email = #{userEmail},
+		user_password = #{userPassword},
+		user_name = #{userName},
+		user_tel = #{userTel},
+		user_birth = #{userBirth},
+		user_gender = #{userGender}
+		WHERE user_id = #{userId}
+	</update>
+    
+</mapper>
