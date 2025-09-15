@@ -117,21 +117,39 @@ public class UserController {
 		return "redirect:reservationDashboard.do";
 	}
 
-	@GetMapping("reservationDashboard.do")
-    public String dashboard(Model model, @RequestParam(defaultValue = "1") int page) {
-        try {
+    @GetMapping("reservationDashboard.do")
+    public String dashboard(Model model, HttpSession session, @RequestParam(defaultValue = "1") int page) {
+        	
+    	try {
             int pageSize = 10;
-            int offset = (page - 1) * pageSize;
-
+            int offset = (page-1) * pageSize;
+            
+            System.out.println(page);
+            System.out.println(offset);
+            
             List<GymAppointmentVO> appointmentList = appDao.getDBListPaging(offset, pageSize);
-            int totalAppointments = appDao.getDBCount();
-
+            int totalAppointments = appDao.getDBCountAll();
+            int Appointment = appDao.getDBCount();
+            System.out.println(Appointment);
+            System.out.println(totalAppointments);
             int totalPages = (int) Math.ceil((double) totalAppointments / pageSize);
+
+            // 로그인한 사용자 정보
+            GymUserVO loginUser = (GymUserVO) session.getAttribute("loginUser");
+            System.out.println("loginUser = " + loginUser);
+
+            // 관리자 여부 확인
+            boolean isManager = false;
+            if (loginUser != null && "1@1.com".equals(loginUser.getUserEmail())) {
+                isManager = true;
+            }
 
             model.addAttribute("appointments", appointmentList);
             model.addAttribute("totalAppointments", totalAppointments);
             model.addAttribute("currentPage", page);
             model.addAttribute("totalPages", totalPages);
+            model.addAttribute("isManager", isManager);
+            model.addAttribute("Appointment", Appointment);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,5 +157,22 @@ public class UserController {
 
         return "dashboard";
     }
+    
+    
+    @PostMapping("/completeReservation")
+    public String completeReservation(@RequestParam("id") String id) {
+        try {
+            // DAO 직접 호출
+            appDao.updateStatus(id, "완료");
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 오류 발생 시 적절히 처리 (에러 페이지로 이동하거나 메시지 출력)
+        }
+
+        // 예약 대시보드로 리다이렉트
+        return "redirect:/reservationDashboard.do";
+    }
+    
+    
 
 }

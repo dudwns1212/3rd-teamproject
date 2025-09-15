@@ -8,7 +8,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3301/3301556.png">
-<title>Appointment system</title>
+<title>짐 케어 개인 PT 신청시스템</title>
 </head>
 <body>
 	<div th:insert="~{header :: header}" class="gympage"></div>
@@ -21,13 +21,13 @@
 						<div class="card bg-dark">
 							<div class="card-body text-center text-light">
 								<h5 style="color: white;">
-									<i class="fa fa-folder text-light"></i> 접수인원
+									<i class="fa fa-folder text-light"></i> 접수중
 								</h5>
 			</div>					
 			
 			
 			<h2 class="text text-center text-light"
-			th:text="${totalAppointments}"></h2>
+			th:text="${Appointment}"></h2>
 							</div>
 							
 						 <div style="text-align: center;">
@@ -85,40 +85,81 @@
 
   </div>
 </div>
-				</div>
-			</div>
+		</div>
+		</div>
 		</div>
 		<div>
 
 			<div>
-	<div class="wrapper">		
-			<table class="table table-hover">
-			    <thead> <tr>
-			            <th scope="col" class="col-id">게시물 번호</th>
-			            <th scope="col" class="col-name">고객명</th>
-			            <th scope="col" class="col-author">이메일</th>
-			            <th scope="col" class="col-tag">전화번호</th>
-			            <th scope="col" class="col-img">주소</th>		            
-			            <th scope="col" class="col-like">강사명</th>
-			            <th scope="col" class="col-dislike">날짜</th>
-			            <th scope="col" class="col-view">시간대</th>
-			            
-			        </tr>
-			    </thead>
-			    <tbody> <tr th:each="appointment, stat : ${appointments}">
-			           <td th:text="${stat.count + 1}"></td>
-					        <td th:text="${appointment.userName}"></td>
-					        <td th:text="${appointment.email}"></td>
-					        <td th:text="${appointment.phone}"></td>
-					        <td th:text="${appointment.address}"></td>
-					        <td th:text="${appointment.serviceType}"></td>
-					        <td th:text="${appointment.appointmentDate}"></td>
-					        <td th:text="${appointment.appointmentDuration}"></td>
-			        </tr> </tbody>
-			</table>
+<div class="wrapper">
+    <table class="table table-hover table-bordered align-middle text-center">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" class="col-id">접수 번호</th>
+                <th scope="col" class="col-name">고객명</th>
+                <th scope="col" class="col-mail">이메일</th>
+                <th scope="col" class="col-mobile">전화번호</th>
+                <th scope="col" class="col-address">주소</th>		            
+                <th scope="col" class="col-teacher">강사명</th>
+                <th scope="col" class="col-date">날짜</th>
+                <th scope="col" class="col-time">시간대</th>
+                <th scope="col" class="col-status">상태</th>
+            </tr>
+        </thead>
 
-			</div>	
-				
+        <!-- 관리자용 -->
+        <tbody th:if="${session.loginUser.userEmail == '1@1.com'}">
+            <tr th:each="appointment : ${appointments}">
+                <td th:text="${appointment.id}"></td>
+                <td th:text="${appointment.userName}"></td>
+                <td th:text="${appointment.email}"></td>
+                <td th:text="${appointment.phone}"></td>
+                <td th:text="${appointment.address}"></td>
+                <td th:text="${appointment.serviceType}"></td>
+                <td th:text="${appointment.appointmentDate}"></td>
+                <td th:text="${appointment.appointmentDuration}"></td>
+                <td>
+                    <span th:if="${appointment.status1 == '완료'}">접수 완료</span>
+                    <form th:if="${appointment.status1 != '완료'}" th:action="@{/completeReservation}" method="post" style="margin: 0;">
+                        <input type="hidden" name="id" th:value="${appointment.id}" />
+                        <button type="submit" class="btn btn-success btn-sm">접수</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+
+        <!-- 일반 유저용 -->
+        <tbody th:unless="${session.loginUser.userEmail == '1@1.com'}">
+            <tr th:each="appointment : ${appointments}" th:if="${appointment.status1 == '완료'}">
+                <td th:text="${appointment.id}"></td>
+                <td th:text="${appointment.userName}"></td>
+                <td th:text="${appointment.email}"></td>
+                <td></td>
+                <td></td>
+                <td th:text="${appointment.serviceType}"></td>
+                <td th:text="${appointment.appointmentDate}"></td>
+                <td th:text="${appointment.appointmentDuration}"></td>
+                <td><span class="badge bg-success">접수완료</span></td>
+            </tr>
+            
+             <tr th:each="appointment : ${appointments}" th:unless="${appointment.status1 == '완료'}">
+                <td th:text="${appointment.id}"></td>
+                <td th:text="${appointment.userName}"></td>
+                <td th:text="${appointment.email}"></td>
+                <td></td>
+                <td></td>
+                <td th:text="${appointment.serviceType}"></td>
+                <td th:text="${appointment.appointmentDate}"></td>
+                <td th:text="${appointment.appointmentDuration}"></td>
+                <td><span>접수중</span></td>
+            </tr>
+            
+            
+            
+        </tbody>
+    </table>
+</div>
+
 				<!-- 페이징 네비게이션 추가 -->
 
 				<nav aria-label="Page navigation" style="margin-top: 10px;">
@@ -129,7 +170,7 @@
 				      </a>
 				    </li>
 				    <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${i == currentPage} ? 'active'">
-				      <a class="page-link" th:href="@{/reservationDashboard.do(page=${i})}" th:text="${i}">1</a>
+				      <a class="page-link" th:href="@{/reservationDashboard.do(page=${i})}" th:text="${i}"></a>
 				    </li>
 				    <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
 				      <a class="page-link" th:href="@{/reservationDashboard.do(page=${currentPage + 1})}" aria-label="Next">
@@ -153,7 +194,6 @@
 }
 
 
-
 .wrapper {
 	height: auto;
 	min-height: 80%;
@@ -172,12 +212,17 @@
 }
 
 
-.table .col-name {
-    width: 10%; 
+.table .col-id{
+	width:10%;
 }
-.table .col-author,
+
+
 .table .col-tag {
     width: 15%; 
+}
+
+.table .col-name{
+	width:10% 
 }
 
 nav, thead {

@@ -2,6 +2,7 @@ package lx.gymproject.springboot.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +30,29 @@ public class GymAppointmentDAO {
         HashMap<String, Integer> params = new HashMap<>();
         params.put("offset", offset);
         params.put("limit", limit);
-        return session.selectList("getAppListPaging", params);
+        return session.selectList("mapper-gym.getDBListPaging", params);
     }
 
-    // 총 개수
+    // 접수 중인 개수 조회
     public int getDBCount() throws Exception {
-        return session.selectOne("getAppCount");
+        return session.selectOne("mapper-gym.getDBCount");
+    }
+    // 총 접수 개수
+    public int getDBCountAll() throws Exception {
+    	return session.selectOne("mapper-gym.getDBCountAll");
     }
 	
+    
+    public GymAppointmentVO getAppointmentById(String id) throws Exception {
+        return session.selectOne("getAppById", id);
+    }
+    
+	public int updateStatus(String id, String status1) throws Exception {
+	    HashMap<String, String> param = new HashMap<>();
+	    param.put("id", id);
+	    param.put("status1", status1);
+	    return session.update("updateAppStatus", param);
+	}
+    
+    
 }

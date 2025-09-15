@@ -115,27 +115,99 @@
 	    FROM post 
 	    WHERE post_id = #{poId}
 	</select>		
+	
+	<!-- 페이징 처리 쿼리 -->
+	<select id="getPostListPaging" parameterType="map" resultType="lx.gymproject.springboot.vo.GymPostVO">
+	    select p.post_id poId,
+	           p.post_name poName,
+	           u.user_name AS authorName,
+	           p.post_tag poTag,
+	           p.post_img poImg,
+	           p.post_like poLike,
+	           p.post_dislike poDislike,
+	           p.post_view poView,
+	           p.post_time poTime
+	    from post p
+	    left join users u on p.post_user_id = u.user_id
+	    order by p.post_id desc
+	    limit #{limit} offset #{offset}
+	</select>
+	
+	<!-- 총 개수 -->
+	<select id="getPostCount" resultType="int">
+	    select count(*) from post
+	</select> 
+		
+	
 	<!-- ========================= POST 끝 ========================= -->
 	
 	<insert id="insertApp" parameterType="lx.gymproject.springboot.vo.GymAppointmentVO">
-        insert into appointment(userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1) values(#{userName}, #{email}, #{phone}, #{address}, #{serviceType}, #{appointmentDate}, #{appointmentDuration}, #{status1}) </insert>
+        insert into appointment(id,userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1) values(#{id},#{userName}, #{email}, #{phone}, #{address}, #{serviceType}, #{appointmentDate}, #{appointmentDuration}, #{status1}) </insert>
 	
 	<select id="getAppList" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
-        select userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1
+        select id,userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1
         from appointment
+    </select>
+    
+    <select id="getAppListByServiceType" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+        select id,userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1
+        from appointment where serviceType = #{serviceType}
     </select>
 	
 	<!-- 페이징 처리 쿼리 -->
-	<select id="getAppListPaging" parameterType="map" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
-	    select userName, email, phone, address, serviceType, appointmentDate, appointmentDuration, status1
+	<select id="getDBListPaging" parameterType="map" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+	    select id,userName, email, phone, address, serviceType, appointmentDate, appointmentDuration, status1
 	    from appointment
-	    order by appointmentDate desc
+	    order by id desc
 	    limit #{limit} offset #{offset}
 	</select>
+<<<<<<< HEAD
 	<!-- 총 개수 -->
-	<select id="getAppCount" resultType="int">
-		select count(*) from appointment
-	</select>  
+
+	<select id="getAppCount" parameterType="map" resultType="int">
+=======
+
+	<!-- 접수 중인 개수 -->
+	<select id="getDBCount" resultType="int">
+	  SELECT COUNT(*)
+	  FROM appointment
+	  WHERE status1 IS NULL
+	</select>
+
+  <!--  총 개수 -->
+  
+  <select id="getDBCountAll" resultType="int">
+>>>>>>> 3bb6942 (성준 final)
+	  SELECT COUNT(*)
+	  FROM appointment
+  </select>
+  
+	<select id="getAppById" parameterType="String" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+    SELECT * FROM appointment WHERE id = #{id}
+	</select>
+	
+	<update id="updateAppStatus" parameterType="map">
+    UPDATE appointment
+    SET status1 = #{status1}
+    WHERE id = #{id}
+	</update>
+
+  <select id="getMachineList" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
+    select machine_id , machine_name , machine_purchase_date , machine_price, machine_service_contact , machine_img , machine_video from gym_machine; 
+  </select>
+  
+  <update id="updateMachine" parameterType="lx.gymproject.springboot.vo.GymMachineVO">
+  	update gym_machine
+  	<trim prefix="SET">
+	  	<if test="machineName != null"> machine_name = #{machineName},</if>
+	  	<if test="machinePurchaseDate != null"> machine_purchase_date = #{machinePurchaseDate},</if>
+	  	<if test="machinePrice != null"> machine_price = #{machinePrice},</if>
+	  	<if test="machineServiceContact != null"> machine_service_contact = #{machineServiceContact},</if>
+	  	<if test="machineImg != null"> machine_img = #{machineImg}</if>
+	  	
+  	</trim>
+  	where machine_id = #{machineId}    
+  </update>
 
 	<!-- 운동기구 리스트 -->
 	<select id="getMachineList"
@@ -178,9 +250,9 @@
 	</insert>
 	<!-- 기구 하나 삭제하기 -->
 	<delete id="deleteMachine" parameterType="int">
-		delete from gym_machine where machine_id = #{machineId}
-	</delete>
 
+	  delete from gym_machine where machine_id = #{machineId}
+	</delete>
 
 	<!-- 댓글 목록 가져오기 (작성자 이름까지 조인) -->
     <select id="getCommentsByPostId" parameterType="int" resultType="lx.gymproject.springboot.vo.GymPostCommentVO">
