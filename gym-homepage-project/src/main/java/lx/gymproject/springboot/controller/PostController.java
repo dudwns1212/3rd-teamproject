@@ -30,6 +30,58 @@ public class PostController {
 
 	@Autowired
 	GymPostDAO dao;
+	
+		@GetMapping("/postBoard.do")
+		public String postBoard(Model model, @RequestParam(defaultValue = "1") int page) throws Exception {
+			
+            int pageSize = 10;
+            int offset = (page - 1) * pageSize;
+            
+            Map<String, Object> params = new HashMap<>();
+            params.put("limit", pageSize);
+            params.put("offset", offset);
+            List<GymPostVO> pageList = dao.getDBListPaging(params);
+            
+            int totalpost = dao.getDBCount();
+            int totalPages = (int) Math.ceil((double) totalpost / pageSize);
+
+            model.addAttribute("data", pageList);
+            model.addAttribute("currentPage", page);
+            model.addAttribute("totalPages", totalPages);
+
+			/*
+			 * List<GymPostVO> list = dao.getDBList();
+			 * Collections.reverse(list);
+			 * req.setAttribute("data", list); 
+			 * System.out.println();
+			 */
+			return "post/postBoard";
+		}
+
+		@GetMapping("/post.do")
+		public String post(@RequestParam("poId") int poId, Model model) throws Exception {
+			dao.increaseView(poId);
+			GymPostVO vo = dao.getDB(poId);
+			model.addAttribute("data", vo);
+			return "post/post";
+		}
+
+		@GetMapping("/postWritePage.do")
+		public String postWritePage() throws Exception {
+			return "post/postWrite";
+		}
+		
+		@PostMapping("/postWrite.do")
+		public String postWrite(GymPostVO vo, HttpSession session) throws Exception {
+			GymUserVO loginUser = (GymUserVO) session.getAttribute("loginUser");
+		    vo.setPoUserId(loginUser.getUserId());
+		    
+		    String savedFileName = FileUploadUtil.saveFile(vo.getFile(), null); // 새 글이니까 기존 파일 없음
+		    vo.setPoImg(savedFileName);
+		    
+		    dao.insertDB(vo);
+		    return "redirect:/postBoard.do";
+		}
 
 	@GetMapping("/postBoard.do")
 	public String postBoard(HttpSession session, HttpServletRequest req) throws Exception {

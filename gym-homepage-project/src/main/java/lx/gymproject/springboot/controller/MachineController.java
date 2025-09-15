@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import lx.gymproject.springboot.dao.GymMachineDAO;
 import lx.gymproject.springboot.util.FileUploadUtil;
 import lx.gymproject.springboot.vo.GymMachineVO;
@@ -27,6 +28,7 @@ public class MachineController {
 	}
 
 	@PostMapping("/updateMachine.do")
+
 	public String updateMachine(GymMachineVO vo) throws Exception {
 
 		GymMachineVO existingFile = dao.getMachine(vo.machineId);

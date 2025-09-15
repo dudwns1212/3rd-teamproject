@@ -90,4 +90,25 @@
     WHERE post_id = #{poId}
 </select>
 
+<select id="getPostListPaging" parameterType="map" resultType="lx.gymproject.springboot.vo.GymPostVO">
+    select p.post_id poId,
+            p.post_name poName,
+            u.user_name AS authorName,
+            p.post_tag poTag,
+            p.post_img poImg,
+            p.post_like poLike,
+            p.post_dislike poDislike,
+            p.post_view poView,
+            p.post_time poTime
+    from post p
+    left join users u on p.post_user_id = u.user_id
+    order by p.post_id desc
+    limit #{limit} offset #{offset}
+</select>
+
+<!-- 총 개수 -->
+<select id="getPostCount" resultType="int">
+    select count(*) from post
+</select>
+
 </mapper>
