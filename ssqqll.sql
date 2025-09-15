@@ -21,6 +21,7 @@ CREATE TABLE post (
   post_img varchar(100) DEFAULT NULL,
   post_like int DEFAULT NULL,
   post_view int DEFAULT NULL,
+  post_time timestamp default current_timestamp,
   post_dislike int DEFAULT NULL,
   post_board_code int DEFAULT NULL,
   PRIMARY KEY (post_id),
@@ -67,10 +68,20 @@ status1 varchar(20) DEFAULT NUll,
 PRIMARY KEY (id)
 );
 
+create table post_comment (
+cm_id int auto_increment,
+po_id int,
+user_id int,
+cm_content text,
+cm_time timestamp default current_timestamp,
+primary key(cm_id),
+foreign key(po_id) references post(post_id),
+foreign key(user_id) references users(user_id)
+);
+
 
 select * from gym_machine;
 select * from users;
 select * from appointment;
 select * from post;
-
 select * from post_comment;
