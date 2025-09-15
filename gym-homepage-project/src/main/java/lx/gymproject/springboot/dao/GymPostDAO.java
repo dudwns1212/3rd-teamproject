@@ -1,10 +1,14 @@
 package lx.gymproject.springboot.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import lx.gymproject.springboot.vo.GymAppointmentVO;
 import lx.gymproject.springboot.vo.GymPostVO;
 
 
@@ -57,4 +61,24 @@ public class GymPostDAO {
 	public int getViewCount(int poId) {
 		return session.selectOne("getViewCount", poId);
 	}	
+	
+	// 페이징된 리스트
+	/*
+	 * public List<GymPostVO> getDBListPaging(int offset, int limit) throws
+	 * Exception { HashMap<String, Integer> params = new HashMap<>();
+	 * params.put("offset", offset); params.put("limit", limit); return
+	 * session.selectList("getPostListPaging", params); }
+	 */
+	public List<GymPostVO> getDBListPaging(Map<String, Object> params) {
+		return session.selectList("getPostListPaging", params);
+	}
+	
+	
+    // 총 개수
+    public int getDBCount() throws Exception {
+        return session.selectOne("getPostCount");
+    }
+
+
+	
 }
