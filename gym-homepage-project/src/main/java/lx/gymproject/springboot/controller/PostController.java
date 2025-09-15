@@ -37,11 +37,29 @@ public class PostController {
 	GymPostDAO dao;
 	
 		@RequestMapping("/postBoard.do")
-		public String postBoard(HttpSession session, HttpServletRequest req) throws Exception {
-			List<GymPostVO> list = dao.getDBList();
-			Collections.reverse(list);
-			req.setAttribute("data", list);
-			System.out.println();
+		public String postBoard(Model model, @RequestParam(defaultValue = "1") int page) throws Exception {
+			
+            int pageSize = 10;
+            int offset = (page - 1) * pageSize;
+            
+            Map<String, Object> params = new HashMap<>();
+            params.put("limit", pageSize);
+            params.put("offset", offset);
+            List<GymPostVO> pageList = dao.getDBListPaging(params);
+            
+            int totalpost = dao.getDBCount();
+            int totalPages = (int) Math.ceil((double) totalpost / pageSize);
+
+            model.addAttribute("data", pageList);
+            model.addAttribute("currentPage", page);
+            model.addAttribute("totalPages", totalPages);
+
+			/*
+			 * List<GymPostVO> list = dao.getDBList();
+			 * Collections.reverse(list);
+			 * req.setAttribute("data", list); 
+			 * System.out.println();
+			 */
 			return "postBoard";
 		}
 		
