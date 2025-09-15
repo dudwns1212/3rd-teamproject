@@ -18,7 +18,7 @@ CREATE TABLE post (
   post_content text DEFAULT NULL,
   post_user_id int Default NULL,
   post_tag char(10) Default NULL,
-  post_img varchar(100) DEFAULT NULL,
+  post_img text DEFAULT NULL,
   post_like int DEFAULT NULL,
   post_view int DEFAULT NULL,
   post_time timestamp default current_timestamp,
@@ -69,11 +69,11 @@ PRIMARY KEY (id)
 );
 
 create table post_comment (
-cm_id bigint auto_increment default not null,
+cm_id bigint auto_increment,
 po_id int,
 user_id int,
-author_name varchar(50) default not null,
-cm_content text default not null,
+author_name varchar(50) default null,
+cm_content text default null,
 cm_time timestamp default current_timestamp,
 primary key(cm_id),
 foreign key(po_id) references post(post_id),
