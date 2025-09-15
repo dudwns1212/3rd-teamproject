@@ -48,13 +48,6 @@ public class PostController {
             model.addAttribute("data", pageList);
             model.addAttribute("currentPage", page);
             model.addAttribute("totalPages", totalPages);
-
-			/*
-			 * List<GymPostVO> list = dao.getDBList();
-			 * Collections.reverse(list);
-			 * req.setAttribute("data", list); 
-			 * System.out.println();
-			 */
 			return "post/postBoard";
 		}
 
@@ -82,40 +75,30 @@ public class PostController {
 		    dao.insertDB(vo);
 		    return "redirect:/postBoard.do";
 		}
+		
 
-	@GetMapping("/postBoard.do")
-	public String postBoard(HttpSession session, HttpServletRequest req) throws Exception {
-		List<GymPostVO> list = dao.getDBList();
-		Collections.reverse(list);
-		req.setAttribute("data", list);
-		System.out.println();
-		return "post/postBoard";
-	}
-
-	@GetMapping("/post.do")
-	public String post(@RequestParam("poId") int poId, Model model) throws Exception {
-		dao.increaseView(poId);
-		GymPostVO vo = dao.getDB(poId);
-		model.addAttribute("data", vo);
-		return "post/post";
-	}
-
-	@GetMapping("/postWritePage.do")
-	public String postWritePage() throws Exception {
-		return "post/postWrite";
-	}
-
-	@PostMapping("/postWrite.do")
-	public String postWrite(GymPostVO vo, HttpSession session) throws Exception {
-		GymUserVO loginUser = (GymUserVO) session.getAttribute("loginUser");
-		vo.setPoUserId(loginUser.getUserId());
-
-		String savedFileName = FileUploadUtil.saveFile(vo.getFile(), null); // 새 글이니까 기존 파일 없음
-		vo.setPoImg(savedFileName);
-
-		dao.insertDB(vo);
-		return "redirect:/postBoard.do";
-	}
+		/*
+		 * @GetMapping("/postBoard.do") public String postBoard(HttpSession session,
+		 * HttpServletRequest req) throws Exception { List<GymPostVO> list =
+		 * dao.getDBList(); Collections.reverse(list); req.setAttribute("data", list);
+		 * System.out.println(); return "post/postBoard"; }
+		 * 
+		 * @GetMapping("/post.do") public String post(@RequestParam("poId") int poId,
+		 * Model model) throws Exception { dao.increaseView(poId); GymPostVO vo =
+		 * dao.getDB(poId); model.addAttribute("data", vo); return "post/post"; }
+		 * 
+		 * @GetMapping("/postWritePage.do") public String postWritePage() throws
+		 * Exception { return "post/postWrite"; }
+		 * 
+		 * @PostMapping("/postWrite.do") public String postWrite(GymPostVO vo,
+		 * HttpSession session) throws Exception { GymUserVO loginUser = (GymUserVO)
+		 * session.getAttribute("loginUser"); vo.setPoUserId(loginUser.getUserId());
+		 * 
+		 * String savedFileName = FileUploadUtil.saveFile(vo.getFile(), null); // 새 글이니까
+		 * 기존 파일 없음 vo.setPoImg(savedFileName);
+		 * 
+		 * dao.insertDB(vo); return "redirect:/postBoard.do"; }
+		 */
 
 	@GetMapping("/postEditPage.do")
 	public String postEdit(@RequestParam("poId") int poId, Model model) throws Exception {
@@ -141,7 +124,7 @@ public class PostController {
 		return "redirect:postBoard.do";
 	}
 
-	@PostMapping("deleteDB.do")
+	@GetMapping("deleteDB.do")
 	public String deleteDB(@RequestParam("poId") int poId) throws Exception {
 		System.out.println(poId);
 		dao.deleteDB(poId);

@@ -1,114 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper-lx.gymproject.springboot.dao.GymPostDAO">
+<mapper
+	namespace="mapper-lx.gymproject.springboot.dao.GymPostDAO">
 
-<select id="getDB" parameterType="int" resultType="lx.gymproject.springboot.vo.GymPostVO">
-    select p.post_id poId
-        ,p.post_name poName
-        ,p.post_content poContent       
-        ,u.user_name AS authorName
-        ,p.post_tag poTag
-        ,p.post_img poImg
-        ,p.post_like poLike
-        ,p.post_view poView
-        ,p.post_dislike poDislike
-        ,p.post_board_code poBoardCode
-        ,p.post_time poTime
-        from post p
-        left join users u
-        	on p.post_user_id = u.user_id
-    where p.post_id = #{poId}
-</select>
-<select id="getDBList" resultType="lx.gymproject.springboot.vo.GymPostVO">
-     select p.post_id poId
-         ,p.post_name poName
-         ,p.post_content poContent       
-         ,u.user_name AS authorName
-         ,p.post_tag poTag
-         ,p.post_img poImg
-         ,p.post_like poLike
-         ,p.post_view poView
-         ,p.post_dislike poDislike
-         ,p.post_board_code poBoardCode 
-         ,p.post_time poTime
-         from post p
-         left join users u
-         	on p.post_user_id = u.user_id
- </select>
+	<select id="getDB" parameterType="int"
+		resultType="lx.gymproject.springboot.vo.GymPostVO">
+		select p.post_id poId
+		,p.post_name poName
+		,p.post_content
+		poContent
+		,u.user_name AS authorName
+		,p.post_tag poTag
+		,p.post_img poImg
+		,p.post_like poLike
+		,p.post_view poView
+		,p.post_dislike poDislike
+		,p.post_board_code poBoardCode
+		,p.post_time poTime
+		from post p
+		left join
+		users u
+		on p.post_user_id = u.user_id
+		where p.post_id = #{poId}
+	</select>
+	<select id="getDBList"
+		resultType="lx.gymproject.springboot.vo.GymPostVO">
+		select p.post_id poId
+		,p.post_name poName
+		,p.post_content
+		poContent
+		,u.user_name AS authorName
+		,p.post_tag poTag
+		,p.post_img poImg
+		,p.post_like poLike
+		,p.post_view poView
+		,p.post_dislike poDislike
+		,p.post_board_code poBoardCode
+		,p.post_time poTime
+		from post p
+		left join
+		users u
+		on p.post_user_id = u.user_id
+	</select>
 
-<insert id="insertDB" parameterType="lx.gymproject.springboot.vo.GymPostVO">
-    insert into post(post_name, post_content, post_user_id, post_tag, post_img, post_like, post_view, post_dislike, post_board_code, post_time)
-    	 values(#{poName}, #{poContent}, #{poUserId}, #{poTag}, #{poImg}, #{poLike}, #{poView}, #{poDislike}, #{poBoardCode}, current_timestamp)
-</insert>
+	<insert id="insertDB"
+		parameterType="lx.gymproject.springboot.vo.GymPostVO">
+		insert into post(post_name, post_content, post_user_id,
+		post_tag, post_img,
+		post_like, post_view, post_dislike,
+		post_board_code, post_time)
+		values(#{poName}, #{poContent},
+		#{poUserId}, #{poTag}, #{poImg},
+		#{poLike}, #{poView}, #{poDislike},
+		#{poBoardCode}, current_timestamp)
+	</insert>
 
-<update id="updateDB" parameterType="lx.gymproject.springboot.vo.GymPostVO">
-    UPDATE post
-    SET post_name = #{poName},
-        post_content = #{poContent},      
-        post_tag = #{poTag},
-        post_img = #{poImg},
-        post_board_code = #{poBoardCode} WHERE post_id = #{poId}
-</update>
+	<update id="updateDB"
+		parameterType="lx.gymproject.springboot.vo.GymPostVO">
+		UPDATE post
+		SET post_name = #{poName},
+		post_content =
+		#{poContent},
+		post_tag = #{poTag},
+		post_img = #{poImg},
+		post_board_code =
+		#{poBoardCode} WHERE post_id = #{poId}
+	</update>
 
-<delete id="deleteDB" parameterType="int">
-    delete from post where post_id = #{poId}
-</delete>
-  
-<update id="increaseLike" parameterType="int">
-    UPDATE post
-    SET post_like = post_like + 1
-    WHERE post_id = #{poId}
-</update>
+	<delete id="deleteDB" parameterType="int">
+		delete from post where
+		post_id = #{poId}
+	</delete>
 
-<update id="increaseDislike" parameterType="int">
-    UPDATE post
-    SET post_dislike = post_dislike + 1
-    WHERE post_id = #{poId}
-</update>
+	<update id="increaseLike" parameterType="int">
+		UPDATE post
+		SET post_like
+		= post_like + 1
+		WHERE post_id = #{poId}
+	</update>
 
-<select id="getLikeCount" parameterType="int" resultType="int">
-    SELECT post_like 
-    FROM post 
-    WHERE post_id = #{poId}
-</select>
+	<update id="increaseDislike" parameterType="int">
+		UPDATE post
+		SET
+		post_dislike = post_dislike + 1
+		WHERE post_id = #{poId}
+	</update>
 
-<select id="getDislikeCount" parameterType="int" resultType="int">
-    SELECT post_dislike 
-    FROM post 
-    WHERE post_id = #{poId}
-</select>
+	<select id="getLikeCount" parameterType="int" resultType="int">
+		SELECT
+		post_like
+		FROM post
+		WHERE post_id = #{poId}
+	</select>
 
-<update id="increaseView" parameterType="int">
-    UPDATE post
-    SET post_view = post_view + 1
-    WHERE post_id = #{poId}
-</update>
+	<select id="getDislikeCount" parameterType="int"
+		resultType="int">
+		SELECT post_dislike
+		FROM post
+		WHERE post_id = #{poId}
+	</select>
 
-<select id="getViewCount" parameterType="int" resultType="int">
-    SELECT post_view
-    FROM post 
-    WHERE post_id = #{poId}
-</select>
+	<update id="increaseView" parameterType="int">
+		UPDATE post
+		SET post_view
+		= post_view + 1
+		WHERE post_id = #{poId}
+	</update>
 
-<select id="getPostListPaging" parameterType="map" resultType="lx.gymproject.springboot.vo.GymPostVO">
-    select p.post_id poId,
-            p.post_name poName,
-            u.user_name AS authorName,
-            p.post_tag poTag,
-            p.post_img poImg,
-            p.post_like poLike,
-            p.post_dislike poDislike,
-            p.post_view poView,
-            p.post_time poTime
-    from post p
-    left join users u on p.post_user_id = u.user_id
-    order by p.post_id desc
-    limit #{limit} offset #{offset}
-</select>
+	<select id="getViewCount" parameterType="int" resultType="int">
+		SELECT
+		post_view
+		FROM post
+		WHERE post_id = #{poId}
+	</select>
 
-<!-- 총 개수 -->
-<select id="getPostCount" resultType="int">
-    select count(*) from post
-</select>
+	<select id="getPostListPaging" parameterType="map"
+		resultType="lx.gymproject.springboot.vo.GymPostVO">
+		select p.post_id poId,
+		p.post_name poName,
+		u.user_name AS
+		authorName,
+		p.post_tag poTag,
+		p.post_img poImg,
+		p.post_like poLike,
+		p.post_dislike poDislike,
+		p.post_view poView,
+		p.post_time poTime
+		from
+		post p
+		left join users u on p.post_user_id = u.user_id
+		order by
+		p.post_id desc
+		limit #{limit} offset #{offset}
+	</select>
+
+	<!-- 총 개수 -->
+	<select id="getPostCount" resultType="int">
+		select count(*) from post
+	</select>
 
 </mapper>
