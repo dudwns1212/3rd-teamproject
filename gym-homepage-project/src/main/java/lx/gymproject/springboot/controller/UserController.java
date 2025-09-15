@@ -119,12 +119,19 @@ public class UserController {
 
     @GetMapping("reservationDashboard.do")
     public String dashboard(Model model, HttpSession session, @RequestParam(defaultValue = "1") int page) {
-        try {
+        	
+    	try {
             int pageSize = 10;
-            int offset = (page - 1) * pageSize;
-
+            int offset = (page-1) * pageSize;
+            
+            System.out.println(page);
+            System.out.println(offset);
+            
             List<GymAppointmentVO> appointmentList = appDao.getDBListPaging(offset, pageSize);
-            int totalAppointments = appDao.getDBCount();
+            int totalAppointments = appDao.getDBCountAll();
+            int Appointment = appDao.getDBCount();
+            System.out.println(Appointment);
+            System.out.println(totalAppointments);
             int totalPages = (int) Math.ceil((double) totalAppointments / pageSize);
 
             // 로그인한 사용자 정보
@@ -142,6 +149,7 @@ public class UserController {
             model.addAttribute("currentPage", page);
             model.addAttribute("totalPages", totalPages);
             model.addAttribute("isManager", isManager);
+            model.addAttribute("Appointment", Appointment);
 
         } catch (Exception e) {
             e.printStackTrace();

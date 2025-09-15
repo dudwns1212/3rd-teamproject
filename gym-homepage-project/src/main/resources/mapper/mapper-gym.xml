@@ -155,27 +155,33 @@
     </select>
 	
 	<!-- 페이징 처리 쿼리 -->
-	<select id="getAppListPaging" parameterType="map" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+	<select id="getDBListPaging" parameterType="map" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
 	    select id,userName, email, phone, address, serviceType, appointmentDate, appointmentDuration, status1
 	    from appointment
 	    order by id desc
 	    limit #{limit} offset #{offset}
 	</select>
+<<<<<<< HEAD
 	<!-- 총 개수 -->
 
 	<select id="getAppCount" parameterType="map" resultType="int">
+=======
+
+	<!-- 접수 중인 개수 -->
+	<select id="getDBCount" resultType="int">
 	  SELECT COUNT(*)
 	  FROM appointment
-   <where>
-	  <if test="status1 == null">
-	      status1 IS NULL
-	  </if>
-	  <if test="status1 != null">
-	      status1 = #{status1}
-	  </if>
-  </where>
+	  WHERE status1 IS NULL
+	</select>
+
+  <!--  총 개수 -->
+  
+  <select id="getDBCountAll" resultType="int">
+>>>>>>> 3bb6942 (성준 final)
+	  SELECT COUNT(*)
+	  FROM appointment
   </select>
-	
+  
 	<select id="getAppById" parameterType="String" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
     SELECT * FROM appointment WHERE id = #{id}
 	</select>

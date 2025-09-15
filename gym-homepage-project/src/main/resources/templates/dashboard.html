@@ -27,7 +27,7 @@
 			
 			
 			<h2 class="text text-center text-light"
-			th:text="${totalAppointments}"></h2>
+			th:text="${Appointment}"></h2>
 							</div>
 							
 						 <div style="text-align: center;">
@@ -133,8 +133,8 @@
             <tr th:each="appointment : ${appointments}" th:if="${appointment.status1 == '완료'}">
                 <td th:text="${appointment.id}"></td>
                 <td th:text="${appointment.userName}"></td>
-                <td th:text="${#strings.substring(appointment.email, 0, 3) + '***@***.com'}"></td>
-                <td th:text="${#strings.substring(appointment.phone, 0, 4) + '****'}"></td>
+                <td th:text="${appointment.email}"></td>
+                <td></td>
                 <td></td>
                 <td th:text="${appointment.serviceType}"></td>
                 <td th:text="${appointment.appointmentDate}"></td>
@@ -145,8 +145,8 @@
              <tr th:each="appointment : ${appointments}" th:unless="${appointment.status1 == '완료'}">
                 <td th:text="${appointment.id}"></td>
                 <td th:text="${appointment.userName}"></td>
-                <td th:text="${#strings.substring(appointment.email, 0, 3) + '***@***.com'}"></td>
-                <td th:text="${#strings.substring(appointment.phone,0, 4) + '****'}"></td>
+                <td th:text="${appointment.email}"></td>
+                <td></td>
                 <td></td>
                 <td th:text="${appointment.serviceType}"></td>
                 <td th:text="${appointment.appointmentDate}"></td>
@@ -170,7 +170,7 @@
 				      </a>
 				    </li>
 				    <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${i == currentPage} ? 'active'">
-				      <a class="page-link" th:href="@{/reservationDashboard.do(page=${i})}" th:text="${i}">1</a>
+				      <a class="page-link" th:href="@{/reservationDashboard.do(page=${i})}" th:text="${i}"></a>
 				    </li>
 				    <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
 				      <a class="page-link" th:href="@{/reservationDashboard.do(page=${currentPage + 1})}" aria-label="Next">
@@ -214,10 +214,6 @@
 
 .table .col-id{
 	width:10%;
-}
-
-.table .col-mobile{
-	width:20%;
 }
 
 
