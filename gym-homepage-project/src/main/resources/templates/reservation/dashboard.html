@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/footer.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +21,7 @@
 						<div class="card bg-dark">
 							<div class="card-body text-center text-light">
 								<h5 style="color: white;">
-									<i class="fa fa-folder text-light"></i> 접수중
+									<i class="fa fa-folder text-light"></i> 접수 대기
 								</h5>
 			</div>					
 			
@@ -121,7 +120,7 @@
                 <td th:text="${appointment.appointmentDuration}"></td>
                 <td>
                     <span th:if="${appointment.status1 == '완료'}">접수 완료</span>
-                    <form th:if="${appointment.status1 != '완료'}" th:action="@{/completeReservation}" method="post" style="margin: 0;">
+                    <form th:if="${appointment.status1 != '완료'}" action="/completeReservation" method="post" style="margin: 0;">
                         <input type="hidden" name="id" th:value="${appointment.id}" />
                         <button type="submit" class="btn btn-success btn-sm">접수</button>
                     </form>
@@ -152,7 +151,7 @@
                 <td th:text="${appointment.serviceType}"></td>
                 <td th:text="${appointment.appointmentDate}"></td>
                 <td th:text="${appointment.appointmentDuration}"></td>
-                <td><span>접수중</span></td>
+                <td><span>접수 대기</span></td>
             </tr>
             
             
