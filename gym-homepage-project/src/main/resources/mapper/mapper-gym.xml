@@ -80,32 +80,52 @@
     </delete>
 	
 	<insert id="insertApp" parameterType="lx.gymproject.springboot.vo.GymAppointmentVO">
-        insert into appointment(userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1) values(#{userName}, #{email}, #{phone}, #{address}, #{serviceType}, #{appointmentDate}, #{appointmentDuration}, #{status1}) </insert>
+        insert into appointment(id,userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1) values(#{id},#{userName}, #{email}, #{phone}, #{address}, #{serviceType}, #{appointmentDate}, #{appointmentDuration}, #{status1}) </insert>
 	
 	<select id="getAppList" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
-        select userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1
+        select id,userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1
         from appointment
+    </select>
+    
+    <select id="getAppListByServiceType" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+        select id,userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1
+        from appointment where serviceType = #{serviceType}
     </select>
 	
 	
 	
 	<!-- 페이징 처리 쿼리 -->
 	<select id="getAppListPaging" parameterType="map" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
-	    select userName, email, phone, address, serviceType, appointmentDate, appointmentDuration, status1
+	    select id,userName, email, phone, address, serviceType, appointmentDate, appointmentDuration, status1
 	    from appointment
-	    order by appointmentDate desc
+	    order by id desc
 	    limit #{limit} offset #{offset}
 	</select>
 
 	<!-- 총 개수 -->
-	<select id="getAppCount" resultType="int">
-		select count(*) from appointment
+	<select id="getAppCount" parameterType="map" resultType="int">
+	  SELECT COUNT(*)
+	  FROM appointment
+   <where>
+	  <if test="status1 == null">
+	      status1 IS NULL
+	  </if>
+	  <if test="status1 != null">
+	      status1 = #{status1}
+	  </if>
+  </where>
+  </select>
+	
+	<select id="getAppById" parameterType="String" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+    SELECT * FROM appointment WHERE id = #{id}
 	</select>
 	
-	
-	
-	
-	
+	<update id="updateAppStatus" parameterType="map">
+    UPDATE appointment
+    SET status1 = #{status1}
+    WHERE id = #{id}
+	</update>
+
   <select id="getMachineList" resultType="lx.gymproject.springboot.vo.GymMachineVO"> 
     select machine_id , machine_name , machine_purchase_date , machine_price, machine_service_contact , machine_img , machine_video from gym_machine; 
   </select>
@@ -146,11 +166,6 @@
 	<delete id="deleteMachine" parameterType="int">
         delete from gym_machine where machine_id = #{machineId}
     </delete>
-	
-	
-	
-	
-	
 	
 	
 

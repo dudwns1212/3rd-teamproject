@@ -37,4 +37,17 @@ public class GymAppointmentDAO {
         return session.selectOne("getAppCount");
     }
 	
+    
+    public GymAppointmentVO getAppointmentById(String id) throws Exception {
+        return session.selectOne("getAppById", id);
+    }
+    
+	public int updateStatus(String id, String status1) throws Exception {
+	    HashMap<String, String> param = new HashMap<>();
+	    param.put("id", id);
+	    param.put("status1", status1);
+	    return session.update("updateAppStatus", param);
+	}
+    
+    
 }
