@@ -24,7 +24,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 				.addPathPatterns("/mypage.do", "/reservation.do",
 				"/reservationDashboard.do", "/reservationInsert.do", "/updateMachine.do", "/machine_edit_form.do",
 				"/insertMachine.do", "/deleteMachine.do", "/post.do", "/postWritePage.do", "/postEdit.do",
-				"/postWrite.do","/write");
+				"/postWrite.do","/write", "/list");
 	
 		registry.addInterceptor(new CheckUserIdAndPostUserId())
 				.order(2)
@@ -40,7 +40,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         
         // 리소스 핸들러 등록
-        registry.addResourceHandler("/uploads/**")
+        registry.addResourceHandler("/uploads/**", "/images/**")
                 .addResourceLocations(resourceLocation);
     }
 	
