@@ -30,7 +30,7 @@ CREATE TABLE post (
 );
 insert into users(user_email, user_password, user_name, user_tel, user_birth, user_gender) values ('2@1.com','1','1','1','1','1');
 insert into post(post_id, post_name, post_content, post_user_id, post_tag, post_img, post_like, post_view, post_dislike, post_board_code)
-values(1, "성장했구나", "당신이 이걸 봤다는게 성장했다는 증거임", 1, null, null, null, null, null, null);
+values(1, "성장했구나", "당신이 이걸 봤다는게 성장했다는 증거임", 1, null, null, 1, 1, 1, null);
 
 
 
