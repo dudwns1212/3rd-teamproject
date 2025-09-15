@@ -30,16 +30,16 @@ public class GymAppointmentDAO {
         HashMap<String, Integer> params = new HashMap<>();
         params.put("offset", offset);
         params.put("limit", limit);
-        return session.selectList("mapper-gym.getDBListPaging", params);
+        return session.selectList("getDBListPaging", params);
     }
 
     // 접수 중인 개수 조회
     public int getDBCount() throws Exception {
-        return session.selectOne("mapper-gym.getDBCount");
+        return session.selectOne("getDBCount");
     }
     // 총 접수 개수
     public int getDBCountAll() throws Exception {
-    	return session.selectOne("mapper-gym.getDBCountAll");
+    	return session.selectOne("getDBCountAll");
     }
 	
     
@@ -49,6 +49,8 @@ public class GymAppointmentDAO {
     
 	public int updateStatus(String id, String status1) throws Exception {
 	    HashMap<String, String> param = new HashMap<>();
+	    System.out.println("update 실행: id=" + id + ", status1=" + status1);
+	    System.out.println("실행");
 	    param.put("id", id);
 	    param.put("status1", status1);
 	    return session.update("updateAppStatus", param);

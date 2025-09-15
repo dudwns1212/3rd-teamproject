@@ -3,11 +3,11 @@
 <mapper namespace="mapper-lx.gymproject.springboot.dao.GymAppointmentDAO">
 
 <insert id="insertApp" parameterType="lx.gymproject.springboot.vo.GymAppointmentVO">
-    insert into appointment(userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1) values(#{userName}, #{email}, #{phone}, #{address}, #{serviceType}, #{appointmentDate}, #{appointmentDuration}, #{status1}) 
+    insert into appointment(id,userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1) values(#{id}, #{userName}, #{email}, #{phone}, #{address}, #{serviceType}, #{appointmentDate}, #{appointmentDuration}, #{status1}) 
 </insert>
 
 <select id="getAppList" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
-    select userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1
+    select id,userName,email,phone,address, serviceType,appointmentDate,appointmentDuration,status1
     from appointment
 </select>
 
@@ -18,13 +18,12 @@
 
 <!-- 페이징 처리 쿼리 -->
 <select id="getDBListPaging" parameterType="map" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
-    select userName, email, phone, address, serviceType, appointmentDate, appointmentDuration, status1
+    select id, userName, email, phone, address, serviceType, appointmentDate, appointmentDuration, status1
     from appointment
-    order by appointmentDate desc
+    order by id desc
     limit #{limit} offset #{offset}
 </select>
 
-<!-- 총 개수 -->
 <!-- 접수 중인 개수 -->
 <select id="getDBCount" resultType="int">
     SELECT COUNT(*)
@@ -35,6 +34,10 @@
 <select id="getDBCountAll" resultType="int">
     SELECT COUNT(*)
     FROM appointment
+</select>
+
+<select id="getAppById" parameterType="String" resultType="lx.gymproject.springboot.vo.GymAppointmentVO">
+    SELECT * FROM appointment WHERE id = #{id}
 </select>
 
 <update id="updateAppStatus" parameterType="map">
