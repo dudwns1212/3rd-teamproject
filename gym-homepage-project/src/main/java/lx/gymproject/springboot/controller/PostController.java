@@ -88,13 +88,8 @@ public class PostController {
 
 		GymPostVO existingFile = dao.getDB(vo.getPoId());
 
-		try {
-			// 기존 파일명을 전달해서 업로드 + 삭제 처리
-			String savedFileName = FileUploadUtil.saveFile(vo.getFile(), existingFile.getPoImg());
-			vo.setPoImg(savedFileName);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		String savedFileName = FileUploadUtil.saveFile(vo.getFile(), existingFile.getPoImg());
+		vo.setPoImg(savedFileName);
 
 		dao.updateDB(vo);
 		return "redirect:postBoard.do";

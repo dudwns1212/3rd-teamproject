@@ -87,7 +87,8 @@
         $('.edit').on('click', function() {
             let poId = $(this).data('poid');
             let poName = $(this).data('pname');
-            document.location.href = "/postEditPage.do?poId=" + poId + "&authorName=" + encodeURIComponent(poName);
+            document.location.href = "/postEditPage.do?poId=" + poId 
+            + "&authorName=" + poName;
         });
 
         // 좋아요 버튼 클릭
