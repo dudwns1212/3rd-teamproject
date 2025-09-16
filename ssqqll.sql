@@ -18,20 +18,16 @@ CREATE TABLE post (
   post_content text DEFAULT NULL,
   post_user_id int Default NULL,
   post_tag char(10) Default NULL,
-  post_img varchar(100) DEFAULT NULL,
+  post_img text DEFAULT NULL,
   post_like int DEFAULT NULL,
   post_view int DEFAULT NULL,
+  post_time timestamp default current_timestamp,
   post_dislike int DEFAULT NULL,
   post_board_code int DEFAULT NULL,
   PRIMARY KEY (post_id),
   foreign key (post_user_id) references users(user_id)
   
 );
-insert into users(user_email, user_password, user_name, user_tel, user_birth, user_gender) values ('2@1.com','1','1','1','1','1');
-insert into post(post_id, post_name, post_content, post_user_id, post_tag, post_img, post_like, post_view, post_dislike, post_board_code)
-values(1, "성장했구나", "당신이 이걸 봤다는게 성장했다는 증거임", 1, null, null, null, null, null, null);
-
-
 
 CREATE TABLE gym_machine (
     machine_id INT AUTO_INCREMENT PRIMARY KEY,     -- 기구 고유 번호 (PK)
@@ -42,15 +38,6 @@ CREATE TABLE gym_machine (
     machine_img VARCHAR(255),                      -- 기구 사진 경로
     machine_video VARCHAR(255)                     -- 기구 사용 영상 경로 (유튜브 링크 등)
 );
-INSERT INTO gym_machine
-(machine_name, machine_purchase_date, machine_price, machine_service_contact, machine_img, machine_video)
-VALUES
-('멀티 코너렉 HP-1001', '2024-03-15', 4300000.00, '010-1234-5678', 'images/멀티 코너렉HP-1001.jpg', 'https://youtu.be/abcd1234'),
-('크로스 오버 NSA-018', '2025-03-15', 325000.00, '010-1234-5678', 'images/NSA-018 크로스 오버.jpg', 'https://youtu.be/abcd1234'),
-('랫풀다운 PRT-303', '2030-03-15', 2300000.00, '010-1234-5678', 'images/랫풀다운PRT-303.jpg', 'https://youtu.be/abcd1234');
-
-
-
 
 CREATE TABLE appointment (
 id int auto_increment,
@@ -67,10 +54,39 @@ status1 varchar(20) DEFAULT NUll,
 PRIMARY KEY (id)
 );
 
+create table post_comment (
+cm_id bigint auto_increment,
+po_id int,
+user_id int,
+author_name varchar(50) default null,
+cm_content text default null,
+cm_time timestamp default current_timestamp,
+primary key(cm_id),
+foreign key(po_id) references post(post_id),
+foreign key(user_id) references users(user_id)
+);
+insert into users(user_email, user_password, user_name, user_tel, user_birth, user_gender) values ('1@1.com','1','1','1','1','1');
+insert into users(user_email, user_password, user_name, user_tel, user_birth, user_gender) values ('2@1.com','2','2','2','2','2');
+insert into post(post_id, post_name, post_content, post_user_id, post_tag, post_img, post_like, post_view, post_dislike, post_board_code)
+values(1, "성장했구나", "당신이 이걸 봤다는게 성장했다는 증거임", 1, null, null, 1, 1, 1, null),
+(2, "게시글입니다", "자유롭게 작성하세요", 2, null, null, 456, 1598, 59, null);
+INSERT INTO gym_machine
+(machine_name, machine_purchase_date, machine_price, machine_service_contact, machine_img, machine_video)
+VALUES
+('멀티 코너렉 HP-1001', '2024-03-15', 4300000.00, '010-1234-5678', '멀티 코너렉HP-1001.jpg', 'https://youtu.be/abcd1234'),
+('크로스 오버 NSA-018', '2025-03-15', 325000.00, '010-1234-5678', 'NSA-018 크로스 오버.jpg', 'https://youtu.be/abcd1234'),
+('랫풀다운 PRT-303', '2030-03-15', 2300000.00, '010-1234-5678', '랫풀다운PRT-303.jpg', 'https://youtu.be/abcd1234'),
+('시미스 머신', '2024-03-15', 2500000.00, '010-1234-5678', '7eeb17f8-f05a-4cb2-903b-acc01deaeb60_smithmachine.jpg', 'https://youtu.be/abcd1234'),
+('벤치프레스', '2025-03-15', '200000.00', '010-1234-5678', 'benchpress.png', 'https://youtu.be/abcd1234'),
+('런닝머신', '2030-03-15', '300000.00', '010-1234-5678', 'runningmachine.jpg', 'https://youtu.be/abcd1234'),
+('숄더 프레스', '2030-03-15', '300000.00', '010-1234-5678', '숄더프레스.jpg', 'https://youtu.be/abcd1234'),
+('시티드 레그익스텐션 컬', '2030-03-15', '300000.00', '010-1234-5678', '시티드 레그익스텐션 컬.jpg', 'https://youtu.be/abcd1234'),
+('시티드 체스트프레스', '2030-03-15', '3200000.00', '010-1234-5678', '시티드 체스트프레스.jpg', 'https://youtu.be/abcd1234'),
+('시티드로우', '2030-03-15', '580000000.00', '010-1234-5678', 'citydrowPRT-402.jpg', 'https://youtu.be/abcd1234');
+
 
 select * from gym_machine;
 select * from users;
 select * from appointment;
 select * from post;
-
 select * from post_comment;

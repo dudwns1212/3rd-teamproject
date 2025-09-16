@@ -36,6 +36,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // uploads 폴더 절대 경로
         Path uploadPath = Paths.get("uploads").toAbsolutePath();
+        
         String resourceLocation = "file:" + uploadPath.toString().replace("\\", "/") + "/";
 
         
